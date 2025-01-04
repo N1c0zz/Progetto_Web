@@ -4,44 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <a href="">
-            <img src="..\img\notifiche.png" alt="notifiche" width="42" height="42" />
-        </a>
-        <img src="" alt="" /> <!-- logo del sito centrale -->
-        <a href="">
-            <img src="..\img\login.png" alt="login" width="42" height="42" />
-        </a>
-        <a href="">
-            <img src="..\img\cart.png" alt="carrello" width="42" height="42" />
-        </a>
-        <form class="search-bar" action="homepage.html" method="get">
-            <input type="search" name="product-search" placeholder="cerca prodotto"/>
-            <button type="submit"><img src="..\img\searchbar.png" alt="cerca prodotto" width="10" height="10" /></button>
-        </form>
-    </header>
-    <main>
+<header class="bg-light py-2">
+    <div class="container">
+        <div class="d-flex">
+            <a href="/notifiche" class="bi bi-bell me-auto p-2 fs-3"></a>
+            <a href="/account" class="bi bi-person-circle p-2 fs-3"></a>
+            <a href="/carrello" class="bi bi-cart p-2 fs-3"></a>
+        </div>
+        <div class="container-fluid">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto">
+              <button class="btn btn-outline-dark" type="submit">Cerca</button>
+            </form>
+          </div>
+    </div>
+</header>
+<main class="container py-3">
+    <!-- categorie -->
+    <div class="d-flex gap-2 my-3 justify-content-center">
+        <a href="/uomo" class="btn btn-light mr-2 border">Uomo</a>
+        <a href="/donna" class="btn btn-light mr-2 border">Donna</a>
+        <a href="/bambino" class="btn btn-light mr-2 border">Bambino</a>
+    </div>
 
-        
-    </main>
-    <footer>
-        <section>
-            <p><a href="">Informativa Privacy</a></p>
-            <p><a href="">Informativa Cookie</a></p>
-            <p><a href="">Termini e condizioni</a></p>
-        </section>
-        <a href="homepage.html">
-            <img src="..\img\logo.png" alt="homepage" width="42" height="42" />
+    <!-- sezione offerte-->
+    <div class="mb-3 text-center">
+        <h5>OFFERTE</h5>
+        <a href="/offerte">
+            <div class="border rounded p-3 mx-auto" style="width: 90%; height: 150px;">
+                <!-- Immagine con link -->
+                <img src="offerte.jpg" alt="offerte" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
         </a>
-        <section>
-            <p>Nome Sede</p>
-            <p>Indirizzo</p>
-            <p>Città</p>
-            <p>CAP</p>
-            <p>Telefono</p>
-        </section>
-    </footer>
+    </div>
+
+    <!-- novità e bestseller -->
+    <div class="row">
+        <div class="col-6 mb-3">
+            <h6 class="text-center">NOVITÀ</h6>
+            <a href="/novita">
+                <div class="border rounded p-3 mx-auto" style="width: 90%; height: 100px;">
+                    <!-- Immagine con link -->
+                    <img src="novita.jpg" alt="novità" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </a>
+        </div>
+        <div class="col-6">
+            <h6 class="text-center">BESTSELLER</h6>
+            <a href="/bestseller">
+                <div class="border rounded p-3 mx-auto" style="width: 90%; height: 100px;">
+                    <!-- Immagine con link -->
+                    <img src="bestseller.jpg" alt="bestseller" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+<footer>
+    <section>
+        <p><a href="">Informativa Privacy</a></p>
+        <p><a href="">Informativa Cookie</a></p>
+        <p><a href="">Termini e condizioni</a></p>
+    </section>
+    <a href="homepage.html">
+        <img src="..\img\logo.png" alt="homepage" width="42" height="42" />
+    </a>
+    <section>
+        <p>Nome Sede<br>Indirizzo<br>Città, CAP<br>Telefono</p>
+    </section>
+</footer>
 </body>
 </html>
