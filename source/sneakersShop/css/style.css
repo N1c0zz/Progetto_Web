@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.search-bar input {
+    width: 100%;
+}
+
+.category-btn {
+    width: 90%;
+    margin: 5px auto;
+}
+
+.social-icons i {
+    font-size: 28px;
+    margin: 10px;
+}
+
+.footer a {
+    font-size: 12px;
+    margin: 3px 0;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer p {
+    font-size: 12px;
+}
+
+.icon {
+    text-decoration: none;
+    color: inherit;      
+}
+
+.icon:hover, .icon:focus {
+    color: #000;
+}

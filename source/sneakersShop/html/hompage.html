@@ -8,14 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Link al file CSS personalizzato -->
+    <link rel="stylesheet" href="..\css\style.css">
 </head>
 <body>
 <header class="bg-light py-2">
     <div class="container">
         <div class="d-flex">
-            <a href="/notifiche" class="bi bi-bell me-auto p-2 fs-3"></a>
-            <a href="/account" class="bi bi-person-circle p-2 fs-3"></a>
-            <a href="/carrello" class="bi bi-cart p-2 fs-3"></a>
+            <a href="/notifiche" class="bi bi-bell me-auto p-2 fs-3 icon"></a>
+            <a href="/account" class="bi bi-person-circle p-2 fs-3 icon"></a>
+            <a href="/carrello" class="bi bi-cart p-2 fs-3 icon"></a>
         </div>
         <div class="container-fluid">
             <form class="d-flex" role="search">
@@ -65,19 +67,78 @@
             </a>
         </div>
     </div>
+
+    <!-- Icons Row with Clickable Logos -->
+    <div class="d-flex justify-content-center my-4">
+        <a href="#" class="mx-2">
+            <img src="..\img\nike.png" alt="Nike" style="width: 3.5em; height: 3.5em; object-fit: contain;">
+        </a>
+        <a href="#" class="mx-2">
+            <img src="..\img\adidas.png" alt="Adidas" style="width: 3.5em; height: 3.5em; object-fit: contain;">
+        </a>
+        <a href="#" class="mx-2">
+            <img src="..\img\puma.png" alt="Puma" style="width: 3.5em; height: 3.5em; object-fit: contain;">
+        </a>
+        <a href="#" class="mx-2">
+            <img src="..\img\newBalance.png" alt="New Balance" style="width: 3.5em; height: 3.5em; object-fit: contain;">
+        </a>
+        <a href="#" class="mx-2">
+            <img src="..\img\timberland.png" alt="Timberland" style="width: 3.5em; height: 3.5em; object-fit: contain;">
+        </a>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="text-center mb-4">
+        <h5>Acquista per categoria</h5>
+        <a href="/scarpe-uomo" class="btn btn-outline-secondary category-btn">Scarpe uomo</a>
+        <a href="/scarpe-donna" class="btn btn-outline-secondary category-btn">Scarpe donna</a>
+        <a href="/scarpe-bambino" class="btn btn-outline-secondary category-btn">Scarpe bambino</a>
+        <a href="/bestseller" class="btn btn-outline-secondary category-btn">Bestseller</a>
+        <a href="/novita" class="btn btn-outline-secondary category-btn">Novità</a>
+        <a href="/offerte" class="btn btn-outline-secondary category-btn">Offerte</a>
+    </div>
+
+    <!-- Social Section -->
+    <div class="text-center my-4">
+        <h5>Social</h5>
+        <div class="d-flex justify-content-center">
+            <a href="https://www.facebook.com" target="_blank" class="mx-3 icon">
+                <i class="bi bi-facebook fs-3"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="mx-3 icon">
+                <i class="bi bi-twitter fs-3"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="mx-3 icon">
+                <i class="bi bi-instagram fs-3"></i>
+            </a>
+        </div>
+    </div>
+    
 </main>
-<footer>
-    <section>
-        <p><a href="">Informativa Privacy</a></p>
-        <p><a href="">Informativa Cookie</a></p>
-        <p><a href="">Termini e condizioni</a></p>
-    </section>
-    <a href="homepage.html">
-        <img src="..\img\logo.png" alt="homepage" width="42" height="42" />
-    </a>
-    <section>
-        <p>Nome Sede<br>Indirizzo<br>Città, CAP<br>Telefono</p>
-    </section>
+<footer class="footer bg-light py-3">
+    <div class="container">
+        <div class="text-center mb-3">
+            <a href="hompage.html">
+                <img src="../img/logo.png" alt="Logo" style="width: 100px; height: auto;">
+            </a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="text-start">
+                <a href="#" class="d-block mb-1">Informativa Privacy</a>
+                <a href="#" class="d-block mb-1">Informativa Cookie</a>
+                <a href="#" class="d-block mb-1">Termini e Condizioni</a>
+            </div>
+            <div class="text-end">
+                <p class="mb-0">
+                    Nome Sede<br>
+                    Indirizzo<br>
+                    Città, CAP<br>
+                    Telefono
+                </p>
+            </div>
+        </div>
+    </div>
 </footer>
 </body>
 </html>
