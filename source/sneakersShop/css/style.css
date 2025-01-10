@@ -22,8 +22,9 @@ body {
 .footer a {
     font-size: 12px;
     margin: 3px 0;
-    color: #007bff;
     text-decoration: none;
+    color: inherit;
+    text-decoration: underline;
 }
 
 .footer p {
@@ -37,4 +38,11 @@ body {
 
 .icon:hover, .icon:focus {
     color: #000;
+}
+
+.section-border {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
