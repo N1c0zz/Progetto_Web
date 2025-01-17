@@ -1,0 +1,9 @@
+a.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+a.card {
+    text-decoration: none;
+    color: inherit;
+}
