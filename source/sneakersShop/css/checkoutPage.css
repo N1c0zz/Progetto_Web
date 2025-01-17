@@ -1,0 +1,8 @@
+@media (min-width: 768px) {  
+
+    .text-end.mb-4 button {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+    }
+}
