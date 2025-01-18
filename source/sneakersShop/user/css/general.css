@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.search-bar input {
+    width: 100%;
+}
+
+.category-btn {
+    width: 90%;
+    margin: 5px auto;
+}
+
+.social-icons i {
+    font-size: 28px;
+    margin: 10px;
+}
+
+.footer a {
+    font-size: 12px;
+    margin: 3px 0;
+    text-decoration: none;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.footer p {
+    font-size: 12px;
+}
+
+.icon {
+    text-decoration: none;
+    color: inherit;      
+}
+
+.icon:hover, .icon:focus {
+    color: #000;
+}
+
+.section-border {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
