@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Link al file CSS personalizzato -->
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/productDetails.css" />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<header class="bg-light py-2">
+    <div class="container">
+        <nav class="d-flex" aria-label="Navigazione principale">
+            <a href="./notifications.html" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
+        </nav>
+        <div class="container-fluid">
+            <form class="d-flex" role="search" aria-label="Cerca prodotti">
+                <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
+                <button class="btn btn-outline-dark" type="submit">Cerca</button>
+            </form>
+            </div>
+    </div>
+</header>
+
+<main class="container overflow-auto py-3">
+    
+        <!-- TODO: sostituire input ricerca con il contenuto inserito nel form ricerca-->
+        <h1 class="fw-semibold mt-5">DETTAGLI PRODOTTO</h1>
+
+        <div class="row row-cols-1 row-cols-md-2 section-border mt-3 bg-body">
+            <div class="col-md-7 d-flex justify-content-center">
+                <img src="../../img/314311775804_01.png" alt="TODO" class="img-fluid" />
+            </div>
+            <div class="col-md-5 bg-body-secondary">
+                <h2 class="fw-semibold mt-5 mb-3">Nome Modello</h2>
+                <p class="mb-1">Categoria</p>
+                <p class="fw-light">Colore</p>
+                <p class="fs-4 mb-5">$ 500,99</p>
+                <form action="" method="get" oninput="x.value=parseFloat(sizeRange.value)">
+                    <fieldset>
+                        <legend class="visually-hidden">selezione taglia</legend>
+                        <label for="sizeRange" class="form-label">Seleziona la taglia (EU):</label>
+                        <output name="x" for="sizeRange" class="fw-bold fs-5"></output>
+                        <input type="range" class="form-range" min="35" max="53" id="sizeRange" />
+                    </fieldset>
+                    <div class="d-flex justify-content-center pb-5 pt-3">
+                        <button type="submit" class="btn btn-lg btn-dark col-10 col-md-6 mt-5">AGGIUNGI AL CARRELLO</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <h3 class="fw-semibold mt-5">Descrizione</h3>
+            <p>
+                Product #: 314101996404<br>
+                Supplier-sku #: CW2288-111
+            </p>
+            <h4 class="fw-semibold">Comfort ispirato alla natura</h4>
+            <p>
+                Irradia la tua personalità con lo stile fresco e audace delle Nike Air Force 1 '07 LV8.
+                Progettate originariamente per il basket, queste sneakers realizzate in materiale riciclato
+                coniugano il meglio della funzionalità sportiva con l'eco-sostenibilità.
+                Ispirata alla natura, la classica struttura anni 80 è rivestita in tela traspirante con inserti cuciti
+                per offrire un comfort duraturo e un look grintoso. Domina le strade con un passo fluido e attutito grazie
+                alla tecnologia Air che ti garantisce un'ammortizzazione incredibile.
+            </p>
+            <h4 class="fw-semibold">Caratteristiche:</h4>
+            <ul class="clist">
+                <li>
+                    <p>Tomaia in tela con inserti cuciti</p>
+                </li>
+                <li>
+                    <p>Dettagli in pelle</p>
+                </li>
+                <li>
+                    <p>Collo imbottito</p>
+                </li>
+                <li>
+                    <p>Intersuola in schiuma</p>
+                </li>
+                <li>
+                    <p>Tecnologia Nike Air</p>
+                </li>
+                <li>
+                    <p>Suola in gomma</p>
+                </li>
+                <li>
+                    <p>Almeno il 20% del peso in materiale riciclato</p>
+                </li>
+            </ul>
+        </div>
+</main>
+
+<footer class="footer mt-auto bg-light py-3">
+    <div class="container">
+        <div class="text-center mb-3">
+            <a href="./homepage.html">
+                <img src="../../img/logo.png" alt="Logo" style="width: 100px; height: auto;"  />
+            </a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <nav class="text-start" aria-label="Navigazione pagine informative per l'utente">
+                <a href="#" class="d-block mb-1">Informativa Privacy</a>
+                <a href="#" class="d-block mb-1">Informativa Cookie</a>
+                <a href="#" class="d-block mb-1">Termini e Condizioni</a>
+            </nav>
+            <div class="text-end">
+                <p class="mb-0">
+                    Nome Sede<br>
+                    Indirizzo<br>
+                    Città, CAP<br>
+                    Telefono
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
