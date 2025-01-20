@@ -1,0 +1,9 @@
+a.product:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s;
+}
+
+a.product {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,8 @@
+ul.clist {
+  list-style-type: disc;
+  padding-left: 30px;
+}
+
+ul.clist > li > p {
+  margin-bottom: 1px;
+}
