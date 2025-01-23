@@ -10,13 +10,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <!-- Link al file CSS generale -->
     <link rel="stylesheet" href="../css/general.css" />
+    <!-- Link al file CSS personalizzato -->
+    <link rel="stylesheet" href="../css/accountPage.css" />
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header class="bg-light py-2">
     <div class="container">
         <nav class="d-flex" aria-label="Navigazione principale">
             <a href="./notifications.html" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
-            <a href="./seller-accountPage.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
         </nav>
         <div class="container-fluid">
             <form class="d-flex" role="search" aria-label="Cerca prodotti">
@@ -26,7 +29,7 @@
             </div>
     </div>
 </header>
-<main class="container overflow-auto my-4">
+<main class="container overflow-auto py-3">
     <div class="container">
         <div class="account-container">
             <h2 class="text-start fw-semibold my-3">Il mio account</h2>
@@ -77,14 +80,44 @@
                     </div>
                     <button type="submit" class="btn btn-dark" aria-label="Conferma la modifica della password">Modifica password</button>
                 </form>
-            </section>       
+            </section>
+
+            <section class="orders-table section-border">
+                <h4 class="fs-4 mb-3 fw-semibold">I miei ordini</h4>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th style="width: 42%;">Numero Ordine</th>
+                            <th style="width: 28%;">Data</th>
+                            <th style="width: 30%;">Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                        </tr>
+                        <tr>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                        </tr>
+                        <tr>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                            <td class="fs-6">XXXXX</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>            
         </div>
     </div>
 </main>
 <footer class="footer mt-auto bg-light py-3">
     <div class="container">
         <div class="text-center mb-3">
-            <a href="./seller-homepage.html">
+            <a href="./index.html">
                 <img src="../../img/logo.png" alt="Logo" style="width: 100px; height: auto;" />
             </a>
         </div>
