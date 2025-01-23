@@ -21,6 +21,55 @@ CREATE TABLE IF NOT EXISTS `utenti` (
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
+-- Table `categorie`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `categorie` (
+  `idcategoria` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nomeCategoria` VARCHAR(50) NOT NULL
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `modelli`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `modelli` (
+  `idmodello` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `prezzo` DECIMAL(10,2) NOT NULL,
+  `immagine` BLOB NULL,
+  `descrizione` MEDIUMTEXT NOT NULL,
+  `dettagli` MEDIUMTEXT NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `colore` VARCHAR(50) NOT NULL
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `prodotti`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `prodotti` (
+  `idprodotto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `idutente` INT NOT NULL,
+  `idcategoria` INT NOT NULL,
+  `idmodello` INT NOT NULL,
+  `quantità` INT NOT NULL,
+  `taglia` INT NOT NULL,
+  `dataInserimento` DATETIME NOT NULL,
+  CONSTRAINT `fk_prodotti_idutente`
+    FOREIGN KEY (`idutente`)
+    REFERENCES `utenti`(`idutente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_prodotti_idcategoria`
+    FOREIGN KEY (`idcategoria`)
+    REFERENCES `categorie`(`idcategoria`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_prodotti_idmodello`
+    FOREIGN KEY (`idmodello`)
+    REFERENCES `modelli`(`idmodello`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `ordini`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ordini` (
@@ -53,56 +102,6 @@ CREATE TABLE IF NOT EXISTS `presenze` (
     REFERENCES `prodotti`(`idprodotto`)
     ON DELETE CASCADE
     ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `prodotti`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `prodotti` (
-  `idprodotto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idutente` INT NOT NULL,
-  `idcategoria` INT NOT NULL,
-  `idmodello` INT NOT NULL,
-  `quantità` INT NOT NULL,
-  `taglia` INT NOT NULL,
-  `dataInserimento` DATETIME NOT NULL,
-  CONSTRAINT `fk_prodotti_idutente`
-    FOREIGN KEY (`idutente`)
-    REFERENCES `utenti`(`idutente`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_prodotti_idcategoria`
-    FOREIGN KEY (`idcategoria`)
-    REFERENCES `categorie`(`idcategoria`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_prodotti_idmodello`
-    FOREIGN KEY (`idmodello`)
-    REFERENCES `modelli`(`idmodello`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `modelli`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `modelli` (
-  `idmodello` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `prezzo` DECIMAL(10,2) NOT NULL,
-  `immagine` BLOB NULL,
-  `descrizione` MEDIUMTEXT NOT NULL,
-  `nome` VARCHAR(50) NOT NULL,
-  `colore1` VARCHAR(50) NOT NULL,
-  `colore2` VARCHAR(50) NULL,
-  `colore3` VARCHAR(50) NULL
-) ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `categorie`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `idcategoria` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `nomeCategoria` VARCHAR(50) NOT NULL
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
