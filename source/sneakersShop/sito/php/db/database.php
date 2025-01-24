@@ -31,6 +31,16 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getSellerDetails($sellerId) {
+        $stmt = $this->db->prepare("SELECT nome, cognome, dataNascita, email, password 
+                                     FROM utenti 
+                                     WHERE idutente = ? AND tipo = 'venditore'");
+        $stmt->bind_param("i", $sellerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        return $result->fetch_assoc(MYSQLI_ASSOC);
+    }
 }
 
 ?>

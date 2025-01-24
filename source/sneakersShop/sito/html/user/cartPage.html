@@ -17,10 +17,17 @@
 <header class="bg-light py-2">
     <div class="container">
         <nav class="d-flex" aria-label="Navigazione principale">
-            <a href="./notifications.html" class="bi bi-bell me-auto p-2 fs-3 icon"></a>
-            <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon"></a>
-            <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon"></a>
+            <a href="./notifications.html" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
         </nav>
+        <div class="container-fluid">
+            <form class="d-flex" role="search" aria-label="Cerca prodotti">
+                <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
+                <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
+                <button class="btn btn-outline-dark" type="submit">Cerca</button>
+            </form>
+            </div>
     </div>
 </header>
 <main class="container overflow-auto py-my-4">
