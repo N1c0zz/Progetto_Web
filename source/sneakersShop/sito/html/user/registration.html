@@ -35,10 +35,10 @@
 
     <h1 class="text-center fw-semibold my-5">Crea un account</h1>
 
-    <form action="" method="post">
+    <form action="TODO" method="post">
         <fieldset>
+            <legend class="visually-hidden">credenziali di registrazione</legend>
             <div class="row row-cols-md-2 g-4">
-                <legend class="visually-hidden">credenziali di registrazione</legend>
                 <div class="d-md-flex justify-content-end">
                     <div class="form-floating mb-3 col-md-8">
                         <input type="text" class="form-control" id="name" placeholder="Inserisci il tuo nome" required />
@@ -54,14 +54,14 @@
 
                 <div class="d-md-flex justify-content-end">
                     <div class="form-floating mb-3 col-md-8">
-                        <input type="date" class="form-control" id="bdate" placeholder="Seleziona la data di nascita" required />
+                        <input type="date" class="form-control" id="bdate" required />
                         <label for="bdate">Data di nascita*</label>
                     </div>
                 </div>
                 <div class="d-md-flex justify-content-start">
                     <div class="form-floating col-md-8">
                         <select class="form-select" id="sex" required>
-                            <option selected>Seleziona il sesso</option>
+                            <option selected value="">Seleziona il sesso</option>
                             <option value="M">Maschio</option>
                             <option value="F">Femmina</option>
                             <option value="O">Altro</option>
@@ -86,7 +86,7 @@
                 <div class="d-md-flex justify-content-end">
                     <div class="form-floating mb-3 col-md-8">
                         <input type="password" class="form-control" id="pwd" placeholder="Crea la password" required />
-                        <label for="phone">Password*</label>
+                        <label for="pwd">Password*</label>
                     </div>
                 </div>
 
