@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 define("IMG_DIR", "../img/");
 require_once("php/utils/functions.php");
 require_once("php/db/database.php");

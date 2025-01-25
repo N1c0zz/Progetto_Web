@@ -1,15 +1,14 @@
 <?php
 
-// connessione al db
 require_once("bootstrap.php");
 
-// PARAMETRI DEL TEMPLATE
-$templateParams["pageTitle"] = "Notifiche";
+if(!isUserLoggedIn()) {
+    header("location: login.php");
+}
 
-// nome del template da visualizzare
+$templateParams["pageTitle"] = "Notifiche";
 $templateParams["name"] = "notification-list.php";
 
-// template html base
 require("template/base.php");
 
 ?>

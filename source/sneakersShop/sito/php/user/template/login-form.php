@@ -2,7 +2,10 @@
 
 <!-- TODO: specificare action -->
 <h1 class="text-center fw-semibold my-5">Accedi</h1>
-<form action="" method="post" class="mt-5">
+<?php if(ifset($templateParams["loginError"])): ?>
+<p><?php echo $templateParams["loginError"]; ?></p>
+<?php endif; ?>
+<form action="login.php" method="post" class="mt-5">
     <fieldset>
         <legend class="visually-hidden">credenziali di accesso</legend>
         <div class="d-flex justify-content-center">
@@ -19,7 +22,7 @@
         </div>                
     </fieldset>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-dark col-10 col-md-3 mt-3">ACCEDI</button>
+        <input type="submit" class="btn btn-dark col-10 col-md-3 mt-3" value="ACCEDI" />
     </div>
 </form>
 <div class="d-flex justify-content-center">

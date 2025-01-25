@@ -13,7 +13,7 @@ class DatabaseHelper{
     // METODO GENERICO PER FARE QUERY AL DB
     // fa una query al database e restituisce il risultato in un array associativo
     public function getSomething($eventualiParametri) {
-        $stmt = this->db->prepare("inserire query con parametro ? ");
+        $stmt = $this->db->prepare("inserire query con parametro ? ");
         $stmt->bind_param("inserire come parametri il formato e il parametro da bindare");
         $stmt->execute();
         $result-> $stmt->get_result();
@@ -30,7 +30,6 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }
 
 ?>
