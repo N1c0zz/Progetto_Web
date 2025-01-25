@@ -41,6 +41,16 @@ class DatabaseHelper{
     
         return $result->fetch_assoc(MYSQLI_ASSOC);
     }
+
+    public function checkLogin($email, $password) {
+        $query = "SELECT idutente, tipo FROM utenti WHERE email = ? AND password = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt = bind_param('ss', $email, $password);
+        $stmt->execute();
+        $result-> $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>
