@@ -3,32 +3,34 @@
             <h2 class="text-start fw-semibold my-3">Il mio account</h2>
 
             <section class="mb-4 section-border">
+                <?php foreach($templateParams["sellerDetails"] as $sellerDetails): ?>
                 <h4 class="fs-4 mb-3 fw-semibold">Informazioni account</h4>
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome:</label>
-                    <input type="text" class="form-control" id="nome" value="XXXXX" readonly />
+                    <input type="text" class="form-control" id="nome" value="<?php echo $sellerDetails["nome"]; ?>" readonly />
                 </div>
                 <div class="mb-3">
                     <label for="cognome" class="form-label">Cognome:</label>
-                    <input type="text" class="form-control" id="cognome" value="XXXXX" readonly />
+                    <input type="text" class="form-control" id="cognome" value="<?php echo $sellerDetails["cognome"]; ?>" readonly />
                 </div>
                 <div class="mb-3">
                     <label for="dataNascita" class="form-label">Data di nascita:</label>
-                    <input type="text" class="form-control" id="dataNascita" value="XX/XX/XXXX" readonly />
+                    <input type="text" class="form-control" id="dataNascita" value="<?php echo $sellerDetails["dataNascita"]; ?>" readonly />
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" value="xxxxx@example.com" readonly />
+                    <input type="email" class="form-control" id="email" value="<?php echo $sellerDetails["email"]; ?>" readonly />
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="password" value="********" readonly />
+                        <input type="password" class="form-control" id="password" value="<?php echo $sellerDetails["password"]; ?>" readonly />
                         <button type="button" class="btn btn-outline-secondary" id="togglePassword" aria-label="Mostra password">
                             <i class="bi bi-eye"></i>
                         </button>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </section>
                                             
             <section class="mb-4 section-border">

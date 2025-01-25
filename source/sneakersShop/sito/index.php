@@ -6,6 +6,9 @@ require_once("bootstrap.php");
 // PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Homepage";
 
+// SELLER
+$templateParams["sellerDetails"] = $dbh->getSellerDetails($sellerId);
+
 // nome del template da visualizzare
 $templateParams["name"] = "homepage.php";
 
