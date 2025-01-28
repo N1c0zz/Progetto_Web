@@ -57,7 +57,9 @@ VALUES
 INSERT INTO `notifiche` (`idnotifica`, `data`, `stato`, `titolo`, `tipo`, `messaggio`) 
 VALUES 
 (1, '2025-01-20 14:35:00', 'da_leggere', 'Nuovo ordine', 'venditore', 'Hai ricevuto un nuovo ordine.'),
-(2, '2025-01-20 14:36:00', 'da_leggere', 'Stato aggiornato', 'cliente', 'Il tuo ordine è stato confermato.');
+(2, '2025-01-20 14:36:00', 'da_leggere', 'Ordine confermato', 'cliente', 'Il tuo ordine è stato confermato.');
+(3, '2025-01-20 14:36:00', 'da_leggere', 'Ordine spedito', 'cliente', 'Il tuo ordine è stato spedito.');
+(4, '2025-01-20 14:36:00', 'letta', 'Consegna effettuato', 'cliente', 'Il tuo ordine è stato consegnato.');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `relazioni` (notifiche associate agli ordini)
@@ -65,7 +67,9 @@ VALUES
 INSERT INTO `relazioni` (`idnotifica`, `idordine`) 
 VALUES 
 (1, 1), -- La notifica 1 si riferisce all'ordine 1
-(2, 1); -- La notifica 2 si riferisce all'ordine 1
+(2, 1), -- La notifica 2 si riferisce all'ordine 1
+(3, 1), -- La notifica 3 si riferisce all'ordine 1
+(4, 1); -- La notifica 4 si riferisce all'ordine 1
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `ricezioni` (notifiche ricevute da utenti)
@@ -73,4 +77,6 @@ VALUES
 INSERT INTO `ricezioni` (`idutente`, `idnotifica`) 
 VALUES 
 (2, 1), -- Notifica per il venditore (Nuovo ordine)
-(1, 2); -- Notifica per il cliente (Stato aggiornato)
+(1, 2), -- Notifica per il cliente (ordine confermato)
+(1, 3), -- Notifica per il cliente (ordine spedito)
+(1, 4); -- Notifica per il cliente (ordine consegnato)
