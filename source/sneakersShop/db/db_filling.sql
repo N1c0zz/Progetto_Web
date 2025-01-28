@@ -20,10 +20,10 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `modelli`
 -- -----------------------------------------------------
-INSERT INTO `modelli` (`idmodello`, `prezzo`, `immagine`, `descrizione`, `nome`, `colore1`, `colore2`, `colore3`) 
+INSERT INTO `modelli` (`idmodello`, `prezzo`, `immagine`, `descrizione`, `nome`, `colore`) 
 VALUES 
-(1, 89.99, NULL, 'Scarpe sportive di alta qualità', 'Nike Air Max', 'Bianco', 'Rosso', NULL),
-(2, 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Timberland Classic', 'Marrone', NULL, NULL);
+(1, 89.99, NULL, 'Scarpe sportive di alta qualità', 'Nike Air Max', 'Bianco'),
+(2, 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Timberland Classic', 'Marrone');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `prodotti` (varianti di taglie)

@@ -9,7 +9,7 @@ USE `ns_kicks`;
 -- Table `utenti`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `utenti` (
-  `idutente` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `idutente` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `nome` VARCHAR(100) NOT NULL,
   `cognome` VARCHAR(100) NOT NULL,
   `dataNascita` DATE NOT NULL,           /* Format YYYY-MM-DD */
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `modelli` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `prodotti` (
   `idprodotto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idutente` INT NOT NULL,
+  `idutente` BIGINT NOT NULL,
   `idcategoria` INT NOT NULL,
   `idmodello` INT NOT NULL,
   `quantità` INT NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ordini` (
   `idordine` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idutente` INT NOT NULL,
+  `idutente` BIGINT NOT NULL,
   `stato` VARCHAR(50) NOT NULL,
   `data` DATETIME NOT NULL,              /* Format YYYY-MM-DD HH:MM:SS */
   CONSTRAINT `fk_ordini_idutente` 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `relazioni` (
 -- Table `ricezioni`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ricezioni` (
-  `idutente` INT NOT NULL,
+  `idutente` BIGINT NOT NULL,
   `idnotifica` INT NOT NULL,
   PRIMARY KEY (`idutente`, `idnotifica`),
   CONSTRAINT `fk_ricezioni_idutente`
