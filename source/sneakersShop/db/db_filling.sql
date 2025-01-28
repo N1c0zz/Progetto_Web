@@ -54,10 +54,10 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `notifiche`
 -- -----------------------------------------------------
-INSERT INTO `notifiche` (`idnotifica`, `data`, `stato`, `tipo`, `messaggio`) 
+INSERT INTO `notifiche` (`idnotifica`, `data`, `stato`, `titolo`, `tipo`, `messaggio`) 
 VALUES 
-(1, '2025-01-20 14:35:00', 'Nuovo ordine', 'venditore', 'Hai ricevuto un nuovo ordine.'),
-(2, '2025-01-20 14:36:00', 'Stato aggiornato', 'cliente', 'Il tuo ordine è stato confermato.');
+(1, '2025-01-20 14:35:00', 'da_leggere', 'Nuovo ordine', 'venditore', 'Hai ricevuto un nuovo ordine.'),
+(2, '2025-01-20 14:36:00', 'da_leggere', 'Stato aggiornato', 'cliente', 'Il tuo ordine è stato confermato.');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `relazioni` (notifiche associate agli ordini)
