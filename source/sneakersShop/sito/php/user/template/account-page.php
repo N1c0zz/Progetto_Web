@@ -78,6 +78,9 @@
                     </tr>
                 </tbody>
             </table>
-        </section>            
+        </section>
+        <section class="d-flex justify-content-center my-5">
+            <a href="php/logout.php" class="btn btn-danger mt-5">ESCI DALL'ACCOUNT</a>
+        </section>
     </div>
 </div>

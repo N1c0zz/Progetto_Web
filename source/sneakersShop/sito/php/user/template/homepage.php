@@ -43,19 +43,19 @@
     <h5 class="mb-3">MARCHE</h5>
     <div class="d-flex justify-content-center">
         <a href="#" class="mx-2">
-            <img src="../../img/nike.png" alt="Nike" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
+            <img src="<?php echo IMG_DIR."nike.png"; ?>" alt="Nike" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
         <a href="#" class="mx-2">
-            <img src="../../img/adidas.png" alt="Adidas" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
+            <img src="<?php echo IMG_DIR."adidas.png"; ?>" alt="Adidas" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
         <a href="#" class="mx-2">
-            <img src="../../img/puma.png" alt="Puma" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
+            <img src="<?php echo IMG_DIR."puma.png"; ?>" alt="Puma" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
         <a href="#" class="mx-2">
-            <img src="../../img/newBalance.png" alt="New Balance" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
+            <img src="<?php echo IMG_DIR."newBalance.png"; ?>" alt="New Balance" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
         <a href="#" class="mx-2">
-            <img src="../../img/timberland.png" alt="Timberland" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
+            <img src="<?php echo IMG_DIR."timberland.png"; ?>" alt="Timberland" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
     </div>
     <div class="mt-3"> <!-- DA SISTEMARE -->

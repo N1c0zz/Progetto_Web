@@ -3,32 +3,38 @@
 
 <h1 class="text-center fw-semibold my-5">Crea un account</h1>
 
-<form action="TODO" method="post">
+<?php if(isset($templateParams["registrationError"])): ?>
+<div class="d-flex justify-content-center">
+    <p class="text-danger mb-2"><?php echo $templateParams["registrationError"]; ?></p>
+</div>
+<?php endif; ?>
+
+<form action="php/registration.php" method="post">
     <fieldset>
         <legend class="visually-hidden">credenziali di registrazione</legend>
         <div class="row row-cols-md-2 g-4">
             <div class="d-md-flex justify-content-end">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="text" class="form-control" id="name" placeholder="Inserisci il tuo nome" required />
+                    <input type="text" class="form-control" id="name" placeholder="Inserisci il tuo nome" name="name" required />
                     <label for="name">Nome*</label>
                 </div>
             </div>
             <div class="d-md-flex justify-content-start">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="text" class="form-control" id="surname" placeholder="Inserisci il tuo Cognome" required />
+                    <input type="text" class="form-control" id="surname" placeholder="Inserisci il tuo Cognome" name="surname" required />
                     <label for="surname">Cognome*</label>
                 </div>
             </div>
 
             <div class="d-md-flex justify-content-end">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="date" class="form-control" id="bdate" required />
+                    <input type="date" class="form-control" id="bdate" name="bday" required />
                     <label for="bdate">Data di nascita*</label>
                 </div>
             </div>
             <div class="d-md-flex justify-content-start">
                 <div class="form-floating col-md-8">
-                    <select class="form-select" id="sex" required>
+                    <select class="form-select" id="sex" name="sex" required>
                         <option selected value="">Seleziona il sesso</option>
                         <option value="M">Maschio</option>
                         <option value="F">Femmina</option>
@@ -40,20 +46,20 @@
 
             <div class="d-md-flex justify-content-end">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" placeholder="Digita il tuo numero di telefono" required />
+                    <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" placeholder="Digita il tuo numero di telefono" name="phone" required />
                     <label for="phone">Numero di telefono*</label>
                 </div>
             </div>
             <div class="d-md-flex justify-content-start">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="email" class="form-control" id="email" placeholder="Inserisci la tua e-mail" required />
+                    <input type="email" class="form-control" id="email" placeholder="Inserisci la tua e-mail" name="email" required />
                     <label for="email">E-mail*</label>
                 </div>
             </div>
 
             <div class="d-md-flex justify-content-end">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="password" class="form-control" id="pwd" placeholder="Crea la password" required />
+                    <input type="password" class="form-control" id="pwd" placeholder="Crea la password" name="password" required />
                     <label for="pwd">Password*</label>
                 </div>
             </div>
@@ -61,6 +67,6 @@
         </div>
     </fieldset>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-dark col-10 col-md-5 mt-3">COMPLETA LA REGISTRAZIONE</button>
+        <input type="submit" class="btn btn-dark col-10 col-md-5 mt-3" value="COMPLETA LA REGISTRAZIONE" />
     </div>
 </form>
