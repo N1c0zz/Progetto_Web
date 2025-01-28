@@ -31,6 +31,7 @@ class DatabaseHelper{
         return $result->fetch_assoc(MYSQLI_ASSOC);
     }
 
+    // controlla se esiste un'utente registrato con le credenziali fornite
     public function checkLogin($email, $password) {
         $query = "SELECT idutente, tipo, email FROM utenti WHERE email = ? AND password = ?";
         $stmt = $this->db->prepare($query);
@@ -41,6 +42,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // conrolla se una email è già registrata nel db
     public function getUser($email) {
         $query = "SELECT email FROM utenti WHERE email = ?";
         $stmt = $this->db->prepare($query);
@@ -51,6 +53,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // registra un nuovo utente
     public function registerUser($name, $surname, $bday, $sex, $phone, $email, $password) {
         do {
             // creazione ID utente univoco
