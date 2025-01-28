@@ -1,10 +1,11 @@
 <?php
 
 session_start();
-define("IMG_DIR", "../img/");
+
+require_once("php/config/config.php");
 require_once("php/utils/functions.php");
 require_once("php/db/database.php");
 
-$dbh = new DatabaseHelper("localhost", "nomeutente", "password", "nomedb", 3306);
+$dbh = new DatabaseHelper("localhost", "root", "", "ns_kicks", 3306);
 
 ?>
