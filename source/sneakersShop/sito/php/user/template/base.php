@@ -20,6 +20,7 @@
         <nav class="d-flex" aria-label="Navigazione principale">
             <a href="./notifications.php" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
             <a href="php/login.php" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <?php if(!isUserLoggedIn() || $_SESSION["tipo"] != "venditore" ): ?>
             <a href="./cartPage.php" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
         </nav>
         <div class="container-fluid">
@@ -28,7 +29,8 @@
               <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
               <button class="btn btn-outline-dark" type="submit">Cerca</button>
             </form>
-          </div>
+        </div>
+        <?php endif; ?>
     </div>
 </header>
 

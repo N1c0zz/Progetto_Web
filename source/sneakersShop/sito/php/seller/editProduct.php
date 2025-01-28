@@ -1,15 +1,15 @@
 <?php
 
 // connessione al db
-require_once("bootstrap.php");
+require_once("../../bootstrap.php");
 
 // PARAMETRI DEL TEMPLATE
-$templateParams["editProductTitle"] = "Modifica prodotto";
+$templateParams["pageTitle"] = "Modifica prodotto";
 
 // nome del template da visualizzare
-$templateParams["name"] = "edit-product.php";
+$templateParams["name"] = "template/edit-product.php";
 
 // template html base
-require("php/seller/template/base.php");
+require("../user/template/base.php");
 
 ?>
