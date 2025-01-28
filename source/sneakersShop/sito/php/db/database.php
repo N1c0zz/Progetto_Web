@@ -68,6 +68,22 @@ class DatabaseHelper{
         $stmt->bind_param('ssssssss', $userID, $name, $surname, $bday, $phone, $sex, $email, $password);
         $stmt->execute();
     }
+
+    // legge le notifiche dell'utente
+    public function getUserNotifications($userID) {
+        $query = "SELECT n.idnotifica, DATE_FORMAT(n.data, '%d-%m-%Y %H:%i') AS data, n.stato, n.titolo, n.tipo, n.messaggio
+                    FROM notifiche n
+                    INNER JOIN ricezioni r 
+                    ON n.idnotifica = r.idnotifica
+                    WHERE r.idutente = ?
+                    ORDER BY n.data DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

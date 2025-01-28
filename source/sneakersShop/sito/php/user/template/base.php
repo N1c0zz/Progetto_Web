@@ -18,7 +18,7 @@
 <header class="bg-light py-2">
     <div class="container">
         <nav class="d-flex" aria-label="Navigazione principale">
-            <a href="./notifications.php" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="php/notifications.php" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
             <a href="php/login.php" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
             <a href="./cartPage.php" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
         </nav>
