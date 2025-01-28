@@ -42,6 +42,7 @@
     </div>
     <?php endif; ?>
 
+    <!-- messaggio di registrazione -->
     <?php if(isset($templateParams["registrationMsg"])): ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
