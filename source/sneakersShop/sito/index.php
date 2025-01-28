@@ -7,12 +7,12 @@ require_once("bootstrap.php");
 $templateParams["pageTitle"] = "Homepage";
 
 // SELLER
-$templateParams["sellerDetails"] = $dbh->getSellerDetails($sellerId);
+// $templateParams["sellerDetails"] = $dbh->getSellerDetails($sellerId);
 
 // nome del template da visualizzare
-$templateParams["name"] = "homepage.php";
+$templateParams["name"] = "php/user/template/homepage.php";
 
 // template html base
-require("template/base.php");
+require("php/user/template/base.php");
 
 ?>
