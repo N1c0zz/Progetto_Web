@@ -217,6 +217,57 @@ class DatabaseHelper{
         
         return $products;
     }
-    
+
+    // ritorna un array associativo con gli ordini associati ad un venditore,
+    // nel formato
+    // [id_ordine][data_ordine][prezzo totale][prodotti[dettagli prodotto 1], [dettagli prodotto 2]]
+    public function getAllOrdersBySeller($sellerId) {
+        $stmt = $this->db->prepare("SELECT 
+                                        o.idordine,
+                                        o.data AS data_ordine,
+                                        SUM(p.quantità * m.prezzo) AS prezzo_totale,
+                                        p.idprodotto,
+                                        m.nome AS prodotto_nome,
+                                        p.quantità,
+                                        m.prezzo
+                                    FROM ordini o
+                                    JOIN presenze p ON o.idordine = p.idordine
+                                    JOIN modelli m ON p.idprodotto = m.idmodello
+                                    JOIN prodotti pr ON p.idprodotto = pr.idprodotto
+                                    WHERE pr.idutente = ?
+                                    GROUP BY o.idordine, p.idprodotto");
+        
+        $stmt->bind_param("i", $sellerId);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        
+        $orders = [];
+        
+        while ($row = $result->fetch_assoc()) {
+            $orderId = $row['idordine'];
+            
+            if (!isset($orders[$orderId])) {
+                $orders[$orderId] = [
+                    'idordine' => $row['idordine'],
+                    'data_ordine' => $row['data_ordine'],
+                    'prezzo_totale' => 0,
+                    'prodotti' => []
+                ];
+            }
+            
+            $orders[$orderId]['prodotti'][] = [
+                'prodotto_nome' => $row['prodotto_nome'],
+                'quantità' => $row['quantità'],
+                'prezzo' => $row['prezzo'],
+                'prezzo_totale_prodotto' => $row['quantità'] * $row['prezzo']
+            ];
+            
+            $orders[$orderId]['prezzo_totale'] += $row['quantità'] * $row['prezzo'];
+        }
+        
+        return $orders;
+    }
+        
 }
 ?>
