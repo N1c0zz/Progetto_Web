@@ -5,8 +5,8 @@ USE `ns_kicks`;
 -- -----------------------------------------------------
 INSERT INTO `utenti` (`idutente`, `nome`, `cognome`, `dataNascita`, `numeroTelefono`, `sesso`, `email`, `password`, `tipo`) 
 VALUES 
-(1, 'Mario', 'Rossi', '1990-05-10', '3331234567', 'M', 'mario.rossi@example.com', 'hashed_password_cliente', 'cliente'),
-(2, 'Luigi', 'Bianchi', '1985-08-20', '3339876543', 'M', 'luigi.bianchi@example.com', 'hashed_password_venditore', 'venditore');
+(1, 'Mario', 'Rossi', '1990-05-10', '3331234567', 'Maschio', 'mario.rossi@example.com', 'hashed_password_cliente', 'cliente'),
+(2, 'Luigi', 'Bianchi', '1985-08-20', '3339876543', 'Maschio', 'luigi.bianchi@example.com', 'hashed_password_venditore', 'venditore');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `categorie`
