@@ -4,14 +4,14 @@
     <div class="col-12 col-lg-6 d-flex align-items-center">
         <div class="border border-dark p-3 text-center w-100">
             <h4 class="mb-1">Vendite totali</h4>
-            <p class="fs-5 mb-0">123</p>
+            <p class="fs-5 mb-0"><?php echo $templateParams["totalSales"]; ?></p>
         </div>
     </div>
 
     <div class="col-12 col-lg-6 d-flex align-items-center">
         <div class="border border-dark p-3 text-center w-100">
             <h4 class="mb-1">Guadagni totali</h4>
-            <p class="fs-5 mb-0">&euro; 4567.89</p>
+            <p class="fs-5 mb-0">&euro; <?php echo $templateParams["totalEarnings"]; ?></p>
         </div>
     </div>
 </div>
