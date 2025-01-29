@@ -36,9 +36,9 @@
                 <div class="form-floating col-md-8">
                     <select class="form-select" id="sex" name="sex" required>
                         <option selected value="">Seleziona il sesso</option>
-                        <option value="M">Maschio</option>
-                        <option value="F">Femmina</option>
-                        <option value="O">Altro</option>
+                        <option value="Maschio">Maschio</option>
+                        <option value="Femmina">Femmina</option>
+                        <option value="Altro">Altro</option>
                     </select>
                     <label for="sex">Sesso*</label>
                 </div>
