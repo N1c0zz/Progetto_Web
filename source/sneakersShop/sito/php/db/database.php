@@ -65,7 +65,7 @@ class DatabaseHelper{
         $query = "INSERT INTO utenti (idutente, nome, cognome, dataNascita, numeroTelefono, sesso, email, password, tipo)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'cliente')";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssssss', $userID, $name, $surname, $bday, $phone, $sex, $email, $password);
+        $stmt->bind_param('isssssss', $userID, $name, $surname, $bday, $phone, $sex, $email, $password);
         $stmt->execute();
     }
 
@@ -83,6 +83,49 @@ class DatabaseHelper{
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserInfo($userID) {
+        $query = "SELECT nome, cognome, DATE_FORMAT(dataNascita, '%Y-%m-%d') AS dataNascita, sesso, numeroTelefono, email FROM utenti WHERE idutente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateUserInfo($userID, $name, $surname, $bday, $sex, $phone, $email) {
+        $query = "UPDATE utenti
+                    SET nome = ?,
+                        cognome = ?,
+                        dataNascita = ?,
+                        sesso = ?,
+                        numeroTelefono = ?,
+                        email = ?
+                    WHERE idutente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssssssi', $name, $surname, $bday, $sex, $phone, $email, $userID);
+        $stmt->execute();
+    }
+
+    public function getUserPwd($userID) {
+        $query = "SELECT password FROM utenti WHERE idutente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateUserPwd($userID, $newPwd) {
+        $query = "UPDATE utenti
+                    SET password = ?
+                    WHERE idutente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $newPwd, $userID);
+        $stmt->execute();
     }
 }
 
