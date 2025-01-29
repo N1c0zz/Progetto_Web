@@ -4,12 +4,12 @@
 require_once("bootstrap.php");
 
 // PARAMETRI DEL TEMPLATE
-$templateParams["accountTitle"] = "Account";
+$templateParams["pageTitle"] = "Account";
 
 // nome del template da visualizzare
-$templateParams["name"] = "account-page.php";
+$templateParams["name"] = "template/account-page.php";
 
 // template html base
-require("php/seller/template/base.php");
+require("../user/template/base.php");
 
 ?>
