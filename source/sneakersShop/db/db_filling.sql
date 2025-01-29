@@ -20,10 +20,10 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `modelli`
 -- -----------------------------------------------------
-INSERT INTO `modelli` (`idmodello`, `prezzo`, `immagine`, `descrizione`, `nome`, `colore`) 
+INSERT INTO `modelli` (`idmodello`, `marca`, `prezzo`, `immagine`, `titoloDescrizione`, `descrizione`, `dettagli`, `nome`, `colore`) 
 VALUES 
-(1, 89.99, NULL, 'Scarpe sportive di alta qualità', 'Nike Air Max', 'Bianco'),
-(2, 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Timberland Classic', 'Marrone');
+(1, 'Nike', 89.99, NULL, 'Scarpe sportive di alta qualità', 'Scarpe da running comode e resistenti per ogni occasione.', 'Suola ammortizzata, Tomaia in mesh traspirante', 'Nike Air Max', 'Bianco'),
+(2, 'Timberland', 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Stivali robusti ideali per terreni accidentati e pioggia.', 'Suola antiscivolo, Impermeabile, Fodera calda', 'Timberland Classic', 'Marrone');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `prodotti` (varianti di taglie)
@@ -59,7 +59,7 @@ VALUES
 (1, '2025-01-20 14:35:00', 'da_leggere', 'Nuovo ordine', 'venditore', 'Hai ricevuto un nuovo ordine.'),
 (2, '2025-01-20 13:30:00', 'da_leggere', 'Ordine confermato', 'cliente', 'Il tuo ordine è stato confermato.'),
 (3, '2025-01-21 15:02:00', 'da_leggere', 'Ordine spedito', 'cliente', 'Il tuo ordine è stato spedito.'),
-(4, '2025-01-22 11:50:00', 'letta', 'Consegna effettuato', 'cliente', 'Il tuo ordine è stato consegnato.');
+(4, '2025-01-22 11:50:00', 'letta', 'Consegna effettuata', 'cliente', 'Il tuo ordine è stato consegnato.');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `relazioni` (notifiche associate agli ordini)

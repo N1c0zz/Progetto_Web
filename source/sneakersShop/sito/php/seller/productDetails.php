@@ -1,15 +1,19 @@
 <?php
 
-// connessione al db
 require_once("../../bootstrap.php");
 
-// PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Dettagli prodotto";
 
-// nome del template da visualizzare
+if (isset($_GET['idprodotto'])) {
+    $templateParams["productDetails"] = $dbh -> getProductDetails((int) $_GET['idprodotto']);
+}
+
+if (isset($templateParams["productDetails"]) && !empty($templateParams["productDetails"])) {
+    $prodotto = $templateParams["productDetails"];
+}
+
 $templateParams["name"] = "template/product-details.php";
 
-// template html base
 require("../user/template/base.php");
 
 ?>

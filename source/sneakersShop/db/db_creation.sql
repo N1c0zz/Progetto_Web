@@ -33,8 +33,10 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `modelli` (
   `idmodello` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `marca` VARCHAR(50) NOT NULL,
   `prezzo` DECIMAL(10,2) NOT NULL,
   `immagine` BLOB NULL,
+  `titoloDescrizione` VARCHAR(50) NOT NULL,
   `descrizione` MEDIUMTEXT NOT NULL,
   `dettagli` MEDIUMTEXT NOT NULL,
   `nome` VARCHAR(50) NOT NULL,
