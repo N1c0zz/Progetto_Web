@@ -15,8 +15,8 @@ if(isset($_POST["email"]) && isset($_POST["password"])) {
 
 // controllo se l'utente è loggato
 if(isUserLoggedIn()) {
-    $templateParams["pageTitle"] = "Account";
-    $templateParams["name"] = "account-page.php";
+    header("Location: account.php");
+    exit();
 } else {
     $templateParams["pageTitle"] = "Login";
     $templateParams["name"] = "login-form.php";
