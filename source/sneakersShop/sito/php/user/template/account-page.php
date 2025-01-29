@@ -30,7 +30,7 @@
                 <input type="email" class="form-control" id="email" value="<?php echo $user["email"]; ?>" readonly />
             </div>
             <div class="d-flex justify-content-center">
-                <a href="php/change-user-info.php" class="btn btn-dark col-6 col-md-5 mt-3">Modifica</a>
+                <a href="index.php?action=change-user-info" class="btn btn-dark col-6 col-md-5 mt-3">Modifica</a>
             </div>
         </section>
 
@@ -46,7 +46,7 @@
                 <p class="text-danger mb-0"><?php echo $templateParams["pwdConfError"]; ?></p>
             </div>
             <?php endif; ?>
-            <form action="php/account.php" method="post">
+            <form action="index.php?action=account" method="post">
                 <fieldset>
                     <legend class="visually-hidden">Modifica password</legend>
                     <div class="mb-3">
@@ -100,7 +100,7 @@
         </section>
         <?php endif; ?>
         <section class="d-flex justify-content-center my-5">
-            <a href="php/logout.php" class="btn btn-danger mt-5">ESCI DALL'ACCOUNT</a>
+            <a href="index.php?action=logout" class="btn btn-danger mt-5">ESCI DALL'ACCOUNT</a>
         </section>
     </div>
 </div>

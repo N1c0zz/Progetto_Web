@@ -1,8 +1,8 @@
 <!-- categorie -->
 <nav class="d-flex gap-2 my-3 justify-content-center" aria-label="Navigazione categorie di vendita">
-    <a href="/products.php?search=uomo" class="btn btn-light mr-2 border">Uomo</a>
-    <a href="/donna" class="btn btn-light mr-2 border">Donna</a>
-    <a href="/bambino" class="btn btn-light mr-2 border">Bambino</a>
+    <a href="index.php?action=products&search=uomo" class="btn btn-light mr-2 border">Uomo</a>
+    <a href="index.php?action=products&search=donna" class="btn btn-light mr-2 border">Donna</a>
+    <a href="index.php?action=products&search=bambino" class="btn btn-light mr-2 border">Bambino</a>
 </nav>
 
 <!-- sezione offerte-->

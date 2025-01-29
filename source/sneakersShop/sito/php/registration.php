@@ -1,13 +1,11 @@
 <?php
 
-require_once("../bootstrap.php");
-
 if(isUserLoggedIn()) {
-    header("Location: " . BASE_PATH . "index.php");
+    header("Location: index.php");
     exit();
 }
 
-$templateParams["name"] = "registration-form.php";
+$templateParams["name"] = "php/user/template/registration-form.php";
 $templateParams["pageTitle"] = "Registrazione";
 
 // controllo se l'utente si sta registrando
@@ -22,13 +20,11 @@ if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["bday"]) &&
         $login_result = $dbh->checkLogin($_POST["email"], $_POST["password"]);
         registerLoggedUser($login_result[0]);
         $templateParams["pageTitle"] = "Homepage";
-        $templateParams["name"] = "homepage.php";
+        $templateParams["name"] = "php/user/template/homepage.php";
         $templateParams["registrationMsg"] = "Registrazione effettuata con successo!";
     } else {
         $templateParams["registrationError"] = "Errore! La email inserita è già in uso";
     }
 }
-
-require("user/template/base.php");
 
 ?>

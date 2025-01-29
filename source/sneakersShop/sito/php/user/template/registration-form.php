@@ -9,7 +9,7 @@
 </div>
 <?php endif; ?>
 
-<form action="php/registration.php" method="post">
+<form action="index.php?action=registration" method="post">
     <fieldset>
         <legend class="visually-hidden">credenziali di registrazione</legend>
         <div class="row row-cols-md-2 g-4">

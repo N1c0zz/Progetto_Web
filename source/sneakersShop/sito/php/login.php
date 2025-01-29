@@ -1,7 +1,5 @@
 <?php
 
-require_once("../bootstrap.php");
-
 // controllo se l'utente sta facendo login
 if(isset($_POST["email"]) && isset($_POST["password"])) {
     $login_result = $dbh->checkLogin($_POST["email"], $_POST["password"]);
@@ -15,13 +13,11 @@ if(isset($_POST["email"]) && isset($_POST["password"])) {
 
 // controllo se l'utente è loggato
 if(isUserLoggedIn()) {
-    header("Location: account.php");
+    header("Location: index.php?action=account");
     exit();
 } else {
     $templateParams["pageTitle"] = "Login";
-    $templateParams["name"] = "login-form.php";
+    $templateParams["name"] = "php/user/template/login-form.php";
 }
-
-require("user/template/base.php");
 
 ?>

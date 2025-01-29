@@ -13,7 +13,7 @@ class DatabaseHelper{
     // legge tutti i prodotti disponibili
     // N.B valutare se fare metodi separati per le query di prodotti utente e seller o se fare una query unica per entrambi
     public function getProducts() {
-        $stmt = $this->db->prepare("SELECT nome, colore1, prezzo, descrizione, immagine FROM modelli");
+        $stmt = $this->db->prepare("SELECT nome, colore, prezzo, descrizione, immagine FROM modelli");
         $stmt->execute();
         $result = $stmt->get_result();
 

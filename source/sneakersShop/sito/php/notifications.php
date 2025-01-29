@@ -1,17 +1,13 @@
 <?php
 
-require_once("../bootstrap.php");
-
 if(!isUserLoggedIn()) {
-    header("location: login.php");
+    header("location: index.php?action=login");
     exit();
 }
 
 $templateParams["notifications"] = $dbh->getUserNotifications($_SESSION["idutente"]);
 
 $templateParams["pageTitle"] = "Notifiche";
-$templateParams["name"] = "user/template/notification-list.php";
-
-require("user/template/base.php");
+$templateParams["name"] = "php/user/template/notification-list.php";
 
 ?>

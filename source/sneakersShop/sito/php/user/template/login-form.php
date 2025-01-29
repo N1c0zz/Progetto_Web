@@ -9,7 +9,7 @@
 </div>
 <?php endif; ?>
 
-<form action="php/login.php" method="post" class="mt-3">
+<form action="index.php?action=login" method="post" class="mt-3">
     <fieldset>
         <legend class="visually-hidden">credenziali di accesso</legend>
         <div class="d-flex justify-content-center">
@@ -30,7 +30,7 @@
     </div>
 </form>
 <div class="d-flex justify-content-center">
-    <a href="php/registration.php" class="btn btn-outline-dark col-8 col-md-3 mt-3">
+    <a href="index.php?action=registration" class="btn btn-outline-dark col-8 col-md-3 mt-3">
         REGISTRATI
     </a>
 </div>

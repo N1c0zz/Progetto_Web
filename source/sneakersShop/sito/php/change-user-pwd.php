@@ -1,14 +1,12 @@
 <?php
 
-require_once("../bootstrap.php");
-
 if(!isUserLoggedIn()) {
-    header("location: login.php");
+    header("Location: index.php?action=login");
     exit();
 }
 
 $templateParams["pageTitle"] = "Modifica informazioni account";
-$templateParams["name"] = "user/template/user-info-form.php";
+$templateParams["name"] = "php/user/template/user-info-form.php";
 
 $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"])[0];
 
@@ -20,14 +18,12 @@ if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["bday"]) &&
         // aggiorno i dettagli dell'account
         $dbh->updateUserInfo($_SESSION["idutente"], $_POST["name"], $_POST["surname"], $_POST["bday"], $_POST["sex"], $_POST["phone"] ,$_POST["email"]);
         $templateParams["pageTitle"] = "Account";
-        $templateParams["name"] = "account-page.php";
+        $templateParams["name"] = "php/user/template/account-page.php";
         $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"])[0];
         $templateParams["userInfoUpdateMsg"] = "Informazioni dell'account aggiornate con successo!";
     } else {
         $templateParams["userInfoUpdateErrorMsg"] = "Errore! La email inserita è già in uso";
     }
 }
-
-require("user/template/base.php");
 
 ?>

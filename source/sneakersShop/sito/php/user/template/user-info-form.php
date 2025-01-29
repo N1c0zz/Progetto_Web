@@ -7,7 +7,7 @@
 <?php endif; ?>
 
 <?php $user = $templateParams["userInfo"] ?>
-<form action="php/change-user-info.php" method="post">
+<form action="index.php?action=change-user-info" method="post">
     <fieldset>
         <legend class="visually-hidden">informazioni dell'account</legend>
         <div class="row row-cols-md-2 g-4">

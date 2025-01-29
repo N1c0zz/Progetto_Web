@@ -10,24 +10,28 @@
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <!-- Link al file CSS generale -->
-    <link rel="stylesheet" href="../css/general.css" />
-    <!-- Link al file CSS personalizzato -->
-    <link rel="stylesheet" href="../css/homepage.css" />
+    <link rel="stylesheet" href="css/user/general.css" />
+    <?php if(isset($templateParams["styleSheet"])): ?>
+        <link rel="stylesheet" href="<?php echo $templateParams["styleSheet"]; ?>" />
+    <?php endif; ?>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header class="bg-light py-2">
     <div class="container">
         <nav class="d-flex" aria-label="Navigazione principale">
-            <a href="php/notifications.php" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
-            <a href="php/login.php" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+            <a href="index.php?action=notifications" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="index.php?action=login" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
             <?php if(!isUserLoggedIn() || $_SESSION["tipo"] != "venditore" ): ?>
-            <a href="./cartPage.php" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
+            <a href="index.php?action=cart" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
         </nav>
         <div class="container-fluid">
-            <form class="d-flex" role="search" aria-label="Cerca prodotti">
-              <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
-              <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
-              <button class="btn btn-outline-dark" type="submit">Cerca</button>
+            <form action="index.php" method="get" class="d-flex" role="search" aria-label="Cerca prodotti">
+                <legend class="visually-hidden">Ricerca prodotti</legend>
+                <fieldset class="flex-grow-1 me-2">
+                    <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
+                    <input class="form-control" type="search" placeholder="Cerca prodotto" name="search" aria-label="cerca prodotto" />
+                </fieldset>
+                <button class="btn btn-outline-dark" name="action" value="products" type="submit">Cerca</button>
             </form>
         </div>
         <?php endif; ?>
@@ -36,7 +40,7 @@
 
 <main class="container overflow-auto py-3">
     <?php
-        require("alerts.php");
+        require("php/user/template/alerts.php");
         require($templateParams["name"]); // import del template specificio
     ?>
 </main>
@@ -44,7 +48,7 @@
 <footer class="footer mt-auto bg-light py-3">
     <div class="container">
         <div class="text-center mb-3">
-            <a href="index.php">
+            <a href="index.php?action=home">
                 <img src="<?php echo IMG_DIR."logo.png"; ?>" alt="Logo" style="width: 100px; height: auto;" />
             </a>
         </div>

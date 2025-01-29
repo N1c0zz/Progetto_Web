@@ -1,14 +1,12 @@
 <?php
 
-require_once("../bootstrap.php");
-
 if(!isUserLoggedIn()) {
-    header("Location: login.php");
+    header("Location: index.php?action=login");
     exit();
 }
 
 $templateParams["pageTitle"] = "Account";
-$templateParams["name"] = "account-page.php";
+$templateParams["name"] = "php/user/template/account-page.php";
 $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"])[0];
 
 if($_SESSION["tipo"] == "cliente") {
@@ -31,7 +29,5 @@ if(isset($_POST["oldPassword"]) && isset($_POST["newPassword"]) && isset($_POST[
         $templateParams["oldPwdError"] = "Errore! la vecchia password inserita non è corretta";
     }
 }
-
-require("user/template/base.php");
 
 ?>
