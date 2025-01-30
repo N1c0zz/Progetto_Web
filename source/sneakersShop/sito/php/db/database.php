@@ -268,6 +268,40 @@ class DatabaseHelper{
         
         return $orders;
     }
+
+    public function getCategoryIdByName($categoryName) {
+        $stmt = $this->db->prepare("SELECT idcategoria FROM categorie WHERE nomeCategoria = ?");
+        $stmt->bind_param("s", $categoryName);
+        $stmt->execute();
+        $stmt->bind_result($categoryId);
         
+        if ($stmt->fetch()) {
+            $stmt->close();
+            return $categoryId;
+        }
+        
+        $stmt->close();
+        return null;
+    }
+    
+    // aggiorna un prodotto di un determinato venditore, ritorna true se l'aggiornamento è andato a buon fine, false altrimenti
+    public function updateProductBySeller($sellerId, $productId, $name, $color, $categoryId, $brand, $availability, $descriptionTitle, $description, $details) {
+        $stmt = $this->db->prepare("UPDATE prodotti p
+                                    JOIN modelli m ON p.idmodello = m.idmodello
+                                    SET m.nome = ?, m.colore = ?, p.idcategoria = ?, m.marca = ?, 
+                                        p.quantità = ?, m.titoloDescrizione = ?, m.descrizione = ?, m.dettagli = ?
+                                    WHERE p.idprodotto = ? AND p.idutente = ?");
+    
+        $stmt->bind_param("ssisssssii", 
+                          $name, $color, $categoryId, $brand, 
+                          $availability, $descriptionTitle, $description, $details, 
+                          $productId, $sellerId);
+    
+        $success = $stmt->execute();
+        $stmt->close();
+    
+        return $success;
+    }    
+    
 }
 ?>

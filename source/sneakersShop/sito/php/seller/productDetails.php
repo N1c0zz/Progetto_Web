@@ -4,14 +4,21 @@ require_once("../../bootstrap.php");
 
 $templateParams["pageTitle"] = "Dettagli prodotto";
 
-if (isset($_GET['idprodotto'])) {
-    $templateParams["productDetails"] = $dbh -> getProductDetails((int) $_GET['idprodotto']);
+// Verifica che l'ID del prodotto sia presente e valido
+$idprodotto = filter_input(INPUT_GET, 'idprodotto', FILTER_VALIDATE_INT);
+
+if ($idprodotto !== false && $idprodotto !== null) {
+    $templateParams["productDetails"] = $dbh->getProductDetails($idprodotto);
 }
 
-if (isset($templateParams["productDetails"]) && !empty($templateParams["productDetails"])) {
+// Verifica che il prodotto esista
+if (!empty($templateParams["productDetails"])) {
     $prodotto = $templateParams["productDetails"];
+} else {
+    $templateParams["errorMessage"] = "Prodotto non trovato.";
 }
 
+// Imposta il template corretto
 $templateParams["name"] = "template/product-details.php";
 
 require("../user/template/base.php");

@@ -12,7 +12,7 @@
             <p class="fs-4 mb-3">&euro; <?php echo $prodotto["prezzo"]; ?></p>
             <p class="mb-3">Disponibilità: <?php echo $prodotto["disponibilità"]; ?> pezzi</p>
             <div class="d-flex justify-content-center pt-3">
-                <a href="editProduct.html" class="btn btn-lg btn-dark col-10 col-md-6 mt-5">MODIFICA</a>
+                <a href="../editProduct.php?idprodotto=<?php echo $_GET['idprodotto']; ?>" class="btn btn-lg btn-dark col-10 col-md-6 mt-5">MODIFICA</a>
             </div>
             <div class="d-flex justify-content-center pb-5">
                 <button type="button" class="btn btn-lg btn-danger col-10 col-md-6 mt-5">RIMUOVI PRODOTTO</button>
