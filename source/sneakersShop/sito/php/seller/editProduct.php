@@ -1,8 +1,5 @@
 <?php
 
-// connessione al db
-require_once("../../bootstrap.php");
-
 // PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Modifica prodotto";
 
@@ -19,7 +16,6 @@ if(isset($_GET["idprodotto"])){
         $prodotto = $templateParams["productDetails"];
     } else {
         $templateParams["errorMessage"] = "Prodotto non trovato.";
-        // Puoi fare un redirect o fermare l'esecuzione qui
         exit;
     }
 }
@@ -34,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Recupera i dati dal form
     $nomeProdotto = $_POST['nomeProdotto'];
     $colore = $_POST['colore'];
+    $categoryName = $_POST['categoria'];
     $marca = $_POST['marca'];
     $disponibilita = $_POST['disponibilità'];
     $titoloDescrizione = $_POST['titoloDescrizione'];
@@ -41,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dettagli = $_POST['dettagli'];
     
     // Verifica categoria
-    $categoryName = $_POST["categoria"];
     $categoryId = $dbh->getCategoryIdByName($categoryName);
 
     if ($categoryId === null) {
@@ -87,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($update) {
             // Redirige l'utente dopo l'aggiornamento
-            header("Location: manageProducts.php");
+            header("Location: index.php?action=manage-products");
             exit;
         } else {
             echo "Errore nell'aggiornamento del prodotto.";
@@ -96,9 +92,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // nome del template da visualizzare
-$templateParams["name"] = "template/edit-product.php";
-
-// template html base
-require("../user/template/base.php");
-
+$templateParams["name"] = "php/seller/template/edit-product.php";
 ?>

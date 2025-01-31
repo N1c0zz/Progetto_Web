@@ -1,8 +1,8 @@
 <?php
 
-require_once("../../bootstrap.php");
-
 $templateParams["pageTitle"] = "Dettagli prodotto";
+
+$templateParams["styleSheet"] = "css/seller/productDetails.css";
 
 // Verifica che l'ID del prodotto sia presente e valido
 $idprodotto = filter_input(INPUT_GET, 'idprodotto', FILTER_VALIDATE_INT);
@@ -19,8 +19,6 @@ if (!empty($templateParams["productDetails"])) {
 }
 
 // Imposta il template corretto
-$templateParams["name"] = "template/product-details.php";
-
-require("../user/template/base.php");
+$templateParams["name"] = "php/seller/template/product-details.php";
 
 ?>

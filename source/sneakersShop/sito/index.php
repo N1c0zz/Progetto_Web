@@ -41,6 +41,26 @@ if(isset($_GET["action"])) {
             require("php/user/products.php");
             break;
         
+        case 'manage-orders':
+            require("php/seller/manageOrders.php");
+            break;
+        
+        case 'manage-products':
+            require("php/seller/manageProducts.php");
+            break;
+        
+        case 'product-details':
+            require("php/seller/productDetails.php");
+            break;
+
+        case 'edit-product':
+            require("php/seller/editProduct.php");
+            break;
+        
+        case 'save-product-info':
+            require("php/seller/editProduct.php");
+            break;
+        
         default:
             require("php/home.php");
             break;

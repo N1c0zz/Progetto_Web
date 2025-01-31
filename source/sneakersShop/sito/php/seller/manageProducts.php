@@ -1,17 +1,16 @@
 <?php
 
-// Connessione al database
-require_once("../../bootstrap.php");
+$templateParams["styleSheet"] = "css/seller/manageProducts.css";
 
 // Controllo autenticazione
 if (!isset($_SESSION["idutente"])) {
-    header("Location: ../../index.php?action=login");
+    header("Location: index.php?action=login");
     exit();
 }
 
 // Controllo ruolo (se necessario)
-if ($_SESSION["role"] !== "vendor") {
-    header("Location: ../../index.php?action=home");
+if ($_SESSION["tipo"] !== "venditore") {
+    header("Location: index.php?action=home");
     exit();
 }
 
@@ -33,9 +32,6 @@ if (empty($templateParams["sellerProducts"])) {
 }
 
 // Nome del template da visualizzare
-$templateParams["name"] = "template/manage-products.php";
-
-// Template HTML base
-require("../user/template/base.php");
+$templateParams["name"] = "php/seller/template/manage-products.php";
 
 ?>

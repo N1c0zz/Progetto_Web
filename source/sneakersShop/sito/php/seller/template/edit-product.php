@@ -1,6 +1,7 @@
 <h1 class="mb-4">Modifica Prodotto</h1>
-    <form action="../editProduct.php" method="post">
-        <input type="hidden" name="idprodotto" value="<?php echo $prodotto['idprodotto']; ?>" />
+    <form action="index.php?action=save-product-info" method="post">
+
+        <input type="hidden" name="idprodotto" value="<?php echo $idprodotto; ?>" />
 
         <div class="mb-3">
             <label for="productName" class="form-label">Nome Prodotto</label>
@@ -12,11 +13,11 @@
         </div>
         <div class="mb-3">
             <label for="productCategory" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="productCategory" placeholder="Inserisci la categoria del prodotto" nome="categoria" value="<?php echo $prodotto["categoria"]; ?>" />
+            <input type="text" class="form-control" id="productCategory" placeholder="Inserisci la categoria del prodotto" name="categoria" value="<?php echo $prodotto["categoria"]; ?>" />
         </div>
         <div class="mb-3">
             <label for="productBrand" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="productBrand" placeholder="Inserisci la marca del prodotto" nome="marca" value="<?php echo $prodotto["marca"]; ?>" />
+            <input type="text" class="form-control" id="productBrand" placeholder="Inserisci la marca del prodotto" name="marca" value="<?php echo $prodotto["marca"]; ?>" />
         </div>
         <div class="mb-3">
             <label for="productAvailability" class="form-label">Disponibilità</label>
@@ -28,15 +29,11 @@
         </div>
         <div class="mb-3">
             <label for="productDescription" class="form-label">Descrizione</label>
-            <textarea class="form-control" id="productDescription" rows="4" placeholder="Inserisci la descrizione del prodotto" name="descrizione">
-                <?php echo $prodotto["descrizione"]; ?>
-            </textarea>
+            <textarea class="form-control" id="productDescription" rows="4" placeholder="Inserisci la descrizione del prodotto" name="descrizione"><?php echo $prodotto["descrizione"]; ?></textarea>
         </div>
         <div class="mb-3">
             <label for="productDetails" class="form-label">Dettagli</label>
-            <textarea class="form-control" id="productDetails" rows="4" placeholder="Inserisci i dettagli tecnici del prodotto" name="dettagli">
-                <?php echo $prodotto["dettagli"]; ?>
-            </textarea>
+            <textarea class="form-control" id="productDetails" rows="4" placeholder="Inserisci i dettagli tecnici del prodotto" name="dettagli"><?php echo $prodotto["dettagli"]; ?></textarea>
         </div>
         <div class="mb-4">
             <label for="productImage" class="form-label">Immagine</label>

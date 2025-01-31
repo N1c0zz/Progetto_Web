@@ -1,9 +1,9 @@
 <?php
-// connessione al db
-require_once("../../bootstrap.php");
 
 // PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Homepage";
+
+$templateParams["styleSheet"] = "css/seller/seller-homepage.css";
 
 // Controlla se l'utente è loggato
 if (!isset($_SESSION['idutente'])) {
@@ -32,9 +32,6 @@ if (isset($_SESSION["idutente"]) && is_numeric($_SESSION["idutente"])) {
 }
 
 // nome del template da visualizzare
-$templateParams["name"] = "template/seller-homepage.php";
-
-// template html base
-require("../user/template/base.php");
+$templateParams["name"] = "php/seller/template/seller-homepage.php";
 
 ?>
