@@ -35,12 +35,31 @@ CREATE TABLE IF NOT EXISTS `modelli` (
   `idmodello` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `marca` VARCHAR(50) NOT NULL,
   `prezzo` DECIMAL(10,2) NOT NULL,
-  `immagine` BLOB NULL,
+  `immagine` VARCHAR(50) NULL,
   `titoloDescrizione` VARCHAR(50) NOT NULL,
   `descrizione` MEDIUMTEXT NOT NULL,
   `dettagli` MEDIUMTEXT NOT NULL,
   `nome` VARCHAR(50) NOT NULL,
   `colore` VARCHAR(50) NOT NULL
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `appartenenze`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appartenenze` (
+  `idmodello` INT NOT NULL,
+  `idcategoria` INT NOT NULL,
+  PRIMARY KEY (`idmodello`, `idcategoria`),
+  CONSTRAINT `fk_appartenenze_idmodello`
+    FOREIGN KEY (`idmodello`)
+    REFERENCES `modelli`(`idmodello`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_appartenenze_idcategoria`
+    FOREIGN KEY (`idcategoria`)
+    REFERENCES `categorie`(`idcategoria`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------

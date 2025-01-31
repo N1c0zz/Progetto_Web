@@ -26,6 +26,14 @@ VALUES
 (2, 'Timberland', 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Stivali robusti ideali per terreni accidentati e pioggia.', 'Suola antiscivolo, Impermeabile, Fodera calda', 'Timberland Classic', 'Marrone');
 
 -- -----------------------------------------------------
+-- Inserimento nella tabella `appartenenze` (relazione tra modelli e categorie)
+-- -----------------------------------------------------
+INSERT INTO `appartenenze` (`idmodello`, `idcategoria`) 
+VALUES 
+(1, 1), -- Nike Air Max appartiene alla categoria Sneakers
+(2, 2); -- Timberland Classic appartiene alla categoria Stivali
+
+-- -----------------------------------------------------
 -- Inserimento nella tabella `prodotti` (varianti di taglie)
 -- -----------------------------------------------------
 INSERT INTO `prodotti` (`idprodotto`, `idutente`, `idcategoria`, `idmodello`, `quantità`, `taglia`, `dataInserimento`) 
