@@ -315,7 +315,62 @@ class DatabaseHelper{
         $stmt->close();
     
         return $success;
-    }    
+    }
+
+    public function updateOrderStatus($orderId, $newStatus) {
+        $stmt = $this->db->prepare("UPDATE ordini SET stato = ? WHERE idordine = ?");
+        
+        $stmt->bind_param("si", $newStatus, $orderId);
+        $success = $stmt->execute();
+        $stmt->close();
+        
+        return $success;
+    }
+
+    public function getUserIdByOrderId($orderId) {
+        $stmt = $this->db->prepare("SELECT idutente FROM ordini WHERE idordine = ?");
+        
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        
+        $stmt->bind_result($userId);
+        $stmt->fetch();
+        $stmt->close();
+        
+        return $userId;
+    }
+
+    public function createOrderStatusNotification($message, $userId, $orderId, $status) {
+ 
+        $structuredMessage = "Lo stato dell'ordine è cambiato in: " . $status . "\n" . $message;
+    
+        $notificationTitle = "Aggiornamento stato ordine #" . $orderId;
+    
+        $stmt = $this->db->prepare("INSERT INTO notifiche (data, titolo, messaggio) VALUES (NOW(), ?, ?)");
+        $stmt->bind_param("ss", $notificationTitle, $structuredMessage);
+        $stmt->execute();
+    
+        $notificationId = $stmt->insert_id;
+        $stmt->close();
+    
+        if ($notificationId) {
+            // Collega la notifica all'ordine nella tabella `relazioni`
+            $stmt = $this->db->prepare("INSERT INTO relazioni (idnotifica, idordine) VALUES (?, ?)");
+            $stmt->bind_param("ii", $notificationId, $orderId);
+            $stmt->execute();
+            $stmt->close();
+    
+            // Collega la notifica al cliente nella tabella `ricezioni`
+            $stmt = $this->db->prepare("INSERT INTO ricezioni (idutente, idnotifica) VALUES (?, ?)");
+            $stmt->bind_param("ii", $userId, $notificationId);
+            $stmt->execute();
+            $stmt->close();
+    
+            return true;
+        }
+    
+        return false;
+    }
     
 }
 ?>
