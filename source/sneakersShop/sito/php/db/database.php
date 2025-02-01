@@ -11,12 +11,26 @@ class DatabaseHelper{
     }
 
     // legge tutti i prodotti disponibili
-    // N.B valutare se fare metodi separati per le query di prodotti utente e seller o se fare una query unica per entrambi
     public function getProducts() {
-        $stmt = $this->db->prepare("SELECT nome, colore, prezzo, descrizione, immagine FROM modelli");
+        $stmt = $this->db->prepare("SELECT 
+                                        m.nome AS modello,
+                                        c.nomeCategoria AS categoria,
+                                        m.marca,                      
+                                        m.colore,
+                                        m.prezzo,
+                                        COALESCE(SUM(p.quantità), 0) AS disponibilità,
+                                        m.descrizione,
+                                        m.dettagli,
+                                        m.titoloDescrizione,
+                                        m.immagine
+                                    FROM prodotti p
+                                    JOIN modelli m ON p.idmodello = m.idmodello
+                                    JOIN appartenenze a ON a.idmodello = m.idmodello
+                                    JOIN categorie c ON a.idcategoria = c.idcategoria
+                                    GROUP BY p.idprodotto, m.nome, c.nomeCategoria, m.marca, m.colore, m.prezzo, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine");
         $stmt->execute();
         $result = $stmt->get_result();
-
+        
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
