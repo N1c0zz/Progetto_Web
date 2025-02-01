@@ -22,8 +22,8 @@ VALUES
 -- -----------------------------------------------------
 INSERT INTO `modelli` (`idmodello`, `marca`, `prezzo`, `immagine`, `titoloDescrizione`, `descrizione`, `dettagli`, `nome`, `colore`) 
 VALUES 
-(1, 'Nike', 89.99, NULL, 'Scarpe sportive di alta qualità', 'Scarpe da running comode e resistenti per ogni occasione.', 'Suola ammortizzata, Tomaia in mesh traspirante', 'Nike Air Max', 'Bianco'),
-(2, 'Timberland', 129.99, NULL, 'Stivali resistenti per tutte le stagioni', 'Stivali robusti ideali per terreni accidentati e pioggia.', 'Suola antiscivolo, Impermeabile, Fodera calda', 'Timberland Classic', 'Marrone');
+(1, 'Nike', 89.99, '314101996404_01.png', 'Scarpe sportive di alta qualità', 'Scarpe da running comode e resistenti per ogni occasione.', 'Suola ammortizzata, Tomaia in mesh traspirante', 'Nike Air Max', 'Bianco'),
+(2, 'Timberland', 129.99, '314626811104_01.png', 'Stivali resistenti per tutte le stagioni', 'Stivali robusti ideali per terreni accidentati e pioggia.', 'Suola antiscivolo, Impermeabile, Fodera calda', 'Timberland Classic', 'Marrone');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `appartenenze` (relazione tra modelli e categorie)
@@ -39,7 +39,6 @@ VALUES
 INSERT INTO `prodotti` (`idprodotto`, `idutente`, `idcategoria`, `idmodello`, `quantità`, `taglia`, `dataInserimento`) 
 VALUES 
 (1, 2, 1, 1, 10, 38, NOW()), -- Nike Air Max, taglia 38
-(2, 2, 1, 1, 15, 40, NOW()), -- Nike Air Max, taglia 40
 (3, 2, 2, 2, 5, 42, NOW());  -- Timberland Classic, taglia 42
 
 -- -----------------------------------------------------
@@ -57,7 +56,6 @@ INSERT INTO `presenze` (`idordine`, `idprodotto`, `quantità`)
 VALUES 
 (1, 1, 2), -- Ordine 1: 2 paia di Nike Air Max, taglia 38
 (1, 3, 1), -- Ordine 1: 1 paio di Timberland Classic, taglia 42
-(2, 2, 1); -- Ordine 2: 1 paio di Nike Air Max, taglia 40
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `notifiche`
