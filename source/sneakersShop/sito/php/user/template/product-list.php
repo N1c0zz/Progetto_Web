@@ -3,9 +3,13 @@
 <!-- N.B SISTEMARE NOMI PARAMETRI -->
 
 <!-- TODO: sostituire input ricerca con il contenuto inserito nel form ricerca-->
-<h1 class="fw-semibold mt-3">INPUT RICERCA</h1>
+<h1 class="fw-semibold mt-3">
+    <?php
+    echo (isset($_GET["search"]) && !empty($_GET["search"])) ? $_GET["search"] : "I nostri prodotti";
+    ?>
+</h1>
 <!-- TODO: sostituire N con il numero effettivo -->
-<p class="">N risultati</p>
+<p class=""><?php echo $templateParams["productAmount"] ?> risultati</p>
 
 <!-- lista prodotti -->
 <ul class="products-list list-unstyled row row-cols-1 row-cols-md-5 g-4 mt-5">
@@ -17,7 +21,7 @@
             <div class="card-body">
                 <h2 class="card-title h5"><?php echo $product["modello"]; ?></h2>
                 <p class="card-text text-muted">
-                    <!-- ?php echo $product["categoria"]; ?><br -->
+                    <?php echo $product["categorie"]; ?><br >
                     <?php echo $product["colore"]; ?><br>
                     <?php echo "Disponibilità: " . $product["disponibilità"] . " pezzi"; ?><br>
                 </p>

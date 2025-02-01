@@ -11,8 +11,11 @@ foreach ($templateParams["productList"] as &$product) {
 unset($product);
 
 if(isset($_GET["search"]) && !empty($_GET["search"])) {
-    $templateParams["productList"] = applyFilter($templateParams["productList"], $_GET["search"]);
+    $filteredList = applyFilter($templateParams["productList"], $_GET["search"]);
+    $templateParams["productList"] = $filteredList;
 }
+
+$templateParams["productAmount"] = count($templateParams["productList"]);
 
 function applyFilter($productList, $userInput) {
     // input utente
@@ -38,7 +41,7 @@ function applyFilter($productList, $userInput) {
             }
             // Ricerca approssimata (per errori di battitura)
             similar_text($keyword, $productText, $similarity);
-            if ($similarity > 70) {
+            if ($similarity > 50) {
                 $score += 5;
                 $foundKeywords[] = $keyword;
             }
@@ -51,13 +54,18 @@ function applyFilter($productList, $userInput) {
             ];
         }
     }
-
-    // Ordina i risultati per rilevanza
-    usort($results, function($a, $b) {
-        return $b['score'] - $a['score'];
-    });
-    $result = array_column($results, "product");
+    if(isset($results)) {
+        // Ordina i risultati per rilevanza
+        usort($results, function($a, $b) {
+            return $b['score'] - $a['score'];
+        });
+        $result = array_column($results, "product");
+        return $result;
+    } else {
+        $result = [];
+    }
     return $result;
+
 }
 
 // Funzione per normalizzare il testo

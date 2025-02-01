@@ -14,8 +14,8 @@ class DatabaseHelper{
     public function getProducts() {
         $stmt = $this->db->prepare("SELECT 
                                         m.nome AS modello,
-                                        c.nomeCategoria AS categoria,
-                                        m.marca,                      
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
+                                        m.marca,
                                         m.colore,
                                         m.prezzo,
                                         COALESCE(SUM(p.quantità), 0) AS disponibilità,
@@ -23,11 +23,11 @@ class DatabaseHelper{
                                         m.dettagli,
                                         m.titoloDescrizione,
                                         m.immagine
-                                    FROM prodotti p
-                                    JOIN modelli m ON p.idmodello = m.idmodello
-                                    JOIN appartenenze a ON a.idmodello = m.idmodello
-                                    JOIN categorie c ON a.idcategoria = c.idcategoria
-                                    GROUP BY p.idprodotto, m.nome, c.nomeCategoria, m.marca, m.colore, m.prezzo, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine");
+                                    FROM modelli m
+                                    LEFT JOIN prodotti p ON p.idmodello = m.idmodello
+                                    LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
+                                    LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
+                                    GROUP BY m.idmodello");
         $stmt->execute();
         $result = $stmt->get_result();
         

@@ -44,9 +44,9 @@ VALUES
 (3, 1),
 (3, 4),
 (4, 1),
-(4, 4),
+(4, 5),
 (5, 1),
-(5, 4),
+(5, 5),
 (6, 1),
 (6, 6);
 
@@ -56,7 +56,11 @@ VALUES
 INSERT INTO `prodotti` (`idprodotto`, `idutente`, `idcategoria`, `idmodello`, `quantità`, `taglia`, `dataInserimento`) 
 VALUES 
 (1, 2, 1, 1, 10, 38, NOW()), -- Nike Air Max, taglia 38
-(3, 2, 2, 2, 5, 42, NOW());  -- Timberland Classic, taglia 42
+(3, 2, 2, 2, 5, 42, NOW()),  -- Timberland Classic, taglia 42
+(2, 2, 2, 3, 5, 42, NOW()),
+(4, 2, 2, 4, 5, 42, NOW()),
+(5, 2, 2, 5, 5, 42, NOW()),
+(6, 2, 2, 6, 5, 42, NOW());
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `ordini`
