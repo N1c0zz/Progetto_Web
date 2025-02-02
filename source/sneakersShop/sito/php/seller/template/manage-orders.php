@@ -2,7 +2,7 @@
 
     <div class="order-list">
     <?php foreach ($templateParams["sellerOrders"] as $order): ?>
-        <a href="./order-details.html?id=12345" class="text-decoration-none text-dark">
+        <a href="index.php?action=edit-order&idordine=<?php $order["idordine"]; ?>" class="text-decoration-none text-dark">
             <div class="order-card border rounded p-3 mb-3">
                 <h4 class="mb-2">Ordine #<?php echo $order["idordine"]; ?></h4>
                 <ul class="list-unstyled mb-2">

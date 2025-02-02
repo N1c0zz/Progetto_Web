@@ -61,6 +61,14 @@ if(isset($_GET["action"])) {
             require("php/seller/editProduct.php");
             break;
         
+        case 'edit-order':
+            require("php/seller/editOrderState.php");
+            break;
+        
+        case 'save-new-order-state':
+            require("php/seller/editOrderState.php");
+            break;
+        
         case 'cart':
             require("php/user/cart.php");
             break;
