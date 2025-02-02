@@ -5,6 +5,7 @@ if(!isUserLoggedIn()) {
     exit();
 }
 
+$templateParams["styleSheet"] = "css/user/accountPage.css";
 $templateParams["pageTitle"] = "Account";
 $templateParams["name"] = "php/user/template/account-page.php";
 $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"])[0];

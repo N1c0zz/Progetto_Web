@@ -1,6 +1,7 @@
 <?php
 
 $templateParams["pageTitle"] = "Homepage";
+$templateParams["styleSheet"] = "css/user/homepage.css";
 
 if(!isUserLoggedIn() || $_SESSION["tipo"] == "cliente") {
     $templateParams["name"] = "php/user/template/homepage.php";
