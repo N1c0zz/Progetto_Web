@@ -29,8 +29,8 @@
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" class="form-control" id="email" value="<?php echo $user["email"]; ?>" readonly />
             </div>
-            <div class="d-flex justify-content-center">
-                <a href="index.php?action=change-user-info" class="btn btn-dark col-6 col-md-5 mt-3">Modifica</a>
+            <div class="d-flex justify-content-start">
+                <a href="index.php?action=change-user-info" class="btn btn-dark col-4 col-md-3 mt-3">Modifica</a>
             </div>
         </section>
 
@@ -63,7 +63,7 @@
                     </div>
                 </fieldset>
                 <div class="d-flex justify-content-center justify-content-md-start">
-                    <input type="submit" class="btn btn-dark col-6 col-md-3 mt-2 mb-4" aria-label="Conferma la modifica della password" value="Modifica password"></button>
+                    <input type="submit" class="btn btn-dark col-4 col-md-3 mt-3 mb-4" aria-label="Conferma la modifica della password" value="Modifica password"></button>
                 </div>
             </form>
         </section>

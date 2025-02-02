@@ -14,18 +14,21 @@ if ($_SESSION["tipo"] !== "venditore") {
     exit();
 }
 
-// Recupero l'ID del venditore e sanitizzazione
 $idVenditore = filter_var($_SESSION["idutente"], FILTER_VALIDATE_INT);
 
 if ($idVenditore) {
-    $templateParams["sellerOrders"] = $dbh->getAllOrdersBySeller($idVenditore);
+    // Prova a ottenere gli ordini dal database
+    $orders = $dbh->getAllOrdersBySeller($idVenditore);
+    // Verifica se ci sono ordini
+    if (empty($orders)) {
+        // Se non ci sono ordini, setta sellerOrders come array vuoto
+        $templateParams["sellerOrders"] = [];
+    } else {
+        // Altrimenti setta gli ordini trovati
+        $templateParams["sellerOrders"] = $orders;
+    }
 } else {
     $templateParams["sellerOrders"] = [];
-}
-
-// Se il venditore non ha ordini
-if (empty($templateParams["sellerOrders"])) {
-    $templateParams["errorMessage"] = "Non hai ancora ricevuto ordini.";
 }
 
 // PARAMETRI DEL TEMPLATE

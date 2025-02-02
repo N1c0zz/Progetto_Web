@@ -56,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // PARAMETRI DEL TEMPLATE
-$templateParams["pageTitle"] = "Gestisci gli ordini";
+$templateParams["pageTitle"] = "Gestisci stato dell'ordine";
 
 // Nome del template da visualizzare
-$templateParams["name"] = "php/seller/template/manage-orders.php";
+$templateParams["name"] = "php/seller/template/edit-order-state.php";
 ?>

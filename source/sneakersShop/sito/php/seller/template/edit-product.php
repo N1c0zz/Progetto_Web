@@ -13,7 +13,8 @@
         </div>
         <div class="mb-3">
             <label for="productCategory" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="productCategory" placeholder="Inserisci la categoria del prodotto" name="categoria" value="<?php echo $prodotto["categoria"]; ?>" />
+            <?php $categorie = implode(', ', $prodotto["categorie"]); ?>
+            <input type="text" class="form-control" id="productCategory" placeholder="Inserisci la categoria del prodotto" name="categoria" value="<?php echo $categorie; ?>" />
         </div>
         <div class="mb-3">
             <label for="productBrand" class="form-label">Marca</label>
@@ -39,7 +40,9 @@
             <label for="productImage" class="form-label">Immagine</label>
             <input type="file" class="form-control" name="productImage" id="productImage" />
         </div>
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-dark">Salva Modifiche</button>
+        <div class="d-flex justify-content-between">
+            <a href="index.php?action=manage-products" class="btn btn-outline-secondary col-1 text-center">Annulla</a>
+            <button type="submit" class="btn btn-dark col-2">Salva Modifiche</button>
         </div>
+  
     </form>

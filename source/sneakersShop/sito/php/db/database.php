@@ -152,60 +152,70 @@ class DatabaseHelper{
     // ritorna il numero di vendite del venditore
     // funzione SQL COALESCE --> se il valore trovato è NULL lo ritorna come zero
     public function getTotalSales($sellerId) {
-        $stmt = $this->db->prepare("SELECT COALESCE(SUM(p.quantità), 0) AS total_sales
-                                    FROM presenze p
-                                    JOIN prodotti pr ON p.idprodotto = pr.idprodotto
-                                    JOIN ordini o ON p.idordine = o.idordine
-                                    WHERE pr.idutente = ?");
-        
+        $stmt = $this->db->prepare("SELECT SUM(pr.quantità) AS totalSales
+                                    FROM presenze pr
+                                    JOIN prodotti p ON pr.idprodotto = p.idprodotto
+                                    WHERE p.idvenditore = ?");
+    
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+    
         $row = $result->fetch_assoc();
-        return $row ? $row['total_sales'] : 0;
+        return isset($row['totalSales']) ? $row['totalSales'] : 0;
     }
-
+    
+             
     // ritorna i guadagni totali del venditore
     public function getTotalEarnings($sellerId) {
-        $stmt = $this->db->prepare("SELECT COALESCE(SUM(p.quantità * m.prezzo), 0) AS total_earnings
-                                    FROM presenze p
-                                    JOIN prodotti pr ON p.idprodotto = pr.idprodotto
-                                    JOIN modelli m ON pr.idmodello = m.idmodello
-                                    WHERE pr.idutente = ?");
-        
+        $stmt = $this->db->prepare("SELECT SUM(pr.quantità * m.prezzo) AS totalEarnings
+                                    FROM presenze pr
+                                    JOIN prodotti p ON pr.idprodotto = p.idprodotto
+                                    JOIN modelli m ON p.idmodello = m.idmodello
+                                    WHERE p.idvenditore = ?");
+    
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+    
         $row = $result->fetch_assoc();
-        return $row ? $row['total_earnings'] : 0;
+        return isset($row['totalEarnings']) ? $row['totalEarnings'] : 0;
     }
-
+    
+    
     // ritorna un array associativo con i dettagli del prodotto passato in input
     public function getProductDetails($productId) {
         $stmt = $this->db->prepare("SELECT 
                                         m.nome AS modello,
-                                        c.nomeCategoria AS categoria,
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria ORDER BY c.nomeCategoria SEPARATOR ', ') AS categorie,
                                         m.marca,                      
                                         m.colore,
                                         m.prezzo,
-                                        COALESCE(SUM(p.quantità), 0) AS disponibilità,
+                                        m.disponibilità,
                                         m.descrizione,
                                         m.dettagli,
                                         m.titoloDescrizione
                                     FROM prodotti p
                                     JOIN modelli m ON p.idmodello = m.idmodello
-                                    JOIN categorie c ON p.idcategoria = c.idcategoria
+                                    JOIN appartenenze a ON m.idmodello = a.idmodello
+                                    JOIN categorie c ON a.idcategoria = c.idcategoria
                                     WHERE p.idprodotto = ?
-                                    GROUP BY p.idprodotto, m.nome, c.nomeCategoria, m.marca, m.colore, m.prezzo, m.descrizione, m.dettagli, m.titoloDescrizione");
-        
+                                    GROUP BY p.idprodotto, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione");
+    
         $stmt->bind_param("i", $productId);
         $stmt->execute();
         $result = $stmt->get_result();
         
-        return $result->fetch_assoc();
+        $productDetails = $result->fetch_assoc();
+    
+        // Convertire la stringa di categorie in un array
+        if ($productDetails && isset($productDetails['categorie'])) {
+            $productDetails['categorie'] = explode(', ', $productDetails['categorie']);
+        }
+    
+        return $productDetails;
     }
+    
     
     // ritorna l'elenco di prodotti di un seller
     public function getProductsBySeller($sellerId) {
@@ -213,78 +223,105 @@ class DatabaseHelper{
                                         pr.idprodotto, 
                                         m.nome AS modello, 
                                         pr.dataInserimento, 
-                                        COALESCE(SUM(p.quantità), 0) AS disponibilità
+                                        m.disponibilità, 
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria ORDER BY c.nomeCategoria SEPARATOR ', ') AS categorie
                                     FROM prodotti pr
                                     JOIN modelli m ON pr.idmodello = m.idmodello
-                                    LEFT JOIN presenze p ON pr.idprodotto = p.idprodotto
-                                    WHERE pr.idutente = ?
-                                    GROUP BY pr.idprodotto, m.nome, pr.dataInserimento");
-        
+                                    JOIN appartenenze a ON m.idmodello = a.idmodello
+                                    JOIN categorie c ON a.idcategoria = c.idcategoria
+                                    WHERE pr.idvenditore = ?
+                                    GROUP BY pr.idprodotto, m.nome, pr.dataInserimento, m.disponibilità");
+    
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
         $result = $stmt->get_result();
         
         $products = [];
         while ($row = $result->fetch_assoc()) {
+            // Convertire le categorie in array
+            if (isset($row['categorie'])) {
+                $row['categorie'] = explode(', ', $row['categorie']);
+            }
             $products[] = $row;
         }
-        
+    
         return $products;
     }
+    
 
     // ritorna un array associativo con gli ordini associati ad un venditore,
     // nel formato
     // [id_ordine][data_ordine][prezzo totale][prodotti[dettagli prodotto 1], [dettagli prodotto 2]]
     public function getAllOrdersBySeller($sellerId) {
+        // Prepara la query per ottenere gli ordini e i dettagli dei prodotti
         $stmt = $this->db->prepare("SELECT 
-                                        o.idordine,
-                                        o.data AS data_ordine,
-                                        SUM(p.quantità * m.prezzo) AS prezzo_totale,
-                                        p.idprodotto,
-                                        m.nome AS prodotto_nome,
-                                        p.quantità,
-                                        m.prezzo
+                                        o.idordine, 
+                                        o.data AS data_ordine, 
+                                        o.stato, 
+                                        p.idprodotto, 
+                                        m.nome AS prodotto_nome, 
+                                        p.quantità, 
+                                        m.prezzo, 
+                                        (p.quantità * m.prezzo) AS prezzo_totale_prodotto 
                                     FROM ordini o
                                     JOIN presenze p ON o.idordine = p.idordine
-                                    JOIN modelli m ON p.idprodotto = m.idmodello
                                     JOIN prodotti pr ON p.idprodotto = pr.idprodotto
-                                    WHERE pr.idutente = ?
-                                    GROUP BY o.idordine, p.idprodotto");
-        
+                                    JOIN modelli m ON pr.idmodello = m.idmodello
+                                    WHERE pr.idvenditore = ? 
+                                    ORDER BY o.idordine, p.idprodotto");
+    
+        // Associa il parametro del venditore alla query
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
         
+        // Ottieni il risultato
         $result = $stmt->get_result();
-        
+    
+        // Array per memorizzare gli ordini
         $orders = [];
-        
+    
+        // Cicla attraverso i risultati
         while ($row = $result->fetch_assoc()) {
             $orderId = $row['idordine'];
-            
+    
+            // Se l'ordine non è già nell'array, lo inizializziamo
             if (!isset($orders[$orderId])) {
                 $orders[$orderId] = [
                     'idordine' => $row['idordine'],
                     'data_ordine' => $row['data_ordine'],
+                    'stato' => $row['stato'],
                     'prezzo_totale' => 0,
                     'prodotti' => []
                 ];
             }
-            
+    
+            // Aggiungi il prodotto all'ordine
             $orders[$orderId]['prodotti'][] = [
+                'idprodotto' => $row['idprodotto'],
                 'prodotto_nome' => $row['prodotto_nome'],
                 'quantità' => $row['quantità'],
                 'prezzo' => $row['prezzo'],
-                'prezzo_totale_prodotto' => $row['quantità'] * $row['prezzo']
+                'prezzo_totale_prodotto' => $row['prezzo_totale_prodotto']
             ];
-            
-            $orders[$orderId]['prezzo_totale'] += $row['quantità'] * $row['prezzo'];
+    
+            // Aggiungi il prezzo totale del prodotto all'ordine
+            $orders[$orderId]['prezzo_totale'] += $row['prezzo_totale_prodotto'];
         }
-        
+    
+        // Chiudi la dichiarazione
+        $stmt->close();
+    
+        // Ritorna l'array degli ordini
         return $orders;
-    }
-
+    }    
+    
     public function getCategoryIdByName($categoryName) {
         $stmt = $this->db->prepare("SELECT idcategoria FROM categorie WHERE nomeCategoria = ?");
+        
+        if ($stmt === false) {
+            return null;
+        }
+    
         $stmt->bind_param("s", $categoryName);
         $stmt->execute();
         $stmt->bind_result($categoryId);
@@ -298,6 +335,7 @@ class DatabaseHelper{
         return null;
     }
     
+    
     // aggiorna un prodotto di un determinato venditore, ritorna true se l'aggiornamento è andato a buon fine, false altrimenti
     public function updateProductBySeller($sellerId, $productId, $name, $color, $categoryId, $brand, $availability, $descriptionTitle, $description, $details) {
         $stmt = $this->db->prepare("UPDATE prodotti p
@@ -305,40 +343,55 @@ class DatabaseHelper{
                                     SET m.nome = ?, m.colore = ?, p.idcategoria = ?, m.marca = ?, 
                                         p.quantità = ?, m.titoloDescrizione = ?, m.descrizione = ?, m.dettagli = ?
                                     WHERE p.idprodotto = ? AND p.idutente = ?");
+        
+        if ($stmt === false) {
+            return false;
+        }
     
-        $stmt->bind_param("ssisssssii", 
+        // Associa i parametri
+        $stmt->bind_param("ssissssss", 
                           $name, $color, $categoryId, $brand, 
                           $availability, $descriptionTitle, $description, $details, 
                           $productId, $sellerId);
-    
         $success = $stmt->execute();
         $stmt->close();
-    
+        
         return $success;
     }
-
+    
     public function updateOrderStatus($orderId, $newStatus) {
         $stmt = $this->db->prepare("UPDATE ordini SET stato = ? WHERE idordine = ?");
         
+        if ($stmt === false) {
+            return false;
+        }
+
         $stmt->bind_param("si", $newStatus, $orderId);
+        
         $success = $stmt->execute();
         $stmt->close();
         
         return $success;
     }
-
+    
     public function getUserIdByOrderId($orderId) {
         $stmt = $this->db->prepare("SELECT idutente FROM ordini WHERE idordine = ?");
         
+        if ($stmt === false) {
+            return null;
+        }
+    
         $stmt->bind_param("i", $orderId);
+        
         $stmt->execute();
         
         $stmt->bind_result($userId);
         $stmt->fetch();
         $stmt->close();
         
-        return $userId;
+        return $userId ? $userId : null; 
     }
+    
 
     public function createOrderStatusNotification($message, $userId, $orderId, $status) {
  

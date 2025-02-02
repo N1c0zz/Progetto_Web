@@ -1,4 +1,4 @@
-<h1 class="fw-semibold mt-5">DETTAGLI PRODOTTO</h1>
+<h1 class="fw-semibold mt-5">Dettagli Prodotto</h1>
 
     <div class="row row-cols-1 row-cols-md-2 section-border mt-3 bg-body">
         <div class="col-md-7 d-flex justify-content-center">
@@ -6,7 +6,8 @@
         </div>
         <div class="col-md-5 bg-body-secondary">
             <h2 class="fw-semibold mt-5 mb-3"><?php echo $prodotto["modello"]; ?></h2>
-            <p class="mb-1"><?php echo $prodotto["categoria"]; ?></p>
+            <?php $categorie = implode(', ', $prodotto["categorie"]); ?>
+            <p class="mb-1"><?php echo $categorie; ?></p>
             <p class="mb-1"><?php echo $prodotto["marca"]; ?></p>
             <p class="fw-light mb-5"><?php echo $prodotto["colore"]; ?></p>
             <p class="fs-4 mb-3">&euro; <?php echo $prodotto["prezzo"]; ?></p>
@@ -30,7 +31,7 @@
         </p>
         <?php
         if (isset($prodotto["dettagli"]) && !empty($prodotto["dettagli"])) {
-            $dettagliArray = explode(';', $prodotto["dettagli"]);
+            $dettagliArray = explode(',', $prodotto["dettagli"]);
             
             echo '<h4 class="fw-semibold">Caratteristiche:</h4>';
             echo '<ul class="clist">';
