@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 CREATE TABLE IF NOT EXISTS `modelli` (
   `idmodello` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `disponibilità` INT NOT NULL,
+  `venditeTotali` INT NOT NULL,
   `marca` VARCHAR(50) NOT NULL,
   `prezzo` DECIMAL(10,2) NOT NULL,
   `immagine` VARCHAR(50) NULL,
@@ -71,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
   `idutente` BIGINT NOT NULL,
   `idcategoria` INT NOT NULL,
   `idmodello` INT NOT NULL,
-  `quantità` INT NOT NULL,
   `taglia` INT NOT NULL,
   `dataInserimento` DATETIME NOT NULL,
   CONSTRAINT `fk_prodotti_idutente`
