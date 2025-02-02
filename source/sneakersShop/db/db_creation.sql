@@ -92,6 +92,27 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
+-- Table `carrello`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `carrello` (
+  `idutente` INT NOT NULL,
+  `idprodotto` INT NOT NULL,
+  `quantitàAggiunta` INT NOT NULL,
+  `tagliaAggiunta` INT NOT NULL,
+  PRIMARY KEY(`idutente`,`idprodotto`,`tagliaAggiunta`),
+  CONSTRAINT `fk_carrello_idutente`
+    FOREIGN KEY (`idutente`)
+    REFERENCES `utenti`(`idutente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_carrello_idprodotto`
+    FOREIGN KEY (`idprodotto`)
+    REFERENCES `prodotti`(`idprodotto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `ordini`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ordini` (

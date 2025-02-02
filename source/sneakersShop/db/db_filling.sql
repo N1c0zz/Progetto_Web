@@ -87,6 +87,14 @@ VALUES
 (12, 2, 2, 12, 15, 42, NOW());
 
 -- -----------------------------------------------------
+-- Inserimento nella tabella `carrello`
+-- -----------------------------------------------------
+INSERT INTO `carrello` (`idutente`, `idprodotto`, `quantitàAggiunta`, `tagliaAggiunta`) 
+VALUES 
+(1, 1, 1, 38),
+(1, 3, 2, 42);
+
+-- -----------------------------------------------------
 -- Inserimento nella tabella `ordini`
 -- -----------------------------------------------------
 INSERT INTO `ordini` (`idordine`, `idutente`, `stato`, `data`) 
