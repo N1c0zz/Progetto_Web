@@ -61,6 +61,10 @@ if(isset($_GET["action"])) {
             require("php/seller/editProduct.php");
             break;
         
+        case 'cart':
+            require("php/user/cart.php");
+            break;
+        
         default:
             require("php/home.php");
             break;
