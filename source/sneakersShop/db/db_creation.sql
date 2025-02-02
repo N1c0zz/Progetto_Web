@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
 -- Table `carrello`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `carrello` (
-  `idutente` INT NOT NULL,
+  `idutente` BIGINT NOT NULL,
   `idprodotto` INT NOT NULL,
   `quantitàAggiunta` INT NOT NULL,
   `tagliaAggiunta` INT NOT NULL,
