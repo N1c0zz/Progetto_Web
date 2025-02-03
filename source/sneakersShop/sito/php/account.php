@@ -31,4 +31,11 @@ if(isset($_POST["oldPassword"]) && isset($_POST["newPassword"]) && isset($_POST[
     }
 }
 
+// recupera ordini di un utente
+if(isset($_SESSION["idutente"]) && ($_SESSION["tipo"] == "cliente")){
+    $templateParams["orders"] = $dbh -> getUserOrders($_SESSION["idutente"]);
+} else {
+    $templateParams["orders"] = [];
+}
+
 ?>

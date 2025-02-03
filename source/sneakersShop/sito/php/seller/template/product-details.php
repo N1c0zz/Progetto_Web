@@ -31,7 +31,7 @@
         </p>
         <?php
         if (isset($prodotto["dettagli"]) && !empty($prodotto["dettagli"])) {
-            $dettagliArray = explode(',', $prodotto["dettagli"]);
+            $dettagliArray = explode(';', $prodotto["dettagli"]);
             
             echo '<h4 class="fw-semibold">Caratteristiche:</h4>';
             echo '<ul class="clist">';

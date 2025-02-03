@@ -131,6 +131,23 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    public function getUserOrders($userID) {
+        $query = "SELECT o.idordine AS numeroOrdine, o.data AS dataOrdine, SUM(m.prezzo) AS prezzoTotale
+                  FROM ordini o
+                  JOIN presenze pr ON o.idordine = pr.idordine
+                  JOIN prodotti p ON pr.idprodotto = p.idprodotto
+                  JOIN modelli m ON p.idmodello = m.idmodello
+                  WHERE o.idutente = ?
+                  GROUP BY o.idordine, o.data";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+
     /*
     ------------------------------------------------
     SELLER FUNCTIONS
@@ -337,27 +354,73 @@ class DatabaseHelper{
     
     
     // aggiorna un prodotto di un determinato venditore, ritorna true se l'aggiornamento è andato a buon fine, false altrimenti
-    public function updateProductBySeller($sellerId, $productId, $name, $color, $categoryId, $brand, $availability, $descriptionTitle, $description, $details) {
-        $stmt = $this->db->prepare("UPDATE prodotti p
-                                    JOIN modelli m ON p.idmodello = m.idmodello
-                                    SET m.nome = ?, m.colore = ?, p.idcategoria = ?, m.marca = ?, 
-                                        p.quantità = ?, m.titoloDescrizione = ?, m.descrizione = ?, m.dettagli = ?
-                                    WHERE p.idprodotto = ? AND p.idutente = ?");
-        
-        if ($stmt === false) {
-            return false;
-        }
+    public function updateProductBySeller($userId, $productId, $nomeProdotto, $colore, $categoryIds, $marca, $disponibilita, $titoloDescrizione, $descrizione, $dettagli, $immagine) {
+        $this->db->begin_transaction();
     
-        // Associa i parametri
-        $stmt->bind_param("ssissssss", 
-                          $name, $color, $categoryId, $brand, 
-                          $availability, $descriptionTitle, $description, $details, 
-                          $productId, $sellerId);
-        $success = $stmt->execute();
-        $stmt->close();
-        
-        return $success;
+        try {
+            // 1. Aggiornamento del prodotto (modello)
+            $query = "UPDATE modelli SET nome = ?, colore = ?, marca = ?, disponibilità = ?, titoloDescrizione = ?, descrizione = ?, dettagli = ?
+                    WHERE idmodello = (SELECT idmodello FROM prodotti WHERE idprodotto = ?)";
+
+            $stmt = $this->db->prepare($query);
+            if ($stmt === false) {
+                throw new Exception("Errore nella preparazione della query di aggiornamento del modello");
+            }
+    
+            $stmt->bind_param('sssisiss', $nomeProdotto, $colore, $marca, $disponibilita, $titoloDescrizione, $descrizione, $dettagli, $productId);
+            $stmt->execute();
+            $stmt->close();
+    
+            // 2. Aggiornamento delle categorie (elimina quelle esistenti e inserisci le nuove)
+            $query = "DELETE FROM appartenenze WHERE idmodello = (SELECT idmodello FROM prodotti WHERE idprodotto = ?)";
+            $stmt = $this->db->prepare($query);
+            if ($stmt === false) {
+                throw new Exception("Errore nella preparazione della query per eliminare categorie esistenti");
+            }
+            $stmt->bind_param('i', $productId);
+            $stmt->execute();
+            $stmt->close();
+    
+            // Aggiungi le nuove categorie
+            foreach ($categoryIds as $categoryId) {
+                $query = "INSERT INTO appartenenze (idmodello, idcategoria) 
+                        SELECT idmodello, ? 
+                        FROM modelli 
+                        WHERE idmodello = (SELECT idmodello FROM prodotti WHERE idprodotto = ?)";
+                        
+                $stmt = $this->db->prepare($query);
+                if ($stmt === false) {
+                    throw new Exception("Errore nella preparazione della query per inserire categoria");
+                }
+    
+                $stmt->bind_param('ii', $categoryId, $productId);
+                $stmt->execute();
+                $stmt->close();
+            }
+    
+            // 3. Aggiornamento dell'immagine
+            if ($immagine !== null) {
+                $query = "UPDATE modelli SET immagine = ? WHERE idmodello = (SELECT idmodello FROM prodotti WHERE idprodotto = ?)";
+                $stmt = $this->db->prepare($query);
+                if ($stmt === false) {
+                    throw new Exception("Errore nella preparazione della query per aggiornare l'immagine");
+                }
+    
+                $stmt->bind_param('si', $immagine, $productId);
+                $stmt->execute();
+                $stmt->close();
+            }
+    
+            // Commit della transazione
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            // Rollback in caso di errore
+            $this->db->rollback();
+            throw $e;
+        }
     }
+    
     
     public function updateOrderStatus($orderId, $newStatus) {
         $stmt = $this->db->prepare("UPDATE ordini SET stato = ? WHERE idordine = ?");

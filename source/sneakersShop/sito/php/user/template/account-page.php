@@ -80,21 +80,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach ($templateParams["orders"] as $order): ?>
                     <tr>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
+                        <td class="fs-6"><?php echo $order["numeroOrdine"]; ?></td>
+                        <td class="fs-6"><?php echo $order["dataOrdine"]; ?></td>
+                        <td class="fs-6">&euro; <?php echo $order["prezzoTotale"]; ?></td>
                     </tr>
-                    <tr>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
-                        <td class="fs-6">XXXXX</td>
-                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </section>

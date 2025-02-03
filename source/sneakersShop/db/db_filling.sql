@@ -25,7 +25,7 @@ VALUES
 -- -----------------------------------------------------
 INSERT INTO `modelli` (`idmodello`, `disponibilità`, `marca`, `nome`, `colore`, `prezzo`, `immagine`, `titoloDescrizione`, `descrizione`, `dettagli`) 
 VALUES 
-(1, 10, 'Nike', 'Nike Air Max', 'Bianco', 89.99, '314101996404_01.png', 'Scarpe sportive di alta qualità', 'Scarpe da running comode e resistenti per ogni occasione.', 'Suola ammortizzata, Tomaia in mesh traspirante'),
+(1, 10, 'Nike', 'Nike Air Max', 'Bianco', 89.99, '314101996404_01.png', 'Scarpe sportive di alta qualità', 'Scarpe da running comode e resistenti per ogni occasione.', 'Suola ammortizzata; Tomaia in mesh traspirante'),
 (2, 20, 'Timberland', 'Timberland Classic', 'Marrone', 129.99, '314626811104_01.png', 'Stivali resistenti per tutte le stagioni', 'Stivali robusti ideali per terreni accidentati e pioggia.', 'Suola antiscivolo, Impermeabile, Fodera calda'),
 (3, 30, 'Nike', 'Nike Tuned 1', 'Nero', 189.99, '314206535404_01.png', 'Inno a una leggenda', 'Con le Nike Air Max Plus la tua energia audace e grintosa saprà farsi notare. Ispirate alla vita da spiaggia, queste sneakers di tendenza celebrano i gloriosi quattro decenni delle iconiche scarpe da corsa Pegasus di Nike. Caratterizzata da linee di design ondulate, la tomaia in pelle sintetica e mesh offre il massimo del comfort e un look alla moda. L''unità Max Air a effetto ammortizzante garantisce una reattività ottimale a ogni passo. Dotate di una suola antiscivolo in gomma, le Nike Air Max Plus sono tutto ciò di cui hai bisogno per muoverti in tutta sicurezza.', 'Tomaia in pelle sintetica e maglia di mesh; Linee ondulate sulla tomaia; Unità Air Max; Arco in plastica sull''intersuola; Suola in gomma'),
 (4, 15, 'Adidas', 'adidas Megaride', 'Bianco', 169.99, '314209829804_01.png', 'Oltre i tuoi limiti con stile', 'Quando il passato incontra il futuro, nascono le adidas Originals Megaride. Direttamente dalla tradizione adidas, queste scarpe ridefiniscono un modello intramontabile con un tocco di innovazione. Il design a tunnel aperto dell''intersuola non passa mai di moda, mentre la tomaia in mesh testurizzato e gli eleganti materiali sintetici catturano l''attenzione ovunque tu vada. Inoltre, il collo imbottito in neoprene assicura un''esperienza esclusiva all''insegna del comfort. Allaccia le adidas Originals Megaride e sfoggia un look unico e innovativo.', 'Vestibilità regular; Tomaia in mesh testurizzato; Design a tunnel aperto sull''intersuola; Collo imbottito in neoprene; Materiali sintetici testurizzati, Design a 3 righe in TPU sagomato'),
@@ -71,20 +71,20 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `prodotti` (varianti di taglie)
 -- -----------------------------------------------------
-INSERT INTO `prodotti` (`idprodotto`, `idvenditore`, `idcategoria`, `idmodello`, `taglia`, `dataInserimento`) 
+INSERT INTO `prodotti` (`idprodotto`, `idvenditore`, `idmodello`, `taglia`, `dataInserimento`) 
 VALUES 
-(1, 2, 1, 1, 38, NOW()), -- Nike Air Max, taglia 38
-(3, 2, 2, 2, 42, NOW()),  -- Timberland Classic, taglia 42
-(2, 2, 2, 3, 42, NOW()),
-(4, 2, 2, 4, 42, NOW()),
-(5, 2, 2, 5, 42, NOW()),
-(6, 2, 2, 6, 42, NOW()),
-(7, 2, 2, 7, 42, NOW()),
-(8, 2, 2, 8, 42, NOW()),
-(9, 2, 2, 9, 42, NOW()),
-(10, 2, 2, 10, 42, NOW()),
-(11, 2, 2, 11, 42, NOW()),
-(12, 2, 2, 12, 42, NOW());
+(1, 2, 1, 38, NOW()), -- Nike Air Max, taglia 38
+(3, 2, 2, 42, NOW()),  -- Timberland Classic, taglia 42
+(2, 2, 3, 42, NOW()),
+(4, 2, 4, 42, NOW()),
+(5, 2, 5, 42, NOW()),
+(6, 2, 6, 42, NOW()),
+(7, 2, 7, 42, NOW()),
+(8, 2, 8, 42, NOW()),
+(9, 2, 9, 42, NOW()),
+(10, 2, 10, 42, NOW()),
+(11, 2, 11, 42, NOW()),
+(12, 2, 12, 42, NOW());
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `carrello`

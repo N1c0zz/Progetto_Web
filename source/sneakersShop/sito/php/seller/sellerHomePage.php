@@ -17,6 +17,10 @@ if ($_SESSION['tipo'] !== 'venditore') {
     exit();
 }
 
+if (isset($_GET['success']) && ($_GET['success'] == 'true')) {
+    $templateParams["saveNewProductMsg"] = "Prodotto modificato con successo!";
+}
+
 // Verifica se l'id utente è valido
 if (isset($_SESSION["idutente"]) && is_numeric($_SESSION["idutente"])) {
     // Recupero vendite totali e guadagni totali dal database

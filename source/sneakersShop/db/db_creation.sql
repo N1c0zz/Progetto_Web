@@ -69,18 +69,12 @@ CREATE TABLE IF NOT EXISTS `appartenenze` (
 CREATE TABLE IF NOT EXISTS `prodotti` (
   `idprodotto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idvenditore` BIGINT NOT NULL,
-  `idcategoria` INT NOT NULL,
   `idmodello` INT NOT NULL,
   `taglia` INT NOT NULL,
   `dataInserimento` DATETIME NOT NULL,
   CONSTRAINT `fk_prodotti_idvenditore`
     FOREIGN KEY (`idvenditore`)
     REFERENCES `utenti`(`idutente`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_prodotti_idcategoria`
-    FOREIGN KEY (`idcategoria`)
-    REFERENCES `categorie`(`idcategoria`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_prodotti_idmodello`
