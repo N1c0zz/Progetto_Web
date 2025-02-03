@@ -1,4 +1,4 @@
-@media (min-width: 768px) {  
+@media (min-width: 768px) {
 
     nav[aria-label="Navigazione categorie di vendita"] .btn {
       font-size: 1.2em;
@@ -14,7 +14,7 @@
     }
 
     .mb-3.text-center div.border.rounded {
-        width: 90% !important; /* Valutare l'uso di !important !!!! */
+        width: 90% !important;
         height: 300px !important;
     }
 
@@ -38,7 +38,7 @@
     }
 
     .d-flex.justify-content-center {
-        gap: 2em; /* Aumenta la spaziatura tra le immagini delle marche */
+        gap: 2em;
     }
 
     .category-btn {

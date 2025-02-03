@@ -10,28 +10,30 @@
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <!-- Link al file CSS generale -->
-    <link rel="stylesheet" href="css/user/general.css" />
+    <link rel="stylesheet" href="css/seller/general.css" />
     <?php if(isset($templateParams["styleSheet"])): ?>
         <link rel="stylesheet" href="<?php echo $templateParams["styleSheet"]; ?>" />
     <?php endif; ?>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header class="bg-light py-2">
-    <div class="container">
-        <nav class="d-flex" aria-label="Navigazione principale">
-            <a href="index.php?action=notifications" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
-            <a href="index.php?action=login" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
-            <?php if(!isUserLoggedIn() || $_SESSION["tipo"] != "venditore" ): ?>
-            <a href="index.php?action=cart" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
+    <div class="container d-flex flex-column align-items-center">
+        <nav class="d-flex w-100 justify-content-center align-items-center position-relative" aria-label="Navigazione principale">
+            <a href="index.php?action=notifications" class="bi bi-bell p-2 fs-1 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="index.php?action=home" class="p-2 mx-auto d-block">
+                <img src="<?php echo IMG_DIR."logo.png"; ?>" alt="Logo" class="logo" />
+            </a> 
+            <div class="d-flex align-items-center gap-1">
+                <a href="index.php?action=login" class="bi bi-person-circle p-2 fs-1 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+                <?php if(!isUserLoggedIn() || $_SESSION["tipo"] != "venditore" ): ?>
+                <a href="index.php?action=cart" class="bi bi-cart p-2 fs-1 icon" aria-label="Vai al tuo carrello"></a>
+            </div>
         </nav>
         <div class="container-fluid">
-            <form action="index.php" method="get" class="d-flex" role="search" aria-label="Cerca prodotti">
-                <legend class="visually-hidden">Ricerca prodotti</legend>
-                <fieldset class="flex-grow-1 me-2">
-                    <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
-                    <input class="form-control" type="search" placeholder="Cerca prodotto" name="search" aria-label="cerca prodotto" />
-                </fieldset>
-                <button class="btn btn-outline-dark" name="action" value="products" type="submit">Cerca</button>
+            <form class="d-flex" role="search" aria-label="Cerca prodotti">
+                <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
+                <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
+                <button class="btn btn-outline-dark" type="submit">Cerca</button>
             </form>
         </div>
         <?php endif; ?>
