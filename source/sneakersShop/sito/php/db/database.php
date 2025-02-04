@@ -503,6 +503,20 @@ class DatabaseHelper{
     
         return false;
     }
+
+    public function deleteProductById($productId) {
+        $stmt = $this->db->prepare("DELETE FROM prodotti WHERE idprodotto = ?");
+        
+        if ($stmt === false) {
+            return false;
+        }
+    
+        $stmt->bind_param("i", $productId);
+        $success = $stmt->execute();
+        $stmt->close();
+    
+        return $success;
+    }    
     
 }
 ?>

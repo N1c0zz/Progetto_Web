@@ -16,7 +16,7 @@
                 <a href="index.php?action=edit-product&idprodotto=<?php echo $_GET['idprodotto']; ?>" class="btn btn-lg btn-dark col-10 col-md-6 mt-5">MODIFICA</a>
             </div>
             <div class="d-flex justify-content-center pb-5">
-                <button type="button" class="btn btn-lg btn-danger col-10 col-md-6 mt-5">RIMUOVI PRODOTTO</button>
+                <a href="index.php?action=delete-product&idprodotto=<?php echo $_GET['idprodotto']; ?>" class="btn btn-lg btn-danger col-10 col-md-6 mt-5">RIMUOVI PRODOTTO</a>
             </div>
         </div>
     </div>

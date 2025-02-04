@@ -51,3 +51,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
 </div>
 <?php endif; ?>
+
+<?php if(isset($templateParams["deleteProductSuccess"])): ?>
+<!-- conferma aggiornamento nuovo stato dell'ordine -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <?php echo $templateParams["deleteProductSuccess"]; ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+</div>
+<?php endif; ?>

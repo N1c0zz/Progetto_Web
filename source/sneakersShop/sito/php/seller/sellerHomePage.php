@@ -18,10 +18,19 @@ if ($_SESSION['tipo'] !== 'venditore') {
 }
 
 if (isset($_GET['success'])){
-    if ($_GET['success'] == 'saveProductInfo'){
-        $templateParams["saveNewProductMsg"] = "Prodotto modificato con successo!";
-    } else if($_GET['success'] == 'newOrderState'){
-        $templateParams["newOrderStateMsg"] = "Stato dell'ordine modificato con successo!";
+    switch($_GET['success']){
+        case 'saveProductInfo':
+            $templateParams["saveNewProductMsg"] = "Prodotto modificato con successo!";
+            break;
+        case 'newOrderState':
+            $templateParams["newOrderStateMsg"] = "Stato dell'ordine modificato con successo!";
+            break;
+        case 'deleteProductSuccess':
+            $templateParams["deleteProductSuccess"] = "Prodotto rimosso con successo!";
+            break;
+        default:
+            header("Location: index.php?action=home");
+            exit();
     }
 }
 
