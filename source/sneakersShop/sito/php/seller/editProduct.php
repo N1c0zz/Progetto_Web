@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Success message
     if ($update) {
-        header("Location: index.php?action=home&success=true");
+        header("Location: index.php?action=home&success=saveProductInfo");
     } else {
         $templateParams["errorMessage"] = "Errore nell'aggiornamento del prodotto.";
     }

@@ -367,7 +367,7 @@ class DatabaseHelper{
                 throw new Exception("Errore nella preparazione della query di aggiornamento del modello");
             }
     
-            $stmt->bind_param('sssisiss', $nomeProdotto, $colore, $marca, $disponibilita, $titoloDescrizione, $descrizione, $dettagli, $productId);
+            $stmt->bind_param('sssisssi', $nomeProdotto, $colore, $marca, $disponibilita, $titoloDescrizione, $descrizione, $dettagli, $productId);
             $stmt->execute();
             $stmt->close();
     
@@ -419,6 +419,22 @@ class DatabaseHelper{
             $this->db->rollback();
             throw $e;
         }
+    }
+
+    public function getOrderStatusById($orderId) {
+        $stmt = $this->db->prepare("SELECT stato FROM ordini WHERE idordine = ?");
+        
+        if ($stmt === false) {
+            return null;
+        }
+    
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $stmt->bind_result($orderStatus);
+        $stmt->fetch();
+        $stmt->close();
+    
+        return $orderStatus ? $orderStatus : null;
     }
     
     
