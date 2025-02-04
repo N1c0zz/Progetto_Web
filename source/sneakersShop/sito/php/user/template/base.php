@@ -10,7 +10,7 @@
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <!-- Link al file CSS generale -->
-    <link rel="stylesheet" href="css/seller/general.css" />
+    <link rel="stylesheet" href="css/general.css" />
     <?php if(isset($templateParams["styleSheet"])): ?>
         <link rel="stylesheet" href="<?php echo $templateParams["styleSheet"]; ?>" />
     <?php endif; ?>
@@ -20,8 +20,8 @@
     <div class="container d-flex flex-column align-items-center">
         <nav class="d-flex w-100 justify-content-center align-items-center position-relative" aria-label="Navigazione principale">
             <a href="index.php?action=notifications" class="bi bi-bell p-2 fs-1 icon" aria-label="Vai alla sezione notifiche"></a>
-            <a href="index.php?action=home" class="p-2 mx-auto d-block">
-                <img src="<?php echo IMG_DIR."logo.png"; ?>" alt="Logo" class="logo" />
+            <a href="index.php?action=home" class="logo-container">
+                <img src="<?php echo IMG_DIR."logo.png"; ?>" alt="Logo" class="header-logo" />
             </a> 
             <div class="d-flex align-items-center gap-1">
                 <a href="index.php?action=login" class="bi bi-person-circle p-2 fs-1 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>

@@ -46,3 +46,29 @@ body {
     padding: 20px;
     margin-bottom: 20px;
 }
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.header-logo {
+    height: 55px; /* Regolabile per adattarsi alle icone */
+    width: auto;
+    display: block;
+}
+
+
+@media (min-width: 768px) {
+    .icon.bi {
+        font-size: 2rem !important;
+    }
+
+    .header-logo {
+        height: 70px; /* Regolabile per adattarsi alle icone */
+        width: auto;
+        display: block;
+    }
+}

@@ -9,17 +9,22 @@
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Link al file CSS generale -->
-    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../../css/general.css">
     <!-- Link al file CSS personalizzato -->
-    <link rel="stylesheet" href="../css/cartPage.css">
+    <link rel="stylesheet" href="../../css/user/cartPage.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header class="bg-light py-2">
     <div class="container">
-        <nav class="d-flex" aria-label="Navigazione principale">
-            <a href="./notifications.html" class="bi bi-bell me-auto p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
-            <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
-            <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
+        <nav class="d-flex align-items-center justify-content-between" aria-label="Navigazione principale">
+            <a href="./notifications.html" class="bi bi-bell p-2 fs-3 icon" aria-label="Vai alla sezione notifiche"></a>
+            <a href="./index.html" class="logo-container">
+                <img src="../../img/logo.png" alt="Logo" class="header-logo" />
+            </a>
+            <div class="d-flex">
+                <a href="./login.html" class="bi bi-person-circle p-2 fs-3 icon" aria-label="Esegui il login o vai alla tua pagina personale"></a>
+                <a href="./cartPage.html" class="bi bi-cart p-2 fs-3 icon" aria-label="Vai al tuo carrello"></a>
+            </div>
         </nav>
         <div class="container-fluid">
             <form class="d-flex" role="search" aria-label="Cerca prodotti">
@@ -27,7 +32,7 @@
                 <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
                 <button class="btn btn-outline-dark" type="submit">Cerca</button>
             </form>
-            </div>
+        </div>
     </div>
 </header>
 <main class="container overflow-auto py-my-4">
