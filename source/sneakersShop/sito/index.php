@@ -73,15 +73,36 @@ if(isset($_GET["action"])) {
             require("php/user/cart.php");
             break;
         
+        case 'checkout':
+            require("php/user/checkout.php");
+            break;
+        
+        case 'create-order':
+            require("php/user/create-order.php");
+            break;
+        
         default:
             require("php/home.php");
             break;
     }
-} else {
-    require("php/home.php");
-}
-
 // template html base
 require("php/user/template/base.php");
+} elseif(isset($_GET["request"])) {
+    switch ($_GET["request"]) {
+        case 'get-new-notifications':
+            require("php/get-new-notifications.php");
+            break;
+        
+        case 'change-notification-status':
+            require("php/change-notification-status.php");
+            break;
+
+        default:
+            break;
+    }
+} else {
+    require("php/home.php");
+    require("php/user/template/base.php");
+}
 
 ?>
