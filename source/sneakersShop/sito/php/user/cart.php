@@ -1,15 +1,23 @@
 <?php
 
-// connessione al db
-require_once("bootstrap.php");
+if(!isUserLoggedIn()) {
+    header("location: index.php?action=login");
+    exit();
+}
 
-// PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Carrello";
+$templateParams["name"] = "php/user/template/cart-page.php";
+$templateParams["styleSheet"] = "css/user/cartPage.css";
 
-// nome del template da visualizzare
-$templateParams["name"] = "cart-page.php";
-
-// template html base
-require("template/base.php");
+$templateParams["cartItems"] = $dbh->getCartItems($_SESSION["idutente"]);
+if(!empty($templateParams["cartItems"])) {
+    $templateParams["total"] = array_sum(array_column($templateParams["cartItems"], "prezzo"));
+    foreach ($templateParams["cartItems"] as &$cartItem) {
+        $cartItem["immagine"] = IMG_DIR . $cartItem["immagine"];
+    }
+    unset($cartItem);
+} else {
+    $templateParams["noItemsFound"] = "Non hai ancora aggiunto prodotti al tuo carrello";
+}
 
 ?>
