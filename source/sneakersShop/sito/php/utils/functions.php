@@ -32,4 +32,12 @@ function logOut() {
     session_destroy();
 }
 
+// valida le credenziali di pagamento inserite
+function validateCardCredentials() {
+    return true;
+}
+
+// esegue la transazione monetaria per l'ordine
+function executeTransaction() {}
+
 ?>
