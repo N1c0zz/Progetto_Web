@@ -1,33 +1,52 @@
+<?php $userInfo = $templateParams["userInfo"][0]; ?>
 <div class="container">
     <div class="checkout-container">
         <h2 class="text-start fw-semibold my-3">Checkout</h2>
 
+        <section class="orders-table section-border mb-4">
+            <h4 class="fs-4 mb-3 fw-semibold">Riepilogo ordine</h4>
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Modello</th>
+                        <th style="width: 20%;">Colore</th>
+                        <th style="width: 20%;">Prezzo</th>
+                        <th style="width: 20%;">Taglia</th>
+                        <th style="width: 20%;">Quantità</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($templateParams["cartItems"] as $item): ?>
+                    <tr>
+                        <td class="fs-6"><?php echo $item["modello"]; ?></td>
+                        <td class="fs-6"><?php echo $item["colore"]; ?></td>
+                        <td class="fs-6"><?php echo $item["prezzo"]; ?></td>
+                        <td class="fs-6"><?php echo $item["tagliaAggiunta"]; ?></td>
+                        <td class="fs-6"><?php echo $item["quantitàAggiunta"]; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+
         <section class="mb-4 section-border">
             <h4 class="fs-4 mb-3 fw-semibold">Informazioni di contatto</h4>
 
-            <div class="d-flex justify-content-center mb-4">
-                <div class="text-center p-4 border rounded-3 border-dark" style="width: 300px;">
-                    <h5 class="mb-3">Accedi o Registrati</h5>
-                    <a href="/accedi" class="btn btn-dark w-100 mb-2">Accedi</a>
-                    <a href="/registrati" class="btn btn-outline-dark w-100">Registrati</a>
-                </div>
-            </div>
-
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
-                <input type="text" class="form-control" id="nome" value="Prefilled" readonly aria-readonly="true" />
+                <input type="text" class="form-control" id="nome" value="<?php echo $userInfo["nome"]; ?>" readonly aria-readonly="true" />
             </div>
             <div class="mb-3">
                 <label for="cognome" class="form-label">Cognome:</label>
-                <input type="text" class="form-control" id="cognome" value="Prefilled" readonly aria-readonly="true" />
+                <input type="text" class="form-control" id="cognome" value="<?php echo $userInfo["cognome"]; ?>" readonly aria-readonly="true" />
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Telefono:</label>
-                <input type="text" class="form-control" id="telefono" value="Prefilled" readonly aria-readonly="true" />
+                <input type="text" class="form-control" id="telefono" value="<?php echo $userInfo["numeroTelefono"]; ?>" readonly aria-readonly="true" />
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" value="Prefilled" readonly aria-readonly="true" />
+                <input type="email" class="form-control" id="email" value="<?php echo $userInfo["email"]; ?>" readonly aria-readonly="true" />
             </div>
         </section>
 
@@ -41,50 +60,26 @@
 
         <section class="mb-4 section-border">
             <h4 class="fs-4 mb-3 fw-semibold">Pagamento</h4>
-            <form>
-                <div class="mb-3">
-                    <label for="titolo-carta" class="form-label">Nome e Cognome Titolare Carta:</label>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="titolo-carta" 
-                        placeholder="Inserisci nome e cognome" 
-                        required 
-                        maxlength="50" 
-                        pattern="[A-Za-z\s]+" 
-                        title="Inserisci solo lettere e spazi" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="numero-carta" class="form-label">Numero Carta:</label>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="numero-carta" 
-                        placeholder="Inserisci numero carta" 
-                        required 
-                        maxlength="16" 
-                        pattern="\d{16}" 
-                        title="Il numero della carta deve contenere esattamente 16 cifre" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="cvv" class="form-label">CVV:</label>
-                    <input 
-                        type="password" 
-                        class="form-control" 
-                        id="cvv" 
-                        placeholder="Inserisci CVV" 
-                        required 
-                        maxlength="3" 
-                        pattern="\d{3}" 
-                        title="Il CVV deve contenere esattamente 3 cifre" />
+            <form action="index.php?action=create-order" method="post">
+                <fieldset>
+                    <legend class="visually-hidden"></legend>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="titolo-carta" name="card-name" placeholder="Inserisci nome e cognome" required maxlength="50" pattern="[A-Za-z\s]+" title="Inserisci solo lettere e spazi" />
+                        <label for="titolo-carta" class="form-label">Nome e Cognome</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="numero-carta" name="card-number" placeholder="Inserisci numero carta" required maxlength="16" pattern="\d{16}" title="Il numero della carta deve contenere esattamente 16 cifre" />
+                        <label for="numero-carta" class="form-label">Numero Carta</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="cvv" name="card-cvv" placeholder="Inserisci CVV" required maxlength="3" pattern="\d{3}" title="Il CVV deve contenere esattamente 3 cifre" />
+                        <label for="cvv" >CVV</label>
+                    </div>
+                </fieldset>
+                <div class="text-end mt-2 d-flex justify-content-center">
+                    <button type="button" class="btn btn-dark btn-lg" aria-label="Effettua l'ordine">Effettua l'Ordine</button>
                 </div>
             </form>
         </section>
-        
-        <div class="text-end mb-4">
-            <button type="button" class="btn btn-dark" aria-label="Effettua l'ordine">Effettua l'Ordine</button>
-        </div>
     </div>
 </div>
