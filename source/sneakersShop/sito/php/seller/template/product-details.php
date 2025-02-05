@@ -2,7 +2,7 @@
 
     <div class="row row-cols-1 row-cols-md-2 section-border mt-3 bg-body">
         <div class="col-md-7 d-flex justify-content-center">
-            <img src="../../img/314311775804_01.png" alt="TODO" class="img-fluid" />
+            <img src="<?php echo IMG_DIR.$prodotto["immagine"]; ?>" alt="Immagine prodotto" class="img-fluid" />
         </div>
         <div class="col-md-5 bg-body-secondary">
             <h2 class="fw-semibold mt-5 mb-3"><?php echo $prodotto["modello"]; ?></h2>

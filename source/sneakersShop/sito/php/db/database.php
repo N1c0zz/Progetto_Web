@@ -211,13 +211,15 @@ class DatabaseHelper{
                                         m.disponibilità,
                                         m.descrizione,
                                         m.dettagli,
-                                        m.titoloDescrizione
+                                        m.titoloDescrizione,
+                                        m.immagine
                                     FROM prodotti p
                                     JOIN modelli m ON p.idmodello = m.idmodello
                                     JOIN appartenenze a ON m.idmodello = a.idmodello
                                     JOIN categorie c ON a.idcategoria = c.idcategoria
                                     WHERE p.idprodotto = ?
-                                    GROUP BY p.idprodotto, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione");
+                                    GROUP BY p.idprodotto, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, 
+                                             m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine");
     
         $stmt->bind_param("i", $productId);
         $stmt->execute();
@@ -233,7 +235,6 @@ class DatabaseHelper{
         return $productDetails;
     }
     
-    
     // ritorna l'elenco di prodotti di un seller
     public function getProductsBySeller($sellerId) {
         $stmt = $this->db->prepare("SELECT 
@@ -241,13 +242,14 @@ class DatabaseHelper{
                                         m.nome AS modello, 
                                         pr.dataInserimento, 
                                         m.disponibilità, 
+                                        m.immagine,
                                         GROUP_CONCAT(DISTINCT c.nomeCategoria ORDER BY c.nomeCategoria SEPARATOR ', ') AS categorie
                                     FROM prodotti pr
                                     JOIN modelli m ON pr.idmodello = m.idmodello
                                     JOIN appartenenze a ON m.idmodello = a.idmodello
                                     JOIN categorie c ON a.idcategoria = c.idcategoria
                                     WHERE pr.idvenditore = ?
-                                    GROUP BY pr.idprodotto, m.nome, pr.dataInserimento, m.disponibilità");
+                                    GROUP BY pr.idprodotto, m.nome, pr.dataInserimento, m.disponibilità, m.immagine");
     
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
@@ -265,7 +267,6 @@ class DatabaseHelper{
         return $products;
     }
     
-
     // ritorna un array associativo con gli ordini associati ad un venditore,
     // nel formato
     // [id_ordine][data_ordine][prezzo totale][prodotti[dettagli prodotto 1], [dettagli prodotto 2]]

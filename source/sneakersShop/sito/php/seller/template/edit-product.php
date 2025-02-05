@@ -1,5 +1,6 @@
 <h1 class="mb-4">Modifica Prodotto</h1>
-    <form action="index.php?action=save-product-info" method="post">
+
+    <form action="index.php?action=save-product-info" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="idprodotto" value="<?php echo $idprodotto; ?>" />
 

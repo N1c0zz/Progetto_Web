@@ -19,9 +19,9 @@
 <a href="index.php?action=manage-orders" class="text-decoration-none">
     <div class="mt-4 border border-dark p-4">
         <h3>Gestisci ordini</h3>
-        <div class="d-flex align-items-center mt-3">
-            <img src="" alt="Gestisci ordini" class="me-3 img-custom" />
-            <p class="mb-0">Visualizza e gestisci lo stato di ogni ordine</p>
+        <div class="d-flex align-items-center mt-4">
+            <img src="<?php echo IMG_DIR."gestioneOrdini.png"; ?>" alt="Gestisci ordini" class="me-3 img-custom w-25" />
+            <p class="mb-0 flex-grow-1 fs-5 ms-5">Visualizza e gestisci lo stato di ogni ordine</p>
         </div>
     </div>
 </a>
@@ -29,9 +29,9 @@
 <a href="index.php?action=manage-products" class="text-decoration-none">
     <div class="mt-4 border border-dark p-4">
         <h3>Gestisci i prodotti</h3>
-        <div class="d-flex align-items-center mt-3">
-            <img src="" alt="Gestisci ordini" class="me-3 img-custom" />
-            <p class="mb-0">Aggiungi, modifica ed elimina i tuoi prodotti dalla lista</p>
+        <div class="d-flex align-items-center mt-4">
+            <img src="<?php echo IMG_DIR."gestioneProdotti.png"; ?>" alt="Gestisci ordini" class="me-3 img-custom w-25" />
+            <p class="mb-0 flex-grow-1 fs-5 ms-5">Aggiungi, modifica ed elimina i tuoi prodotti dalla lista</p>
         </div>
     </div>
 </a>
