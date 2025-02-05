@@ -146,7 +146,51 @@ class DatabaseHelper{
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
+    public function getCartItems($userID) {
+        $stmt = $this->db->prepare("SELECT
+                                    	m.nome AS modello,
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
+                                        m.marca,
+                                        m.colore,
+                                        m.prezzo,
+                                        carr.quantitàAggiunta,
+                                        carr.tagliaAggiunta,
+                                        m.immagine
+									FROM modelli m
+                                    JOIN prodotti p ON p.idmodello = m.idmodello
+                                    JOIN carrello carr ON carr.idprodotto = p.idprodotto
+                                    JOIN appartenenze a ON a.idmodello = m.idmodello
+                                    JOIN categorie c ON a.idcategoria = c.idcategoria
+									WHERE carr.idutente = ?
+                                    GROUP BY m.idmodello;");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function createOrder($userID) {
+        $stmt = $this->db->prepare("");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+    }
+
+    public function emptyCart($userID) {
+        $stmt = $this->db->prepare("");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+    }
+
+    public function changeNotificationStatus($userID, $notifID, $newStatus) {
+        $stmt = $this->db->prepare("UPDATE notifiche n
+                                    JOIN ricezioni r ON n.idnotifica = r.idnotifica
+                                    SET n.stato = ?
+                                    WHERE r.idutente = ?
+                                    AND n.idnotifica = ?");
+        $stmt->bind_param('sii', $newStatus, $userID, $notifID);
+        $stmt->execute();
+    }
 
     /*
     ------------------------------------------------
