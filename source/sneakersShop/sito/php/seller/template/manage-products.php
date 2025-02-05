@@ -5,7 +5,7 @@
             <li>
                 <a href="index.php?action=product-details&idprodotto=<?php echo $product["idprodotto"]; ?>" class="product col d-flex section-border">
                     <div class="col-6 col-md-3 me-3 mt-2 mt-0 mt-md-0 ps-md-3 ">
-                        <img src="../../img/314311775804_01.png" class="img-fluid" alt="TODO" />
+                        <img src="<?php echo IMG_DIR.$product["immagine"]; ?>" class="img-fluid" alt="Immagine prodotto" />
                     </div>
                     <div class="col-6 col-md-8">
                         <div class="ms-md-5 mt-md-4">

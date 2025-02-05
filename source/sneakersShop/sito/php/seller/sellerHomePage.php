@@ -17,8 +17,21 @@ if ($_SESSION['tipo'] !== 'venditore') {
     exit();
 }
 
-if (isset($_GET['success']) && ($_GET['success'] == 'true')) {
-    $templateParams["saveNewProductMsg"] = "Prodotto modificato con successo!";
+if (isset($_GET['success'])){
+    switch($_GET['success']){
+        case 'saveProductInfo':
+            $templateParams["saveNewProductMsg"] = "Prodotto modificato con successo!";
+            break;
+        case 'newOrderState':
+            $templateParams["newOrderStateMsg"] = "Stato dell'ordine modificato con successo!";
+            break;
+        case 'deleteProductSuccess':
+            $templateParams["deleteProductSuccess"] = "Prodotto rimosso con successo!";
+            break;
+        default:
+            header("Location: index.php?action=home");
+            exit();
+    }
 }
 
 // Verifica se l'id utente è valido

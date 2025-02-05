@@ -73,6 +73,10 @@ if(isset($_GET["action"])) {
             require("php/user/cart.php");
             break;
         
+        case 'delete-product':
+            require("php/seller/deleteProduct.php");
+            break;
+        
         case 'checkout':
             require("php/user/checkout.php");
             break;

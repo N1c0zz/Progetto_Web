@@ -55,19 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Gestione dell'immagine
     $immagine = null;
-    if (!empty($_FILES["productImage"]["name"])) {
+    if (isset($_FILES["productImage"]) && $_FILES["productImage"]["error"] === UPLOAD_ERR_OK) {
         $uploadDir = "../../uploads/";
         $fileName = basename($_FILES["productImage"]["name"]);
-        $filePath = $uploadDir . time() . '_' . $fileName;  // Usa un timestamp per il nome del file in modo da evitare nomi duplicati
-
-        // Verifica se il file è un'immagine
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-        if (in_array($fileExtension, $allowedExtensions)) {
-            // Controlla che il file venga effettivamente caricato
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    
+        // Verifica che il file sia effettivamente un'immagine
+        if (in_array($fileExtension, $allowedExtensions) && getimagesize($_FILES["productImage"]["tmp_name"])) {
+            $newFileName = uniqid() . '_' . $fileName;
+            $filePath = $uploadDir . $newFileName;
+    
+            // Sposta il file nella cartella uploads
             if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $filePath)) {
-                $immagine = $filePath;
+                $immagine = $newFileName;  // Salva solo il nome del file
             } else {
                 echo "Errore nel caricamento del file immagine.";
                 exit;
@@ -77,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
     }
-
+    
     // Aggiorna il prodotto
     $update = $dbh->updateProductBySeller(
         $_SESSION["idutente"],
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Success message
     if ($update) {
-        header("Location: index.php?action=home&success=true");
+        header("Location: index.php?action=home&success=saveProductInfo");
     } else {
         $templateParams["errorMessage"] = "Errore nell'aggiornamento del prodotto.";
     }

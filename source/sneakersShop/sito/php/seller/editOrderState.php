@@ -11,11 +11,12 @@ if ($_SESSION["tipo"] !== "venditore") {
 }
 
 // Controllo di idordine
-if (!isset($_GET["idordine"])) {
+if (!isset($_GET["idordine"]) && ($_SERVER["REQUEST_METHOD"] !== "POST")) {
     header("Location: index.php?action=home");
     exit();
 } else {
     $idordine = $_GET["idordine"];
+    $statoAttuale = $dbh -> getOrderStatusById($idordine);
 }
 
 // Gestione della richiesta POST
@@ -32,12 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Aggiorna lo stato dell'ordine
     $response = $dbh->updateOrderStatus($idordine, $nuovoStato);
 
-    if ($response) {
-        echo "Stato dell'ordine cambiato con successo.";
-    } else {
-        echo "Aggiornamento fallito.";
-    }
-
     // Ottieni l'ID del cliente associato all'ordine
     $idcliente = $dbh->getUserIdByOrderId($idordine);
 
@@ -52,6 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } else {
         echo "Nessun cliente associato a questo ordine.";
+    }
+
+    if ($response) {
+        header("Location: index.php?action=home&success=newOrderState");
+    } else {
+        echo "Aggiornamento fallito.";
     }
 }
 
