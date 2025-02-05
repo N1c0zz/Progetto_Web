@@ -71,5 +71,14 @@
         </div>
     </div>
 </footer>
+<?php
+if(isset($templateParams["js"])):
+    foreach($templateParams["js"] as $script):
+?>
+    <script src="<?php echo $script; ?>"></script>
+<?php
+    endforeach;
+endif;
+?>
 </body>
 </html>
