@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
   `idprodotto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idvenditore` BIGINT NOT NULL,
   `idmodello` INT NOT NULL,
-  `taglia` INT NOT NULL,
   `dataInserimento` DATETIME NOT NULL,
   CONSTRAINT `fk_prodotti_idvenditore`
     FOREIGN KEY (`idvenditore`)
@@ -126,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `ordini` (
 CREATE TABLE IF NOT EXISTS `presenze` (
   `idordine` INT NOT NULL,
   `idprodotto` INT NOT NULL,
+  `taglia` INT NOT NULL,
   `quantità` INT NOT NULL,
   PRIMARY KEY (`idordine`, `idprodotto`),
   CONSTRAINT `fk_presenze_idordine`

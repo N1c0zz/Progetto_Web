@@ -71,20 +71,20 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `prodotti` (varianti di taglie)
 -- -----------------------------------------------------
-INSERT INTO `prodotti` (`idprodotto`, `idvenditore`, `idmodello`, `taglia`, `dataInserimento`) 
+INSERT INTO `prodotti` (`idprodotto`, `idvenditore`, `idmodello`, `dataInserimento`) 
 VALUES 
-(1, 2, 1, 38, NOW()), -- Nike Air Max, taglia 38
-(3, 2, 2, 42, NOW()),  -- Timberland Classic, taglia 42
-(2, 2, 3, 42, NOW()),
-(4, 2, 4, 42, NOW()),
-(5, 2, 5, 42, NOW()),
-(6, 2, 6, 42, NOW()),
-(7, 2, 7, 42, NOW()),
-(8, 2, 8, 42, NOW()),
-(9, 2, 9, 42, NOW()),
-(10, 2, 10, 42, NOW()),
-(11, 2, 11, 42, NOW()),
-(12, 2, 12, 42, NOW());
+(1, 2, 1, NOW()), -- Nike Air Max, taglia 38
+(3, 2, 2, NOW()),  -- Timberland Classic, taglia 42
+(2, 2, 3, NOW()),
+(4, 2, 4, NOW()),
+(5, 2, 5, NOW()),
+(6, 2, 6, NOW()),
+(7, 2, 7, NOW()),
+(8, 2, 8, NOW()),
+(9, 2, 9, NOW()),
+(10, 2, 10, NOW()),
+(11, 2, 11, NOW()),
+(12, 2, 12, NOW());
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `carrello`
@@ -105,10 +105,10 @@ VALUES
 -- -----------------------------------------------------
 -- Inserimento nella tabella `presenze` (prodotti associati agli ordini)
 -- -----------------------------------------------------
-INSERT INTO `presenze` (`idordine`, `idprodotto`, `quantità`) 
+INSERT INTO `presenze` (`idordine`, `idprodotto`, `taglia`, `quantità`) 
 VALUES 
-(1, 1, 2), -- Ordine 1: 2 paia di Nike Air Max, taglia 38
-(1, 3, 1); -- Ordine 1: 1 paio di Timberland Classic, taglia 42
+(1, 1, 38, 2), -- Ordine 1: 2 paia di Nike Air Max, taglia 38
+(1, 3, 42, 1); -- Ordine 1: 1 paio di Timberland Classic, taglia 42
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `notifiche`
