@@ -7,7 +7,7 @@
 
 <!-- banner di apertura-->
 <div class="mt-5 mb-3 text-center">
-    <h5>ESPLORA LE MIGLIORI SNEAKERS</h5>
+    <h5>ESPLORA I NOSTRI PRODOTTI</h5>
     <a href="index.php?action=products">
         <div class="border rounded p-3 mx-auto" style="width: 90%; height: 150px;">
             <img src="<?php echo IMG_DIR."esplora.png"; ?>" style="width: 100%; height: 100%; object-fit: cover;" />
