@@ -30,10 +30,13 @@
             </div>
         </nav>
         <div class="container-fluid">
-            <form class="d-flex" role="search" aria-label="Cerca prodotti">
-                <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
-                <input class="form-control me-2" type="search" placeholder="Cerca prodotto" aria-label="cerca prodotto" />
-                <button class="btn btn-outline-dark" type="submit">Cerca</button>
+            <form action="index.php" method="get" class="d-flex" role="search" aria-label="Cerca prodotti">
+                <legend class="visually-hidden">Ricerca prodotti</legend>
+                <fieldset class="flex-grow-1 me-2">
+                    <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
+                    <input class="form-control" type="search" placeholder="Cerca prodotto" name="search" aria-label="cerca prodotto" />
+                </fieldset>
+                <button class="btn btn-outline-dark" name="action" value="products" type="submit">Cerca</button>
             </form>
         </div>
         <?php endif; ?>

@@ -16,7 +16,7 @@
     <!-- Prodotto 1 -->
     <?php foreach($templateParams["productList"] as $product): ?>
     <li class="col">
-        <a href="#" class="card">
+        <a href="index.php?action=user-product-details&idprodotto=<?php echo $product["idprodotto"]; ?>" class="card">
             <img src="<?php echo $product["immagine"]; ?>" class="card-img-top" alt="<?php echo $product["modello"]; ?>" />
             <div class="card-body">
                 <h2 class="card-title h5"><?php echo $product["modello"]; ?></h2>
@@ -25,7 +25,7 @@
                     <?php echo $product["colore"]; ?><br>
                     <?php echo "Disponibilità: " . $product["disponibilità"] . " pezzi"; ?><br>
                 </p>
-                <p class="card-text fw-bold">$<?php echo $product["prezzo"]; ?></p>
+                <p class="card-text fw-bold">&euro; <?php echo $product["prezzo"]; ?></p>
             </div>
         </a>
     </li>

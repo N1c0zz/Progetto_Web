@@ -1,15 +1,21 @@
 <?php
 
-// connessione al db
-require_once("bootstrap.php");
-
-// PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Dettagli prodotto";
 
-// nome del template da visualizzare
-$templateParams["name"] = "product-details.php";
+$templateParams["styleSheet"] = "css/user/productDetails.css";
 
-// template html base
-require("template/base.php");
+$idprodotto = filter_input(INPUT_GET, 'idprodotto', FILTER_VALIDATE_INT);
+
+if ($idprodotto !== false && $idprodotto !== null) {
+    $templateParams["productDetails"] = $dbh->getProductDetails($idprodotto);
+}
+
+if (!empty($templateParams["productDetails"])) {
+    $prodotto = $templateParams["productDetails"];
+} else {
+    $templateParams["errorMessage"] = "Prodotto non trovato.";
+}
+
+$templateParams["name"] = "php/user/template/product-details.php";
 
 ?>

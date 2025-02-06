@@ -13,27 +13,30 @@ class DatabaseHelper{
     // legge tutti i prodotti disponibili
     public function getProducts() {
         $stmt = $this->db->prepare("SELECT 
+                                        p.idprodotto,
+                                        m.idmodello,
                                         m.nome AS modello,
                                         GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
                                         m.marca,
                                         m.colore,
                                         m.prezzo,
-                                        COALESCE(SUM(p.quantità), 0) AS disponibilità,
+                                        m.disponibilità,
                                         m.descrizione,
                                         m.dettagli,
                                         m.titoloDescrizione,
                                         m.immagine
                                     FROM modelli m
-                                    LEFT JOIN prodotti p ON p.idmodello = m.idmodello
+                                    JOIN prodotti p ON p.idmodello = m.idmodello
                                     LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
                                     LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
-                                    GROUP BY m.idmodello");
+                                    GROUP BY p.idprodotto, m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine");
+    
         $stmt->execute();
         $result = $stmt->get_result();
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
+    
     // controlla se esiste un'utente registrato con le credenziali fornite
     public function checkLogin($email, $password) {
         $query = "SELECT idutente, tipo, email FROM utenti WHERE email = ? AND password = ?";
@@ -234,6 +237,61 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    public function getBestsellerProducts() {
+        $stmt = $this->db->prepare("SELECT 
+                                        m.idmodello,
+                                        m.nome AS modello,
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
+                                        m.marca,
+                                        m.colore,
+                                        m.prezzo,
+                                        m.disponibilità,
+                                        m.descrizione,
+                                        m.dettagli,
+                                        m.titoloDescrizione,
+                                        m.immagine,
+                                        COALESCE(SUM(pr.quantità), 0) AS vendite
+                                    FROM modelli m
+                                    JOIN prodotti p ON p.idmodello = m.idmodello
+                                    JOIN presenze pr ON pr.idprodotto = p.idprodotto
+                                    LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
+                                    LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
+                                    GROUP BY m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine
+                                    ORDER BY vendite DESC");
+    
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNewProducts() {
+        $stmt = $this->db->prepare("SELECT 
+                                        m.idmodello,
+                                        m.nome AS modello,
+                                        GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
+                                        m.marca,
+                                        m.colore,
+                                        m.prezzo,
+                                        m.disponibilità,
+                                        m.descrizione,
+                                        m.dettagli,
+                                        m.titoloDescrizione,
+                                        m.immagine,
+                                        MAX(p.dataInserimento) AS dataInserimento
+                                    FROM modelli m
+                                    JOIN prodotti p ON p.idmodello = m.idmodello
+                                    LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
+                                    LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
+                                    GROUP BY m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine
+                                    ORDER BY dataInserimento DESC");
+    
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
     /*
     ------------------------------------------------
     SELLER FUNCTIONS

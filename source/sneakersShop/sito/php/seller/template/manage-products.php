@@ -3,7 +3,7 @@
         <ul class="products-list list-unstyled mt-3 col-md-9">
             <?php foreach ($templateParams["sellerProducts"] as $product): ?>
             <li>
-                <a href="index.php?action=product-details&idprodotto=<?php echo $product["idprodotto"]; ?>" class="product col d-flex section-border">
+                <a href="index.php?action=seller-product-details&idprodotto=<?php echo $product["idprodotto"]; ?>" class="product col d-flex section-border">
                     <div class="col-6 col-md-3 me-3 mt-2 mt-0 mt-md-0 ps-md-3 ">
                         <img src="<?php echo IMG_DIR.$product["immagine"]; ?>" class="img-fluid" alt="Immagine prodotto" />
                     </div>

@@ -49,7 +49,11 @@ if(isset($_GET["action"])) {
             require("php/seller/manageProducts.php");
             break;
         
-        case 'product-details':
+        case 'user-product-details':
+            require("php/user/productDetails.php");
+            break;
+
+        case 'seller-product-details':
             require("php/seller/productDetails.php");
             break;
 
@@ -92,6 +96,24 @@ if(isset($_GET["action"])) {
 // template html base
 require("php/user/template/base.php");
 
+} elseif(isset($_GET["search"])) {
+
+    switch ($_GET["search"]) {
+        case 'bestseller':
+            require("php/user/bestsellerProducts.php");
+            break;
+        
+        case 'novità':
+            require("php/user/newArrivalsProducts.php");
+            break;
+
+        default:
+            require ("php/user/products.php");
+            break;
+    }
+
+    require("php/user/template/base.php");
+   
 } elseif(isset($_GET["request"])) {
 
     switch ($_GET["request"]) {
