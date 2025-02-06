@@ -88,6 +88,16 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function changeNotificationStatus($userID, $notifID, $newStatus) {
+        $stmt = $this->db->prepare("UPDATE notifiche n
+                                    JOIN ricezioni r ON n.idnotifica = r.idnotifica
+                                    SET n.stato = ?
+                                    WHERE r.idutente = ?
+                                    AND n.idnotifica = ?");
+        $stmt->bind_param('sii', $newStatus, $userID, $notifID);
+        $stmt->execute();
+    }
+
     public function getUserInfo($userID) {
         $query = "SELECT nome, cognome, DATE_FORMAT(dataNascita, '%Y-%m-%d') AS dataNascita, sesso, numeroTelefono, email FROM utenti WHERE idutente = ?";
         $stmt = $this->db->prepare($query);
@@ -170,25 +180,57 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function createOrder($userID) {
-        $stmt = $this->db->prepare("");
-        $stmt->bind_param('i', $userID);
-        $stmt->execute();
-    }
-
     public function emptyCart($userID) {
-        $stmt = $this->db->prepare("");
+        $stmt = $this->db->prepare("DELETE FROM carrello
+                                    WHERE idutente = ?");
         $stmt->bind_param('i', $userID);
         $stmt->execute();
     }
 
-    public function changeNotificationStatus($userID, $notifID, $newStatus) {
-        $stmt = $this->db->prepare("UPDATE notifiche n
-                                    JOIN ricezioni r ON n.idnotifica = r.idnotifica
-                                    SET n.stato = ?
-                                    WHERE r.idutente = ?
-                                    AND n.idnotifica = ?");
-        $stmt->bind_param('sii', $newStatus, $userID, $notifID);
+    public function addItemToCart($userID, $productID, $size, $amount) {
+        $stmt = $this->db->prepare("INSERT INTO carrrello (idutente, idprodotto, quantitàAggiunta, tagliaAggiunta)
+                                    VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('iiii', $userID, $productID, $size, $amount);
+        $stmt->execute();
+    }
+
+    public function updateCartItem($userID, $productID, $oldSize, $newSize, $amount) {
+        $stmt = $this->db->prepare("UPDATE carrello c
+                                    SET c.quantitàAggiunta = ?,
+                                        c.tagliaAggiunta = ?
+                                    WHERE c.idutente = ?
+                                    AND c.idprodotto = ?
+                                    AND c.tagliaAggiunta = ?");
+        $stmt->bind_param('', $amount, $newSize, $userID, $productID, $oldSize);
+        $stmt->execute();
+    }
+
+    public function removeItemFromCart($userID, $productID, $size) {
+        $stmt = $this->db->prepare("DELETE FROM carrello
+                                    WHERE idutente = ?
+                                    AND idprodotto = ?
+                                    AND tagliaAggiunta = ?");
+        $stmt->bind_param('iii', $userID, $productID, $size);
+        $stmt->execute();
+    }
+
+    public function createOrder($userID) {
+        // create order
+        $stmt = $this->db->prepare("INSERT INTO ordini (idutente, stato, data)
+                                    VALUES (?, 'In elaborazione', NOW())");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+
+        // add cartItems to the order
+        $stmt = $this->db->prepare("INSERT INTO presenze (idordine, idprodotto, taglia, quantità)
+                                    SELECT
+                                        LAST_INSERT_ID(),
+                                        c.idprodotto,
+                                        c.tagliaAggiunta,
+                                        c.quantitàAggiunta
+                                    FROM carrello c
+                                    WHERE c.idutente = ?");
+        $stmt->bind_param('i', $userID);
         $stmt->execute();
     }
 
