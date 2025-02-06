@@ -50,7 +50,7 @@
         <a href="index.php?search=puma" class="mx-2">
             <img src="<?php echo IMG_DIR."puma.png"; ?>" alt="Puma" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
-        <a href="index.php?search=newBalance" class="mx-2">
+        <a href="index.php?search=new balance" class="mx-2">
             <img src="<?php echo IMG_DIR."newBalance.png"; ?>" alt="New Balance" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
         <a href="index.php?search=timberland" class="mx-2">
