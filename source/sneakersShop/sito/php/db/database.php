@@ -239,6 +239,7 @@ class DatabaseHelper{
 
     public function getBestsellerProducts() {
         $stmt = $this->db->prepare("SELECT 
+                                        p.idprodotto,
                                         m.idmodello,
                                         m.nome AS modello,
                                         GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
@@ -256,17 +257,18 @@ class DatabaseHelper{
                                     JOIN presenze pr ON pr.idprodotto = p.idprodotto
                                     LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
                                     LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
-                                    GROUP BY m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine
+                                    GROUP BY p.idprodotto, m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine
                                     ORDER BY vendite DESC");
     
         $stmt->execute();
         $result = $stmt->get_result();
         
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
+    }    
 
     public function getNewProducts() {
         $stmt = $this->db->prepare("SELECT 
+                                        p.idprodotto,
                                         m.idmodello,
                                         m.nome AS modello,
                                         GROUP_CONCAT(DISTINCT c.nomeCategoria SEPARATOR ', ') AS categorie,
@@ -278,19 +280,19 @@ class DatabaseHelper{
                                         m.dettagli,
                                         m.titoloDescrizione,
                                         m.immagine,
-                                        MAX(p.dataInserimento) AS dataInserimento
+                                        p.dataInserimento
                                     FROM modelli m
                                     JOIN prodotti p ON p.idmodello = m.idmodello
                                     LEFT JOIN appartenenze a ON a.idmodello = m.idmodello
                                     LEFT JOIN categorie c ON a.idcategoria = c.idcategoria
-                                    GROUP BY m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine
-                                    ORDER BY dataInserimento DESC");
+                                    GROUP BY p.idprodotto, m.idmodello, m.nome, m.marca, m.colore, m.prezzo, m.disponibilità, m.descrizione, m.dettagli, m.titoloDescrizione, m.immagine, p.dataInserimento
+                                    ORDER BY p.dataInserimento DESC");
     
         $stmt->execute();
         $result = $stmt->get_result();
         
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
+    }    
     
     /*
     ------------------------------------------------
