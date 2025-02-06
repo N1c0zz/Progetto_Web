@@ -91,7 +91,9 @@ if(isset($_GET["action"])) {
     }
 // template html base
 require("php/user/template/base.php");
+
 } elseif(isset($_GET["request"])) {
+
     switch ($_GET["request"]) {
         case 'get-new-notifications':
             require("php/get-new-notifications.php");
@@ -104,6 +106,7 @@ require("php/user/template/base.php");
         default:
             break;
     }
+
 } else {
     require("php/home.php");
     require("php/user/template/base.php");
