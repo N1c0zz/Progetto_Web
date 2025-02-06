@@ -34,6 +34,15 @@
 </div>
 <?php endif; ?>
 
+<?php if(isset($templateParams["orderCreationMsg"])): ?>
+<!-- conferma di creazione ordine  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <?php echo $templateParams["orderCreationMsg"]; ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+</div>
+<?php endif; ?>
+
 <?php if(isset($templateParams["saveNewProductMsg"])): ?>
 <!-- conferma aggiornamento nuovi dettagli prodotto -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

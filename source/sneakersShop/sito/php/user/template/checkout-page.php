@@ -77,7 +77,7 @@
                     </div>
                 </fieldset>
                 <div class="text-end mt-2 d-flex justify-content-center">
-                    <button type="button" class="btn btn-dark btn-lg" aria-label="Effettua l'ordine">Effettua l'Ordine</button>
+                    <input type="submit" class="btn btn-dark btn-lg" aria-label="Effettua l'ordine" value="Effettua l'ordine" />
                 </div>
             </form>
         </section>
