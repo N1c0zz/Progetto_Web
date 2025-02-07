@@ -74,8 +74,8 @@ VALUES
 INSERT INTO `prodotti` (`idprodotto`, `idvenditore`, `idmodello`, `dataInserimento`) 
 VALUES 
 (1, 2, 1, NOW()), -- Nike Air Max, taglia 38
-(3, 2, 2, NOW()),  -- Timberland Classic, taglia 42
-(2, 2, 3, NOW()),
+(2, 2, 2, NOW()),  -- Timberland Classic, taglia 42
+(3, 2, 3, NOW()),
 (4, 2, 4, NOW()),
 (5, 2, 5, NOW()),
 (6, 2, 6, NOW()),
