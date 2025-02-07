@@ -16,6 +16,7 @@ if(!empty($templateParams["cartItems"])) {
         $cartItem["immagine"] = IMG_DIR . $cartItem["immagine"];
     }
     unset($cartItem);
+    $templateParams["js"] = array("js/remove-item-from-cart.js");
 } else {
     $templateParams["noItemsFound"] = "Non hai ancora aggiunto prodotti al tuo carrello";
 }

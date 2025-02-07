@@ -169,7 +169,8 @@ class DatabaseHelper{
                                         m.prezzo,
                                         carr.quantitàAggiunta,
                                         carr.tagliaAggiunta,
-                                        m.immagine
+                                        m.immagine,
+                                        p.idmodello
 									FROM modelli m
                                     JOIN prodotti p ON p.idmodello = m.idmodello
                                     JOIN carrello carr ON carr.idprodotto = p.idprodotto
@@ -206,6 +207,16 @@ class DatabaseHelper{
                                     AND c.tagliaAggiunta = ?");
         $stmt->bind_param('', $amount, $newSize, $userID, $productID, $oldSize);
         $stmt->execute();
+    }
+
+    public function getProductId($productName) {
+        $stmt = $this->db->prepare("SELECT idprodotto
+                                    FROM prodotti
+                                    WHERE ");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function removeItemFromCart($userID, $productID, $size) {

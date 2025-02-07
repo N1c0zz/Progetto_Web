@@ -125,6 +125,11 @@ require("php/user/template/base.php");
             require("php/change-notification-status.php");
             break;
 
+        
+        case 'remove-item-from-cart':
+            require("php/remove-item-from-cart.php");
+            break;
+
         default:
             break;
     }
