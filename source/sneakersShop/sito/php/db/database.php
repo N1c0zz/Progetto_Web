@@ -209,16 +209,6 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
-    public function getProductId($productName) {
-        $stmt = $this->db->prepare("SELECT idprodotto
-                                    FROM prodotti
-                                    WHERE ");
-        $stmt->bind_param('i', $userID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function removeItemFromCart($userID, $productID, $size) {
         $stmt = $this->db->prepare("DELETE FROM carrello
                                     WHERE idutente = ?
