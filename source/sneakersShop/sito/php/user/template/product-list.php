@@ -20,10 +20,14 @@
             <img src="<?php echo $product["immagine"]; ?>" class="card-img-top" alt="<?php echo $product["modello"]; ?>" />
             <div class="card-body">
                 <h2 class="card-title h5"><?php echo $product["modello"]; ?></h2>
-                <p class="card-text text-muted">
-                    <?php echo $product["categorie"]; ?><br >
-                    <?php echo $product["colore"]; ?><br>
-                    <?php echo "Disponibilità: " . $product["disponibilità"] . " pezzi"; ?><br>
+                <p class="card-text text-muted mb-0"><?php echo $product["categorie"]; ?></p>
+                <p class="card-text text-muted mb-0"><?php echo $product["colore"]; ?></p>
+                <p class="card-text <?php echo $product['disponibilità'] > 0 ? 'text-muted' : 'text-danger' ?>">
+                    <?php
+                        echo $product["disponibilità"] > 0 ?
+                        "Disponibilità: " . $product["disponibilità"] . " pezzi"
+                        : "Prodotto esaurito";
+                    ?>
                 </p>
                 <p class="card-text fw-bold">&euro; <?php echo $product["prezzo"]; ?></p>
             </div>
