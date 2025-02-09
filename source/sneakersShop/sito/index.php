@@ -89,6 +89,18 @@ if(isset($_GET["action"])) {
             require("php/user/create-order.php");
             break;
         
+        case 'add-item-to-cart':
+            require("php/user/add-item-to-cart.php");
+            break;
+        
+        case 'edit-cart-item':
+            require("php/user/edit-cart-item.php");
+            break;
+        
+        case 'update-cart-item':
+            require("php/user/update-cart-item.php");
+            break;
+        
         default:
             require("php/home.php");
             break;
