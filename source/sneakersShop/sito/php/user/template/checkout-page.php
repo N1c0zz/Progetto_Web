@@ -27,6 +27,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <p class="text-center text-md-start mt-4 fw-bold fs-3 mb-1">Totale: &euro; <?php echo $templateParams["total"]; ?></p>
         </section>
 
         <section class="mb-4 section-border">
