@@ -160,6 +160,32 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function isProductIdValid($productID) {
+        $stmt = $this->db->prepare("SELECT
+                                    idprodotto
+                                    FROM prodotti
+                                    WHERE idprodotto = ?
+                                    LIMIT 1");
+        $stmt->bind_param('i', $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+
+    public function getProductAvailability($productID) {
+        $stmt = $this->db->prepare("SELECT
+                                    m.disponibilità
+                                    FROM modelli m
+                                    JOIN prodotti p ON m.idmodello = p.idmodello
+                                    WHERE p.idprodotto = ?
+                                    LIMIT 1");
+        $stmt->bind_param('i', $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return (int) $row['disponibilità'];
+    }
+
     public function getCartItems($userID) {
         $stmt = $this->db->prepare("SELECT
                                     	m.nome AS modello,
@@ -177,11 +203,37 @@ class DatabaseHelper{
                                     JOIN appartenenze a ON a.idmodello = m.idmodello
                                     JOIN categorie c ON a.idcategoria = c.idcategoria
 									WHERE carr.idutente = ?
-                                    GROUP BY m.idmodello;");
+                                    GROUP BY m.idmodello, carr.tagliaAggiunta");
         $stmt->bind_param('i', $userID);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getCartItem($userID, $productID, $size) {
+                $stmt = $this->db->prepare("SELECT *
+                                            FROM carrello
+                                            WHERE idutente = ?
+                                            AND idprodotto = ?
+                                            AND tagliaAggiunta = ?");
+        $stmt->bind_param('iii', $userID, $productID, $size);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductAmountInCart($userID, $productID) {
+        $stmt = $this->db->prepare("SELECT
+                                    COALESCE(SUM(quantitàAggiunta), 0) AS quantitàTotale
+                                    FROM carrello
+                                    WHERE idutente = ?
+                                    AND idprodotto = ?");
+        $stmt->bind_param('ii', $userID, $productID);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return (int) $row['quantitàTotale'];
     }
 
     public function emptyCart($userID) {
@@ -192,7 +244,7 @@ class DatabaseHelper{
     }
 
     public function addItemToCart($userID, $productID, $size, $amount) {
-        $stmt = $this->db->prepare("INSERT INTO carrrello (idutente, idprodotto, quantitàAggiunta, tagliaAggiunta)
+        $stmt = $this->db->prepare("INSERT INTO carrello (idutente, idprodotto, tagliaAggiunta, quantitàAggiunta)
                                     VALUES (?, ?, ?, ?)");
         $stmt->bind_param('iiii', $userID, $productID, $size, $amount);
         $stmt->execute();
@@ -205,7 +257,7 @@ class DatabaseHelper{
                                     WHERE c.idutente = ?
                                     AND c.idprodotto = ?
                                     AND c.tagliaAggiunta = ?");
-        $stmt->bind_param('', $amount, $newSize, $userID, $productID, $oldSize);
+        $stmt->bind_param('iiiii', $amount, $newSize, $userID, $productID, $oldSize);
         $stmt->execute();
     }
 
