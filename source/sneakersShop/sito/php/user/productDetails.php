@@ -1,7 +1,7 @@
 <?php
 
 $templateParams["pageTitle"] = "Dettagli prodotto";
-
+$templateParams["name"] = "php/user/template/product-details.php";
 $templateParams["styleSheet"] = "css/user/productDetails.css";
 
 $idprodotto = filter_input(INPUT_GET, 'idprodotto', FILTER_VALIDATE_INT);
@@ -16,6 +16,5 @@ if (!empty($templateParams["productDetails"])) {
     $templateParams["errorMessage"] = "Prodotto non trovato.";
 }
 
-$templateParams["name"] = "php/user/template/product-details.php";
 
 ?>
