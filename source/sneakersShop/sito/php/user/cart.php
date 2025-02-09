@@ -8,10 +8,14 @@ if(!isUserLoggedIn()) {
 $templateParams["pageTitle"] = "Carrello";
 $templateParams["name"] = "php/user/template/cart-page.php";
 $templateParams["styleSheet"] = "css/user/cartPage.css";
-
 $templateParams["cartItems"] = $dbh->getCartItems($_SESSION["idutente"]);
+
 if(!empty($templateParams["cartItems"])) {
-    $templateParams["total"] = array_sum(array_column($templateParams["cartItems"], "prezzo"));
+
+    $templateParams["total"] = array_sum(
+        array_map(fn($item) => $item["prezzo"] * $item["quantitàAggiunta"], $templateParams["cartItems"])
+    );
+
     foreach ($templateParams["cartItems"] as &$cartItem) {
         $cartItem["immagine"] = IMG_DIR . $cartItem["immagine"];
     }
