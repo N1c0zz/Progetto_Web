@@ -7,6 +7,8 @@ if(isUserLoggedIn()) {
 
 $templateParams["name"] = "php/user/template/registration-form.php";
 $templateParams["pageTitle"] = "Registrazione";
+$templateParams["styleSheet"] = array("css/user/togglePassword.css");
+$templateParams["js"] = array("js/toggle-password.js");
 
 // controllo se l'utente si sta registrando
 if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["bday"]) && isset($_POST["sex"])

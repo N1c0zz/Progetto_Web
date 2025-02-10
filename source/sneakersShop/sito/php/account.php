@@ -5,9 +5,10 @@ if(!isUserLoggedIn()) {
     exit();
 }
 
-$templateParams["styleSheet"] = "css/user/accountPage.css";
+$templateParams["styleSheet"] = array("css/user/accountPage.css", "css/user/togglePassword.css");
 $templateParams["pageTitle"] = "Account";
 $templateParams["name"] = "php/user/template/account-page.php";
+$templateParams["js"] = array("js/toggle-password.js");
 $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"])[0];
 
 if($_SESSION["tipo"] == "cliente") {

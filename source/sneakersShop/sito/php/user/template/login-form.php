@@ -3,13 +3,13 @@
 <!-- TODO: specificare action -->
 <h1 class="text-center fw-semibold my-5">Accedi</h1>
 
-<?php if(isset($templateParams["loginError"])): ?>
+<?php if (isset($templateParams["loginError"])): ?>
 <div class="d-flex justify-content-center">
     <p class="text-danger mb-0"><?php echo $templateParams["loginError"]; ?></p>
 </div>
 <?php endif; ?>
 
-<form action="index.php?action=login" method="post" class="mt-3">
+<form action="index.php?action=login" method="post" class="mt-3 form-with-pwd">
     <fieldset>
         <legend class="visually-hidden">credenziali di accesso</legend>
         <div class="d-flex justify-content-center">
@@ -20,10 +20,13 @@
         </div>
         <div class="d-flex justify-content-center">
             <div class="form-floating mb-3 col-10 col-md-4">
-                <input type="password" class="form-control" id="pwd" placeholder="Inserisci la password" name="password" required />
+                <input type="password" class="form-control pwd-input" id="pwd" placeholder="Inserisci la password" name="password" required />
                 <label for="pwd">Password*</label>
+                <button type="button" class="toggle-password">
+                    <i class="bi bi-eye"></i>
+                </button>
             </div>
-        </div>                
+        </div>
     </fieldset>
     <div class="d-flex justify-content-center">
         <input type="submit" class="btn btn-dark col-8 col-md-3 mt-3" value="ACCEDI" />

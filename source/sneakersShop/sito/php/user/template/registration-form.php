@@ -1,15 +1,14 @@
-
 <!-- form registrazione -->
 
 <h1 class="text-center fw-semibold my-5">Crea un account</h1>
 
-<?php if(isset($templateParams["registrationError"])): ?>
-<div class="d-flex justify-content-center">
-    <p class="text-danger mb-2"><?php echo $templateParams["registrationError"]; ?></p>
-</div>
+<?php if (isset($templateParams["registrationError"])): ?>
+    <div class="d-flex justify-content-center">
+        <p class="text-danger mb-2"><?php echo $templateParams["registrationError"]; ?></p>
+    </div>
 <?php endif; ?>
 
-<form action="index.php?action=registration" method="post">
+<form action="index.php?action=registration" method="post" class="form-with-pwd">
     <fieldset>
         <legend class="visually-hidden">credenziali di registrazione</legend>
         <div class="row row-cols-md-2 g-4">
@@ -59,8 +58,11 @@
 
             <div class="d-md-flex justify-content-end">
                 <div class="form-floating mb-3 col-md-8">
-                    <input type="password" class="form-control" id="pwd" placeholder="Crea la password" name="password" required />
+                    <input type="password" class="form-control pwd-input" id="pwd" placeholder="Scegli una password" name="password" required />
                     <label for="pwd">Password*</label>
+                    <button type="button" class="toggle-password">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
             </div>
 

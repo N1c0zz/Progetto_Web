@@ -18,6 +18,8 @@ if(isUserLoggedIn()) {
 } else {
     $templateParams["pageTitle"] = "Login";
     $templateParams["name"] = "php/user/template/login-form.php";
+    $templateParams["styleSheet"] = array("css/user/togglePassword.css");
+    $templateParams["js"] = array("js/toggle-password.js");
 }
 
 ?>
