@@ -2,7 +2,7 @@
 
 $templateParams["pageTitle"] = "Dettagli prodotto";
 
-$templateParams["styleSheet"] = "css/seller/productDetails.css";
+$templateParams["styleSheet"] = array("css/seller/productDetails.css");
 
 $idprodotto = filter_input(INPUT_GET, 'idprodotto', FILTER_VALIDATE_INT);
 

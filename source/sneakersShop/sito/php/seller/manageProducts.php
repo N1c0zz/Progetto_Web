@@ -1,6 +1,6 @@
 <?php
 
-$templateParams["styleSheet"] = "css/seller/manageProducts.css";
+$templateParams["styleSheet"] = array("css/seller/manageProducts.css");
 
 // Controllo autenticazione
 if (!isset($_SESSION["idutente"])) {

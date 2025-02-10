@@ -3,7 +3,7 @@
 // PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Homepage";
 
-$templateParams["styleSheet"] = "css/seller/seller-homepage.css";
+$templateParams["styleSheet"] = array("css/seller/seller-homepage.css");
 
 // Controlla se l'utente è loggato
 if (!isset($_SESSION['idutente'])) {

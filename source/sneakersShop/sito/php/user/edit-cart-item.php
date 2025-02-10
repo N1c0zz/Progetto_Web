@@ -7,7 +7,7 @@ if(!isUserLoggedIn()) {
 
 $templateParams["pageTitle"] = "Modifica prodotto del carrello";
 $templateParams["name"] = "php/user/template/cart-item-edit-page.php";
-$templateParams["styleSheet"] = "css/user/productDetails.css";
+$templateParams["styleSheet"] = array("css/user/productDetails.css");
 
 if (isset($_POST["productId"]) && isset($_POST["size"]) && isset($_POST["amount"])) {
     $templateParams["productDetails"] = $dbh->getProductDetails($_POST["productId"]);

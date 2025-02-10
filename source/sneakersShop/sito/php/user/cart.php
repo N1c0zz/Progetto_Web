@@ -7,7 +7,7 @@ if(!isUserLoggedIn()) {
 
 $templateParams["pageTitle"] = "Carrello";
 $templateParams["name"] = "php/user/template/cart-page.php";
-$templateParams["styleSheet"] = "css/user/cartPage.css";
+$templateParams["styleSheet"] = array("css/user/cartPage.css");
 $templateParams["cartItems"] = $dbh->getCartItems($_SESSION["idutente"]);
 
 if(!empty($templateParams["cartItems"])) {

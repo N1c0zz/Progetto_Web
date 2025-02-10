@@ -19,6 +19,6 @@ $templateParams["total"] = array_sum(
 $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["idutente"]);
 $templateParams["pageTitle"] = "Checkout";
 $templateParams["name"] = "checkout-page.php";
-$templateParams["styleSheet"] = "css/user/checkoutPage.css";
+$templateParams["styleSheet"] = array("css/user/checkoutPage.css");
 
 ?>

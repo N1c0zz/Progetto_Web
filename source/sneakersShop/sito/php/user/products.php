@@ -3,7 +3,7 @@
 $templateParams["pageTitle"] = "Prodotti";
 $templateParams["name"] = "product-list.php";
 $templateParams["productList"] = $dbh->getProducts();
-$templateParams["styleSheet"] = "css/user/products.css";
+$templateParams["styleSheet"] = array("css/user/products.css");
 
 foreach ($templateParams["productList"] as &$product) {
     $product["immagine"] = IMG_DIR . $product["immagine"];
