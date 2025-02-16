@@ -2,12 +2,10 @@
 
 // controllo se l'utente sta facendo login
 if(isset($_POST["email"]) && isset($_POST["password"])) {
-    $login_result = $dbh->checkLogin($_POST["email"], $_POST["password"]);
-    if(count($login_result) == 0) {
+    $login_result = $dbh->login($_POST["email"], $_POST["password"]);
+    if($login_result == false) {
         // login fallito
         $templateParams["loginError"] = "Errore! Credenziali scorrette o account inesistente";
-    } else {
-        registerLoggedUser($login_result[0]);
     }
 }
 

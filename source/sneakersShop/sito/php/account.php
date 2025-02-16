@@ -18,8 +18,8 @@ if($_SESSION["tipo"] == "cliente") {
 // modifica password
 if(isset($_POST["oldPassword"]) && isset($_POST["newPassword"]) && isset($_POST["newPasswordConf"])) {
     // controllo se la password vecchia inserita è corretta
-    $login_result = $dbh->checkLogin($_SESSION["email"], $_POST["oldPassword"]);
-    if(count($login_result) == 1) {
+    $login_result = $dbh->login($_SESSION["email"], $_POST["oldPassword"]);
+    if($login_result == true) {
         // controllo se le due nuove password inserite coincidono
         if ($_POST["newPassword"] == $_POST["newPasswordConf"]) {
             $dbh->updateUserPwd($_SESSION["idutente"], $_POST["newPassword"]);

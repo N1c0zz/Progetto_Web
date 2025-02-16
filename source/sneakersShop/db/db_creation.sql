@@ -5,6 +5,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `ns_kicks` DEFAULT CHARACTER SET utf8;
 USE `ns_kicks`;
 
+CREATE USER 'user'@'localhost' IDENTIFIED BY '';
+
 -- -----------------------------------------------------
 -- Table `utenti`
 -- -----------------------------------------------------
@@ -16,8 +18,14 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `numeroTelefono` VARCHAR(15) NOT NULL,
   `sesso` VARCHAR(50) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(512) NOT NULL,
+  `password` CHAR(128) NOT NULL,
+  `salt` CHAR(128) NOT NULL,
   `tipo` VARCHAR(45) NOT NULL
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `tentativi_login` (
+  `idutente` BIGINT NOT NULL,
+  `data` VARCHAR(30) NOT NULL
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -193,3 +201,9 @@ CREATE TABLE IF NOT EXISTS `ricezioni` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+GRANT SELECT, INSERT, UPDATE ON `ns_kicks`.* TO 'user'@'localhost';
+GRANT DELETE ON `ns_kicks`.carrello TO 'user'@'localhost';
+GRANT DELETE ON `ns_kicks`.appartenenze TO 'user'@'localhost';
+GRANT DELETE ON `ns_kicks`.prodotti TO 'user'@'localhost';
+FLUSH PRIVILEGES;

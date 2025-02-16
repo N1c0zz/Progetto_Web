@@ -36,16 +36,55 @@ class DatabaseHelper{
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
-    // controlla se esiste un'utente registrato con le credenziali fornite
-    public function checkLogin($email, $password) {
-        $query = "SELECT idutente, tipo, email FROM utenti WHERE email = ? AND password = ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ss', $email, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+    public function login($email, $password) {
+        if ($stmt = $this->db->prepare("SELECT idutente, tipo, email, password, salt FROM utenti WHERE email = ? LIMIT 1")) {
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($user_id, $type, $email, $db_password, $salt);
+            $stmt->fetch();
+            $password = hash('sha512', $password . $salt);
+            if ($stmt->num_rows == 1) { // se l'utente esiste
+                if ($db_password == $password) {
+                    // Password corretta
+                    $user_browser = $_SERVER['HTTP_USER_AGENT'];
+                    $login_data['login_string'] = hash('sha512', $password . $user_browser);
+                    $login_data['idutente'] = preg_replace("/[^0-9]+/", "", $user_id); // prevenzione XSS
+                    $login_data['email'] = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $email); // prevenzione XSS
+                    $login_data['tipo'] = $type;
+                    registerLoggedUser($login_data);
+                    // Login eseguito con successo.
+                    return true;
+                } else {
+                    // Password incorretta.
+                    $now = time();
+                    $this->db->query("INSERT INTO tentativi_login (idutente, data) VALUES ('$user_id', '$now')");
+                    return false;
+                }
+            } else {
+                // L'utente inserito non esiste.
+                return false;
+            }
+        }
+    }
+
+    // restituisce false se l'user agent è cambiato dopo il login (prevenzione hijacking della sessione)
+    public function login_check($user_id, $login_string, $user_browser) {
+        if ($stmt = $this->db->prepare("SELECT password FROM utenti WHERE idutente = ? LIMIT 1")) {
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_assoc();
+
+            if (!empty($result)) {
+                $login_check = hash('sha512', $result['password'] . $user_browser);
+                if ($login_check == $login_string) {
+                    // Login eseguito!!!!
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // conrolla se una email è già registrata nel db
@@ -60,7 +99,7 @@ class DatabaseHelper{
     }
 
     // registra un nuovo utente
-    public function registerUser($name, $surname, $bday, $sex, $phone, $email, $password) {
+    public function registerUser($name, $surname, $bday, $sex, $phone, $email, $password, $salt) {
         do {
             // creazione ID utente univoco
             $userID = random_int(0, PHP_INT_MAX);
@@ -68,10 +107,10 @@ class DatabaseHelper{
             $result = $usedIDs->fetch_assoc();
         } while($result['usedIDs'] != 0);
         // registrazione utente
-        $query = "INSERT INTO utenti (idutente, nome, cognome, dataNascita, numeroTelefono, sesso, email, password, tipo)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'cliente')";
+        $query = "INSERT INTO utenti (idutente, nome, cognome, dataNascita, numeroTelefono, sesso, email, password, salt, tipo)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'cliente')";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('isssssss', $userID, $name, $surname, $bday, $phone, $sex, $email, $password);
+        $stmt->bind_param('issssssss', $userID, $name, $surname, $bday, $phone, $sex, $email, $password, $salt);
         $stmt->execute();
     }
 
