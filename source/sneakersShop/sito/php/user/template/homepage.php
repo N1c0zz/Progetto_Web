@@ -57,11 +57,6 @@
             <img src="<?php echo IMG_DIR."timberland.png"; ?>" alt="Timberland" style="width: 3.5em; height: 3.5em; object-fit: contain;" />
         </a>
     </div>
-    <div class="mt-3"> <!-- DA SISTEMARE -->
-        <a href="index.php?action=products" class="text-decoration-none d-block" style="font-size: 1.2em; color: inherit;">
-            Tutte le marche
-        </a>
-    </div>
 </div>
 
 <!-- Categories Section -->
