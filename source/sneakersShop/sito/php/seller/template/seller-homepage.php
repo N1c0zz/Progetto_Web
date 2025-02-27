@@ -20,7 +20,7 @@
     <div class="mt-4 border border-dark p-4">
         <h3>Gestisci ordini</h3>
         <div class="d-flex align-items-center mt-4">
-            <img src="<?php echo IMG_DIR."gestioneOrdini.png"; ?>" alt="Gestisci ordini" class="me-3 img-custom w-25" />
+            <img src="<?php echo IMG_DIR."gestioneOrdini.png"; ?>" alt="Gestisci ordini" class="img-fluid img-custom" />
             <p class="mb-0 flex-grow-1 fs-5 ms-5">Visualizza e gestisci lo stato di ogni ordine</p>
         </div>
     </div>
@@ -30,7 +30,7 @@
     <div class="mt-4 border border-dark p-4">
         <h3>Gestisci i prodotti</h3>
         <div class="d-flex align-items-center mt-4">
-            <img src="<?php echo IMG_DIR."gestioneProdotti.png"; ?>" alt="Gestisci ordini" class="me-3 img-custom w-25" />
+            <img src="<?php echo IMG_DIR."gestioneProdotti.png"; ?>" alt="Gestisci ordini" class="img-fluid img-custom" />
             <p class="mb-0 flex-grow-1 fs-5 ms-5">Aggiungi, modifica ed elimina i tuoi prodotti dalla lista</p>
         </div>
     </div>

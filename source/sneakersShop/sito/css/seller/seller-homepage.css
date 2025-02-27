@@ -10,8 +10,16 @@ a.text-decoration-none:focus {
 }
 
 .img-custom {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
+    width: 80%; /* L'immagine occupa tutta la larghezza del contenitore */
+    max-width: 300px; /* Evita che diventi troppo grande */
+    height: auto; /* Mantiene le proporzioni */
+    display: block; /* Evita problemi di allineamento */
+    margin: 0 auto; /* Centra l'immagine */
+}
+
+@media (min-width: 768px) {
+    .img-custom {
+        width: 25%; /* Rende l'immagine più piccola su schermi grandi */
+        max-width: 300px; /* Evita ingrandimenti eccessivi */
+    }
 }

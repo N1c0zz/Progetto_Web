@@ -2,11 +2,13 @@ USE `ns_kicks`;
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `utenti` (un cliente e un venditore)
+-- Password venditore in chiaro: password_venditore
+-- Password cliente in chiaro: password_cliente
 -- -----------------------------------------------------
 INSERT INTO `utenti` (`idutente`, `nome`, `cognome`, `dataNascita`, `numeroTelefono`, `sesso`, `email`, `password`, `salt`, `tipo`) 
 VALUES 
-(1, 'Mario', 'Rossi', '1990-05-10', '3331234567', 'Maschio', 'mario.rossi@example.com', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', 'cliente'),
-(2, 'Luigi', 'Bianchi', '1985-08-20', '3339876543', 'Maschio', 'luigi.bianchi@example.com', 'bb807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'bbaab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', 'venditore');
+(1, 'Mario', 'Rossi', '1990-05-10', '3331234567', 'Maschio', 'mario.rossi@example.com', 'b4357a2e9b1eea8ed5c9bd5d3dc993a6b5f91c91279083012da50f709781293843d389d8d60af304f34c3ea81d0ed7a545e5963577eaf1ff65190dba22af6cda', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', 'cliente'),
+(2, 'Luigi', 'Bianchi', '1985-08-20', '3339876543', 'Maschio', 'luigi.bianchi@example.com', '42fcc5f5a1597113d589d437f1eb632ced5490e65b0711e17b782882b8f1bdbed5e0804490798d920d8fc4687afeeec7605a4452603481dba2fbdd187b47ba2f', 'bbaab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', 'venditore');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `categorie`
