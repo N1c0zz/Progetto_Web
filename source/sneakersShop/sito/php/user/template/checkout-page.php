@@ -5,31 +5,51 @@
 
         <section class="orders-table section-border mb-4">
             <h4 class="fs-4 mb-3 fw-semibold">Riepilogo ordine</h4>
-            <table class="table table-bordered table-sm">
-                <thead>
-                    <tr>
-                        <th style="width: 20%;">Modello</th>
-                        <th style="width: 20%;">Colore</th>
-                        <th style="width: 20%;">Prezzo</th>
-                        <th style="width: 20%;">Taglia</th>
-                        <th style="width: 20%;">Quantità</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($templateParams["cartItems"] as $item): ?>
-                    <tr>
-                        <td class="fs-6"><?php echo $item["modello"]; ?></td>
-                        <td class="fs-6"><?php echo $item["colore"]; ?></td>
-                        <td class="fs-6"><?php echo $item["prezzo"]; ?></td>
-                        <td class="fs-6"><?php echo $item["tagliaAggiunta"]; ?></td>
-                        <td class="fs-6"><?php echo $item["quantitàAggiunta"]; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <p class="text-center text-md-start mt-4 fw-bold fs-3 mb-1">Totale: &euro; <?php echo $templateParams["total"]; ?></p>
-        </section>
 
+            <!-- Tabella visibile solo su desktop -->
+            <div class="d-none d-md-block">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Modello</th>
+                            <th>Colore</th>
+                            <th>Prezzo</th>
+                            <th>Taglia</th>
+                            <th>Quantità</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($templateParams["cartItems"] as $item): ?>
+                        <tr>
+                            <td><?php echo $item["modello"]; ?></td>
+                            <td><?php echo $item["colore"]; ?></td>
+                            <td><?php echo $item["prezzo"]; ?> €</td>
+                            <td><?php echo $item["tagliaAggiunta"]; ?></td>
+                            <td><?php echo $item["quantitàAggiunta"]; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Lista di card visibile solo su mobile -->
+            <div class="d-md-none">
+                <?php foreach($templateParams["cartItems"] as $item): ?>
+                <div class="order-item p-3 border rounded mb-3">
+                    <p class="mb-1"><strong>Modello:</strong> <?php echo $item["modello"]; ?></p>
+                    <p class="mb-1"><strong>Colore:</strong> <?php echo $item["colore"]; ?></p>
+                    <p class="mb-1"><strong>Prezzo:</strong> <?php echo $item["prezzo"]; ?> €</p>
+                    <p class="mb-1"><strong>Taglia:</strong> <?php echo $item["tagliaAggiunta"]; ?></p>
+                    <p class="mb-0"><strong>Quantità:</strong> <?php echo $item["quantitàAggiunta"]; ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <p class="text-center text-md-start mt-4 fw-bold fs-3 mb-1">
+                Totale: &euro; <?php echo $templateParams["total"]; ?>
+            </p>
+        </section>
+        
         <section class="mb-4 section-border">
             <h4 class="fs-4 mb-3 fw-semibold">Informazioni di contatto</h4>
 

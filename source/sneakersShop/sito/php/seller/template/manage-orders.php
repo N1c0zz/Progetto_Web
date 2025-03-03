@@ -1,4 +1,4 @@
-<h1 class="mb-4">Gestione Ordini</h1>
+<h1 class="fw-semibold mb-3">Gestione Ordini</h1>
 
     <div class="order-list">
     <?php foreach ($templateParams["sellerOrders"] as $order): ?>

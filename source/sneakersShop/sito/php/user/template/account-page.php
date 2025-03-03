@@ -30,10 +30,9 @@
                 <input type="email" class="form-control" id="email" value="<?php echo $user["email"]; ?>" readonly />
             </div>
             <div class="d-flex justify-content-center">
-                <a href="index.php?action=change-user-info" class="btn btn-lg btn-dark col-4 col-md-3 mt-3">Modifica</a>
+                <a href="index.php?action=change-user-info" class="btn btn-lg btn-dark col-10 col-md-4 mt-3">Modifica</a>
             </div>
         </section>
-
         <section class="mb-4 section-border">
             <h4 class="fs-4 mb-3 fw-semibold">Modifica Password</h4>
             <?php if (isset($templateParams["oldPwdError"])): ?>
@@ -72,7 +71,7 @@
                     </div>
                 </fieldset>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-lg btn-dark col-4 col-md-3 my-3" aria-label="Conferma la modifica della password">Modifica</button>
+                    <button type="submit" class="btn btn-lg btn-dark col-10 col-md-4 my-3" aria-label="Conferma la modifica della password">Modifica</button>
                 </div>
             </form>
         </section>
@@ -101,7 +100,7 @@
             </section>
         <?php endif; ?>
         <section class="d-flex justify-content-center my-5">
-            <a href="index.php?action=logout" class="btn btn-danger mt-5">ESCI DALL'ACCOUNT</a>
+            <a href="index.php?action=logout" class="btn btn-danger col-10 col-md-4 mt-4">ESCI DALL'ACCOUNT</a>
         </section>
     </div>
 </div>

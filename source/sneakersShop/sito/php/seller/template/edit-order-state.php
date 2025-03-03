@@ -1,4 +1,4 @@
-<h1 class="mb-4">Modifica Stato Ordine</h1>
+<h1 class="fw-semibold mb-4">Modifica stato ordine</h1>
 
     <div class="card border rounded p-3 mb-3">
         <h4 class="mb-3">Ordine #<?php echo $idordine ?></h4>

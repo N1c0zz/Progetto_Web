@@ -1,4 +1,4 @@
-<h1 class="fw-semibold mt-5">NOTIFICHE</h1>
+<h1 class="fw-semibold mt-5">Notifiche</h1>
 <ol class="list-group list-unstyled mt-3" id="notification-list">
     <?php foreach($templateParams["notifications"] as $notif): ?>
         <li class="list-group-item <?php if($notif["stato"] == 'da_leggere') echo 'bg-body-secondary' ?>">

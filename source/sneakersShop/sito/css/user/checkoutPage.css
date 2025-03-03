@@ -1,3 +1,17 @@
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    min-width: 600px; /* Evita che le colonne si comprimano troppo */
+}
+
+.table th, .table td {
+    font-size: 14px; /* Testo più piccolo su schermi piccoli */
+    white-space: nowrap; /* Evita che il testo vada a capo */
+}
+
 @media (min-width: 768px) {  
 
     .text-end.mb-4 button {
