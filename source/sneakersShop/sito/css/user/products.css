@@ -7,3 +7,26 @@ a.card {
     text-decoration: none;
     color: inherit;
 }
+
+.card-title {
+    word-wrap: break-word; /* Permette di spezzare le parole */
+    overflow-wrap: break-word; /* Garantisce che il testo vada a capo */
+    white-space: normal; /* Permette il wrapping del testo */
+    width: 100%; /* Impedisce che il testo esca dai limiti della card */
+    min-height: 50px; /* Impostiamo un'altezza minima */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-bottom: 10px; /* Per aggiungere un po' di spazio nella parte inferiore */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spazio uguale tra gli elementi della card */
+    height: 100%;
+}
