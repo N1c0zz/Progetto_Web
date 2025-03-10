@@ -80,9 +80,9 @@
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <nav class="text-start" aria-label="Navigazione pagine informative per l'utente">
-                    <a href="#" class="d-block mb-1">Informativa Privacy</a>
-                    <a href="#" class="d-block mb-1">Informativa Cookie</a>
-                    <a href="#" class="d-block mb-1">Termini e Condizioni</a>
+                    <a href="index.php?action=privacy-info" class="d-block mb-1">Informativa Privacy</a>
+                    <a href="index.php?action=cookie-info" class="d-block mb-1">Informativa Cookie</a>
+                    <a href="index.php?action=ToS" class="d-block mb-1">Termini e Condizioni</a>
                 </nav>
                 <div class="text-end">
                     <p class="mb-0">

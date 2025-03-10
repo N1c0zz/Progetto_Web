@@ -101,6 +101,18 @@ if(isset($_GET["action"])) {
             require("php/user/update-cart-item.php");
             break;
         
+        case 'privacy-info':
+            require("php/user/privacy-page.php");
+            break;
+        
+        case 'cookie-info':
+            require("php/user/cookie-page.php");
+            break;
+
+        case 'ToS':
+            require("php/user/ToS-page.php");
+            break;
+        
         default:
             require("php/home.php");
             break;
