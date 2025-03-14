@@ -17,8 +17,8 @@
     }
 }
 
-/* Assicura il layout corretto */
-.d-flex.align-items-center {
+/* Assicura il layout corretto - limitato solo ai contenuti principali */
+main .d-flex.align-items-center {
     flex-direction: column;
     text-align: center;
     padding-left: 0 !important;
@@ -26,7 +26,7 @@
 }
 
 @media (min-width: 768px) {
-    .d-flex.align-items-center {
+    main .d-flex.align-items-center {
         flex-direction: row; /* Immagine a sinistra, testo a destra */
         justify-content: flex-start;
         text-align: left;
@@ -35,13 +35,13 @@
 }
 
 /* Aggiunge spazio tra l'immagine e il testo su mobile */
-.fs-5 {
+main .fs-5 {
     font-size: 1rem;
     margin-top: 15px !important; /* Forza lo spazio sopra il testo */
 }
 
 @media (min-width: 768px) {
-    .fs-5 {
+    main .fs-5 {
         font-size: 1.25rem;
         margin-left: 1rem; /* Spazio tra immagine e testo su desktop */
         margin-top: 0;
@@ -57,4 +57,26 @@ h3.text-center {
     h3.text-md-start {
         text-align: left; /* Allinea a sinistra su desktop */
     }
+}
+
+/* Assicura che i link nelle sezioni di gestione non siano colorati */
+main a.text-decoration-none {
+    color: inherit;
+}
+
+
+/* Fix for header layout in seller pages */
+header nav.d-flex {
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
+header nav a.bi-bell, 
+header nav .d-flex a.bi-person-circle {
+    flex: 0 0 auto;
+}
+
+header nav a.logo-container-seller {
+    flex: 1 0 auto;
+    margin: 0 auto;
 }

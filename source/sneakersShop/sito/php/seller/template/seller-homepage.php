@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<a href="index.php?action=manage-orders" class="text-decoration-none">
+<a href="index.php?action=manage-orders" class="text-decoration-none text-dark">
     <div class="mt-4 border border-dark p-4">
         <h3 class="fw-semibold text-md-start text-center">Gestisci ordini</h3>
         <div class="d-flex align-items-center mt-4 flex-column flex-md-row">
@@ -30,7 +30,7 @@
     </div>
 </a>
 
-<a href="index.php?action=manage-products" class="text-decoration-none">
+<a href="index.php?action=manage-products" class="text-decoration-none text-dark">
     <div class="mt-4 border border-dark p-4">
         <h3 class="fw-semibold text-md-start text-center">Gestisci i prodotti</h3>
         <div class="d-flex align-items-center mt-4 flex-column flex-md-row">

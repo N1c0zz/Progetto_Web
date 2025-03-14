@@ -61,6 +61,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%; /* Add this to ensure full width */
+    max-width: 200px; /* Limit the width to prevent stretching */
 }
 
 .logo-container {

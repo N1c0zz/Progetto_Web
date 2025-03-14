@@ -24,7 +24,7 @@
         <div class="container <?php if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == "venditore") echo 'd-flex flex-column align-items-center'; ?>">
             <nav class="d-flex w-100 
                         <?php if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == "venditore") {
-                            echo 'justify-content-center align-items-center position-relative';
+                            echo 'justify-content-evenly align-items-center position-relative';
                         } else {
                             echo 'align-items-center justify-content-between';
                         } ?>" 
