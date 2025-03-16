@@ -202,8 +202,8 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-GRANT SELECT, INSERT, UPDATE ON `ns_kicks`.* TO 'user'@'localhost';
-GRANT DELETE ON `ns_kicks`.carrello TO 'user'@'localhost';
-GRANT DELETE ON `ns_kicks`.appartenenze TO 'user'@'localhost';
-GRANT DELETE ON `ns_kicks`.prodotti TO 'user'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON `ns_kicks`.* TO 'ns_user'@'localhost';
+GRANT DELETE ON `ns_kicks`.carrello TO 'ns_user'@'localhost';
+GRANT DELETE ON `ns_kicks`.appartenenze TO 'ns_user'@'localhost';
+GRANT DELETE ON `ns_kicks`.prodotti TO 'ns_user'@'localhost';
 FLUSH PRIVILEGES;
