@@ -21,13 +21,10 @@ if (isset($_GET["idprodotto"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    // Controllo se l'utente è autenticato
     if (!isset($_SESSION["idutente"])) {
         die("Accesso negato. Devi essere loggato.");
     }
 
-    // Recupera i dati dal form
     $nomeProdotto = $_POST['nomeProdotto'];
     $colore = $_POST['colore'];
     $categoryName = $_POST['categoria'];
@@ -36,39 +33,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $titoloDescrizione = $_POST['titoloDescrizione'];
     $descrizione = $_POST['descrizione'];
     $dettagli = $_POST['dettagli'];
-
-    // Elenco delle categorie separato da virgola
-    $categoryParts = explode(', ', $categoryName);
+    $idprodotto = $_POST['idprodotto'];
 
     // Recupera gli ID delle categorie
+    $categoryParts = explode(', ', $categoryName);
     $categoryIds = [];
     foreach ($categoryParts as $category) {
         $categoryId = $dbh->getCategoryIdByName($category);
         if ($categoryId !== null) {
             $categoryIds[] = $categoryId;
         } else {
-            // Mostra un errore se una delle categorie non esiste
             echo "Errore: la categoria '$category' non esiste!";
             exit;
         }
     }
 
-    // Gestione dell'immagine
+    // Percorso di salvataggio immagini
+    $uploadDir = __DIR__ . "/../../img/";
+
+    // Controlla se la cartella di destinazione esiste
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0775, true);
+    }
+
     $immagine = null;
     if (isset($_FILES["productImage"]) && $_FILES["productImage"]["error"] === UPLOAD_ERR_OK) {
-        $uploadDir = "../../uploads/";
         $fileName = basename($_FILES["productImage"]["name"]);
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    
-        // Verifica che il file sia effettivamente un'immagine
+
         if (in_array($fileExtension, $allowedExtensions) && getimagesize($_FILES["productImage"]["tmp_name"])) {
             $newFileName = uniqid() . '_' . $fileName;
             $filePath = $uploadDir . $newFileName;
-    
-            // Sposta il file nella cartella uploads
+
             if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $filePath)) {
-                $immagine = $newFileName;  // Salva solo il nome del file
+                $immagine = $newFileName;
             } else {
                 echo "Errore nel caricamento del file immagine.";
                 exit;
@@ -77,12 +76,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Errore: il file caricato non è un'immagine valida.";
             exit;
         }
+    } else {
+        // Recupera l'immagine esistente se non viene caricata una nuova
+        $productDetails = $dbh->getProductDetails($idprodotto);
+        $immagine = $productDetails["immagine"];
     }
-    
+
     // Aggiorna il prodotto
     $update = $dbh->updateProductBySeller(
         $_SESSION["idutente"],
-        $_POST["idprodotto"],
+        $idprodotto,
         $nomeProdotto,
         $colore,
         $categoryIds,
@@ -94,9 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $immagine
     );
 
-    // Success message
     if ($update) {
         header("Location: index.php?action=home&success=saveProductInfo");
+        exit;
     } else {
         $templateParams["errorMessage"] = "Errore nell'aggiornamento del prodotto.";
     }
