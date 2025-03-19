@@ -6,14 +6,14 @@
 }
 
 .order-list a {
-    flex: 1 1 calc(100% - 1rem); /* Riquadri in una colonna su mobile */
+    flex: 1 1 calc(100% - 1rem);
     max-width: 100%;
     text-decoration: none;
 }
 
 @media (min-width: 768px) {
     .order-list a {
-        flex: 1 1 calc(50% - 1rem); /* Due riquadri per riga su schermi piu grandi */
+        flex: 1 1 calc(50% - 1rem);
         max-width: calc(50% - 1rem);
     }
 }

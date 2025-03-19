@@ -1,4 +1,5 @@
 <h1 class="fw-semibold mb-4">Gestione Prodotti</h1>
+
     <div class="d-flex justify-content-center">
         <ul class="products-list list-unstyled mt-3 col-md-9">
             <?php foreach ($templateParams["sellerProducts"] as $product): ?>

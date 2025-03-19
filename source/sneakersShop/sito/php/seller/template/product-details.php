@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row mb-5">
         <h3 class="fw-semibold mt-5">Descrizione</h3>
         <p>

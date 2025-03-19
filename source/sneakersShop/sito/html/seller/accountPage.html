@@ -1,106 +1,149 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Il mio account</title>
+    <base href="http://localhost/Progetto_Web/source/sneakersShop/sito/" />
+    <title>Account</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
-    <!-- Link al file CSS generale -->
-    <link rel="stylesheet" href="../../css/general.css" />
+    <!-- Link ai file CSS -->
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/user/accountPage.css" />
+    <link rel="stylesheet" href="css/user/togglePassword.css" />
 </head>
-<body class="d-flex flex-column min-vh-100">
-<header class="bg-light py-2">
-    <div class="container d-flex flex-column align-items-center">
-        <nav class="d-flex w-100 justify-content-center align-items-center position-relative" aria-label="Navigazione principale">
-            <a href="./notifications.html" class="bi bi-bell p-2 fs-1 icon-seller" aria-label="Vai alla sezione notifiche"></a>
-            <a href="./index.html" class="logo-container-seller">
-                <img src="../../img/logo.png" alt="Logo" class="header-logo" />
-            </a>            
-            <a href="./accountPage.html" class="bi bi-person-circle p-2 fs-1 icon-seller" aria-label="Esegui il login o vai alla tua pagina personale"></a>
-        </nav>
-    </div>
-</header>
-<main class="container overflow-auto my-4">
-    <div class="container">
-        <div class="account-container">
-            <h2 class="text-start fw-semibold my-3">Il mio account</h2>
 
-            <section class="mb-4 section-border">
-                <h4 class="fs-4 mb-3 fw-semibold">Informazioni account</h4>
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome:</label>
-                    <input type="text" class="form-control" id="nome" value="XXXXX" readonly />
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-light py-2">
+        <div class="container d-flex flex-column align-items-center">
+            <nav class="d-flex w-100 justify-content-evenly align-items-center position-relative"
+                aria-label="Navigazione principale">
+                <a href="index.php?action=notifications" class="bi bi-bell p-2 fs-1 icon-seller"
+                    aria-label="Vai alla sezione notifiche"></a>
+
+                <a href="index.php?action=home" class="logo-container-seller">
+                    <img src="img/logo.png" alt="Logo" class="header-logo" />
+                </a>
+
+                <div class="d-flex align-items-center gap-1">
+                    <a href="index.php?action=login" class="bi bi-person-circle p-2 fs-1 icon-seller"
+                        aria-label="Esegui il login o vai alla tua pagina personale"></a>
                 </div>
-                <div class="mb-3">
-                    <label for="cognome" class="form-label">Cognome:</label>
-                    <input type="text" class="form-control" id="cognome" value="XXXXX" readonly />
-                </div>
-                <div class="mb-3">
-                    <label for="dataNascita" class="form-label">Data di nascita:</label>
-                    <input type="text" class="form-control" id="dataNascita" value="XX/XX/XXXX" readonly />
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" value="xxxxx@example.com" readonly />
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password:</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="password" value="********" readonly />
-                        <button type="button" class="btn btn-outline-secondary" id="togglePassword" aria-label="Mostra password">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                    </div>
-                </div>
-            </section>
-                                            
-            <section class="mb-4 section-border">
-                <h4 class="fs-4 mb-3 fw-semibold">Modifica Password</h4>
-                <form action="" method="post">
-                    <div class="mb-3">
-                        <label for="oldPassword" class="form-label">Inserisci vecchia password:</label>
-                        <input type="password" class="form-control" id="oldPassword" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="newPassword" class="form-label">Inserisci nuova password:</label>
-                        <input type="password" class="form-control" id="newPassword" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Conferma nuova password:</label>
-                        <input type="password" class="form-control" id="confirmPassword" />
-                    </div>
-                    <button type="submit" class="btn btn-dark" aria-label="Conferma la modifica della password">Modifica password</button>
-                </form>
-            </section>       
-        </div>
-    </div>
-</main>
-<footer class="footer mt-auto bg-light py-3">
-    <div class="container">
-        <div class="footer-logo-container">
-            <a href="./index.html">
-                <img src="../../img/logo.png" alt="Logo" class="footer-logo" />
-            </a>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <nav class="text-start" aria-label="Navigazione pagine informative per l'utente">
-                <a href="#" class="d-block mb-1">Informativa Privacy</a>
-                <a href="#" class="d-block mb-1">Informativa Cookie</a>
-                <a href="#" class="d-block mb-1">Termini e Condizioni</a>
             </nav>
-            <div class="text-end">
-                <p class="mb-0">
-                    Nome Sede<br>
-                    Indirizzo<br>
-                    Città, CAP<br>
-                    Telefono
-                </p>
+        </div>
+    </header>
+
+    <main class="container overflow-auto py-3">
+        <div class="container">
+            <div class="account-container">
+                <h2 class="text-start fw-semibold my-3">Il mio account</h2>
+
+                <section class="mb-5 section-border">
+                    <h4 class="fs-4 mb-3 fw-semibold">Informazioni account</h4>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" value="Luigi" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="cognome" class="form-label">Cognome:</label>
+                        <input type="text" class="form-control" id="cognome" value="Bianchi" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="dataNascita" class="form-label">Data di nascita:</label>
+                        <input type="date" class="form-control" id="dataNascita" value="1985-08-20" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="sesso" class="form-label">Sesso:</label>
+                        <input type="text" class="form-control" id="sesso" value="Maschio" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Numero di telefono:</label>
+                        <input type="tel" class="form-control" id="telefono" value="3339876543" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" value="luigi.bianchi@example.com" readonly />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="index.php?action=change-user-info"
+                            class="btn btn-lg btn-dark col-10 col-md-4 mt-3">Modifica</a>
+                    </div>
+                </section>
+
+                <section class="mb-4 section-border">
+                    <h4 class="fs-4 mb-3 fw-semibold">Modifica Password</h4>
+                    <form action="index.php?action=account" method="post" class="form-with-pwd">
+                        <fieldset>
+                            <legend class="visually-hidden">Modifica password</legend>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control pwd-input" id="oldPassword"
+                                    placeholder="Inserisci la vecchia password" name="oldPassword" required />
+                                <label for="oldPassword">Vecchia password*</label>
+                                <button type="button" class="toggle-password">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control pwd-input" id="newPassword"
+                                    placeholder="Inserisci la nuova password" name="newPassword" required />
+                                <label for="newPassword">Nuova password*</label>
+                                <button type="button" class="toggle-password">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control pwd-input" id="confirmPassword"
+                                    placeholder="Inserisci la nuova password" name="newPasswordConf" required />
+                                <label for="confirmPassword">Conferma nuova password*</label>
+                                <button type="button" class="toggle-password">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-lg btn-dark col-10 col-md-4 my-3"
+                                aria-label="Conferma la modifica della password">Modifica</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="d-flex justify-content-center my-5">
+                    <a href="index.php?action=logout" class="btn btn-danger col-10 col-md-4 mt-4">ESCI
+                        DALL'ACCOUNT</a>
+                </section>
             </div>
         </div>
-    </div>
-</footer>
+    </main>
+
+    <footer class="footer mt-auto bg-light py-3">
+        <div class="container">
+            <div class="text-center mb-3">
+                <a href="index.php?action=home">
+                    <img src="img/logo.png" alt="Logo" style="width: 100px; height: auto;" />
+                </a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <nav class="text-start" aria-label="Navigazione pagine informative per l'utente">
+                    <a href="index.php?action=privacy-info" class="d-block mb-1">Informativa Privacy</a>
+                    <a href="index.php?action=cookie-info" class="d-block mb-1">Informativa Cookie</a>
+                    <a href="index.php?action=ToS" class="d-block mb-1">Termini e Condizioni</a>
+                </nav>
+                <div class="text-end">
+                    <p class="mb-0">
+                        Nome Sede<br>
+                        Indirizzo<br>
+                        Città, CAP<br>
+                        Telefono
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/toggle-password.js"></script>
 </body>
+
 </html>

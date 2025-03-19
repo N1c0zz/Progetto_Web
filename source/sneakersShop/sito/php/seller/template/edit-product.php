@@ -1,4 +1,4 @@
-<h1 class="mb-4">Modifica Prodotto</h1>
+<h1 class="fw-semibold mb-4">Modifica Prodotto</h1>
 
     <form action="index.php?action=save-product-info" method="post" enctype="multipart/form-data">
 

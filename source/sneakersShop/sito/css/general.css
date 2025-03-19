@@ -63,8 +63,8 @@ body {
     flex-grow: 1;
     margin: 0 auto;
     text-align: center;
-    width: 100%; /* Add this to ensure full width */
-    max-width: 200px; /* Limit the width to prevent stretching */
+    width: 100%;
+    max-width: 200px;
 }
 
 .logo-container {
@@ -78,7 +78,7 @@ nav {
 }
 
 .header-logo {
-    height: 55px; /* Regolabile per adattarsi alle icone */
+    height: 55px;
     width: auto;
     display: block;
     margin-bottom: 5px;
@@ -107,7 +107,7 @@ nav {
     }
 
     .header-logo {
-        height: 70px; /* Regolabile per adattarsi alle icone */
+        height: 70px;
         width: auto;
         display: block;
     }

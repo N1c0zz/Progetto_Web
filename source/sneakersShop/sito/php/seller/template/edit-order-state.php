@@ -2,6 +2,7 @@
 
     <div class="card border rounded p-3 mb-3">
         <h4 class="mb-3">Ordine #<?php echo $idordine ?></h4>
+
         <form action="index.php?action=save-new-order-state&idordine=<?php echo $idordine ?>" method="post">
             <div class="mb-3">
                 <label for="orderStatus" class="form-label"><strong>Stato attuale:</strong></label>
