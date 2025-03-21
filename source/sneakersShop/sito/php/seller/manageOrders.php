@@ -1,14 +1,14 @@
 <?php
 
+$templateParams["pageTitle"] = "Gestisci gli ordini";
+$templateParams["name"] = "php/seller/template/manage-orders.php";
 $templateParams["styleSheet"] = array("css/seller/seller-ordersManagement.css");
 
-// Controllo autenticazione
 if (!isset($_SESSION["idutente"])) {
     header("Location: index.php?action=login");
     exit();
 }
 
-// Controllo ruolo (se necessario)
 if ($_SESSION["tipo"] !== "venditore") {
     header("Location: index.php?action=home");
     exit();
@@ -30,11 +30,5 @@ if ($idVenditore) {
 } else {
     $templateParams["sellerOrders"] = [];
 }
-
-// PARAMETRI DEL TEMPLATE
-$templateParams["pageTitle"] = "Gestisci gli ordini";
-
-// Nome del template da visualizzare
-$templateParams["name"] = "php/seller/template/manage-orders.php";
 
 ?>

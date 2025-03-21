@@ -10,7 +10,13 @@ class DatabaseHelper{
         }
     }
 
-    // legge tutti i prodotti disponibili
+    /*
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                         USER FUNCTIONS
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    */
+
+    // Ricava tutti i prodotti disponibili
     public function getProducts() {
         $stmt = $this->db->prepare("SELECT 
                                         p.idprodotto,
@@ -37,6 +43,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Contiene la logica per il login dell'utente
     public function login($email, $password) {
         if ($stmt = $this->db->prepare("SELECT idutente, tipo, email, password, salt FROM utenti WHERE email = ? LIMIT 1")) {
             $stmt->bind_param('s', $email);
@@ -69,7 +76,7 @@ class DatabaseHelper{
         }
     }
 
-    // restituisce false se l'user agent è cambiato dopo il login (prevenzione hijacking della sessione)
+    // Restituisce false se l'user agent è cambiato dopo il login (prevenzione hijacking della sessione)
     public function login_check($user_id, $login_string, $user_browser) {
         if ($stmt = $this->db->prepare("SELECT password FROM utenti WHERE idutente = ? LIMIT 1")) {
             $stmt->bind_param('i', $user_id);
@@ -87,7 +94,7 @@ class DatabaseHelper{
         return false;
     }
 
-    // conrolla se una email è già registrata nel db
+    // Controlla se un indirizzo email utilizzato è già presente del database
     public function getUser($email) {
         $query = "SELECT email FROM utenti WHERE email = ?";
         $stmt = $this->db->prepare($query);
@@ -98,7 +105,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // registra un nuovo utente
+    // Registra un nuovo utente
     public function registerUser($name, $surname, $bday, $sex, $phone, $email, $password, $salt) {
         do {
             // creazione ID utente univoco
@@ -114,7 +121,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
-    // legge le notifiche dell'utente
+    // Ricava tutte le notifiche collegate ad un determinato utente
     public function getUserNotifications($userID) {
         $query = "SELECT n.idnotifica, DATE_FORMAT(n.data, '%d-%m-%Y %H:%i') AS data, n.stato, n.titolo, n.tipo, n.messaggio
                     FROM notifiche n
@@ -130,6 +137,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Cambia lo stato di una determinata notifica
     public function changeNotificationStatus($userID, $notifID, $newStatus) {
         $stmt = $this->db->prepare("UPDATE notifiche n
                                     JOIN ricezioni r ON n.idnotifica = r.idnotifica
@@ -140,6 +148,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Ricava tutte le informazioni di un determinato utente registrate nel database
     public function getUserInfo($userID) {
         $query = "SELECT nome, cognome, DATE_FORMAT(dataNascita, '%Y-%m-%d') AS dataNascita, sesso, numeroTelefono, email FROM utenti WHERE idutente = ?";
         $stmt = $this->db->prepare($query);
@@ -150,6 +159,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Aggiorna le informazioni di un determinato utente sostituendole con quelle passate in input
     public function updateUserInfo($userID, $name, $surname, $bday, $sex, $phone, $email) {
         $query = "UPDATE utenti
                     SET nome = ?,
@@ -164,6 +174,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Ricava la password di un determinato profilo utente
     public function getUserPwd($userID) {
         $query = "SELECT password FROM utenti WHERE idutente = ?";
         $stmt = $this->db->prepare($query);
@@ -174,6 +185,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Aggiorna la password di un determinato profilo utente
     public function updateUserPwd($userID, $newPwd) {
         $query = "UPDATE utenti
                     SET password = ?
@@ -183,6 +195,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Ricava tutti gli ordini appartenenti ad un determinato utente
     public function getUserOrders($userID) {
         $query = "SELECT o.idordine AS numeroOrdine, o.data AS dataOrdine, SUM(m.prezzo) AS prezzoTotale
                   FROM ordini o
@@ -199,6 +212,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Restituisce TRUE se il prodottoè valido
     public function isProductIdValid($productID) {
         $stmt = $this->db->prepare("SELECT
                                     idprodotto
@@ -211,6 +225,7 @@ class DatabaseHelper{
         return $result->num_rows > 0;
     }
 
+    // Ricava la quantità disponibile di un determinato prodotto
     public function getProductAvailability($productID) {
         $stmt = $this->db->prepare("SELECT
                                     m.disponibilità
@@ -225,6 +240,7 @@ class DatabaseHelper{
         return (int) $row['disponibilità'];
     }
 
+    // Ricava i prodotti aggiunti al carello da un determinato utente
     public function getCartItems($userID) {
         $stmt = $this->db->prepare("SELECT
                                     	m.nome AS modello,
@@ -249,6 +265,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Ricava uno specifico prodotto aggiunto al carrello da un determinato utente
     public function getCartItem($userID, $productID, $size) {
                 $stmt = $this->db->prepare("SELECT *
                                             FROM carrello
@@ -261,6 +278,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Restituisce la quantità del prodotto aggiunto al carrello da un determinato utente
     public function getProductAmountInCart($userID, $productID) {
         $stmt = $this->db->prepare("SELECT
                                     COALESCE(SUM(quantitàAggiunta), 0) AS quantitàTotale
@@ -275,6 +293,7 @@ class DatabaseHelper{
         return (int) $row['quantitàTotale'];
     }
 
+    // Svuota il carrello di un determinato utente
     public function emptyCart($userID) {
         $stmt = $this->db->prepare("DELETE FROM carrello
                                     WHERE idutente = ?");
@@ -282,6 +301,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Aggiunge un prodotto al carrello
     public function addItemToCart($userID, $productID, $size, $amount) {
         $stmt = $this->db->prepare("INSERT INTO carrello (idutente, idprodotto, tagliaAggiunta, quantitàAggiunta)
                                     VALUES (?, ?, ?, ?)");
@@ -289,6 +309,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Aggiorna un prodotto all'interno del carrello
     public function updateCartItem($userID, $productID, $oldSize, $newSize, $amount) {
         $stmt = $this->db->prepare("UPDATE carrello c
                                     SET c.quantitàAggiunta = ?,
@@ -300,6 +321,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Rimuove un prodotto dal carello
     public function removeItemFromCart($userID, $productID, $size) {
         $stmt = $this->db->prepare("DELETE FROM carrello
                                     WHERE idutente = ?
@@ -309,14 +331,13 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Crea un nuovo ordine
     public function createOrder($userID) {
-        // create order
         $stmt = $this->db->prepare("INSERT INTO ordini (idutente, stato, data)
                                     VALUES (?, 'In elaborazione', NOW())");
         $stmt->bind_param('i', $userID);
         $stmt->execute();
 
-        // add cartItems to the order
         $stmt = $this->db->prepare("INSERT INTO presenze (idordine, idprodotto, taglia, quantità)
                                     SELECT
                                         LAST_INSERT_ID(),
@@ -329,6 +350,7 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Ricava tutti i prodotti in ordine decrescente da quello con il più alto numero di ordini
     public function getBestsellerProducts() {
         $stmt = $this->db->prepare("SELECT 
                                         p.idprodotto,
@@ -358,6 +380,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }    
 
+    // Ricava tutti i prodotti ordinati a seconda della loro data di inserimento
     public function getNewProducts() {
         $stmt = $this->db->prepare("SELECT 
                                         p.idprodotto,
@@ -387,12 +410,12 @@ class DatabaseHelper{
     }    
     
     /*
-    ------------------------------------------------
-    SELLER FUNCTIONS
-    ------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                         SELLER FUNCTIONS
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     */
 
-    // ritorna i dettagli del venditore tramite il suo id
+    // Ricava i dettagli del venditore tramite il suo id
     public function getSellerDetails($sellerId) {
         $stmt = $this->db->prepare("SELECT nome, cognome, dataNascita, email, password 
                                      FROM utenti 
@@ -404,8 +427,7 @@ class DatabaseHelper{
         return $result->fetch_assoc(MYSQLI_ASSOC);
     }
 
-    // ritorna il numero di vendite del venditore
-    // funzione SQL COALESCE --> se il valore trovato è NULL lo ritorna come zero
+    // Ricava il numero totale di vendite di un determinato venditore
     public function getTotalSales($sellerId) {
         $stmt = $this->db->prepare("SELECT SUM(pr.quantità) AS totalSales
                                     FROM presenze pr
@@ -421,7 +443,7 @@ class DatabaseHelper{
     }
     
              
-    // ritorna i guadagni totali del venditore
+    // Ricava i guadagni totali di un determinato venditore
     public function getTotalEarnings($sellerId) {
         $stmt = $this->db->prepare("SELECT SUM(pr.quantità * m.prezzo) AS totalEarnings
                                     FROM presenze pr
@@ -437,8 +459,7 @@ class DatabaseHelper{
         return isset($row['totalEarnings']) ? $row['totalEarnings'] : 0;
     }
     
-    
-    // ritorna un array associativo con i dettagli del prodotto passato in input
+    // Ritorna un array associativo con i dettagli del prodotto passato in input
     public function getProductDetails($productId) {
         $stmt = $this->db->prepare("SELECT 
                                         m.nome AS modello,
@@ -465,7 +486,7 @@ class DatabaseHelper{
         
         $productDetails = $result->fetch_assoc();
     
-        // Convertire la stringa di categorie in un array
+        // Converte la stringa di categorie in un array
         if ($productDetails && isset($productDetails['categorie'])) {
             $productDetails['categorie'] = explode(', ', $productDetails['categorie']);
         }
@@ -473,7 +494,7 @@ class DatabaseHelper{
         return $productDetails;
     }
     
-    // ritorna l'elenco di prodotti di un seller
+    // Ricava l'elenco di prodotti messi in vendita da un determinato venditore
     public function getProductsBySeller($sellerId) {
         $stmt = $this->db->prepare("SELECT 
                                         pr.idprodotto, 
@@ -495,7 +516,6 @@ class DatabaseHelper{
         
         $products = [];
         while ($row = $result->fetch_assoc()) {
-            // Convertire le categorie in array
             if (isset($row['categorie'])) {
                 $row['categorie'] = explode(', ', $row['categorie']);
             }
@@ -505,11 +525,10 @@ class DatabaseHelper{
         return $products;
     }
     
-    // ritorna un array associativo con gli ordini associati ad un venditore,
-    // nel formato
+    // Ritorna un array associativo con gli ordini associati ad un determinato venditore,
+    // nel seguente formato:
     // [id_ordine][data_ordine][prezzo totale][prodotti[dettagli prodotto 1], [dettagli prodotto 2]]
     public function getAllOrdersBySeller($sellerId) {
-        // Prepara la query per ottenere gli ordini e i dettagli dei prodotti
         $stmt = $this->db->prepare("SELECT 
                                         o.idordine, 
                                         o.data AS data_ordine, 
@@ -526,14 +545,11 @@ class DatabaseHelper{
                                     WHERE pr.idvenditore = ? 
                                     ORDER BY o.idordine, p.idprodotto");
     
-        // Associa il parametro del venditore alla query
         $stmt->bind_param("i", $sellerId);
         $stmt->execute();
-        
-        // Ottieni il risultato
+
         $result = $stmt->get_result();
-    
-        // Array per memorizzare gli ordini
+
         $orders = [];
     
         // Cicla attraverso i risultati
@@ -564,13 +580,12 @@ class DatabaseHelper{
             $orders[$orderId]['prezzo_totale'] += $row['prezzo_totale_prodotto'];
         }
     
-        // Chiudi la dichiarazione
         $stmt->close();
     
-        // Ritorna l'array degli ordini
         return $orders;
     }    
     
+    // Ricava l'ID della categoria attraverso il relativo nome
     public function getCategoryIdByName($categoryName) {
         $stmt = $this->db->prepare("SELECT idcategoria FROM categorie WHERE nomeCategoria = ?");
         
@@ -592,7 +607,9 @@ class DatabaseHelper{
     }
     
     
-    // aggiorna un prodotto di un determinato venditore, ritorna true se l'aggiornamento è andato a buon fine, false altrimenti
+    // Aggiorna un prodotto di un determinato venditore,
+    // ritorna TRUE se l'aggiornamento è andato a buon fine,
+    // FALSE altrimenti
     public function updateProductBySeller($userId, $productId, $nomeProdotto, $colore, $categoryIds, $marca, $disponibilita, $titoloDescrizione, $descrizione, $dettagli, $immagine) {
         $this->db->begin_transaction();
     
@@ -620,7 +637,6 @@ class DatabaseHelper{
             $stmt->execute();
             $stmt->close();
     
-            // Aggiungi le nuove categorie
             foreach ($categoryIds as $categoryId) {
                 $query = "INSERT INTO appartenenze (idmodello, idcategoria) 
                         SELECT idmodello, ? 
@@ -660,6 +676,7 @@ class DatabaseHelper{
         }
     }
 
+    // Ritorna lo stato di un ordine attraverso il relativo ID
     public function getOrderStatusById($orderId) {
         $stmt = $this->db->prepare("SELECT stato FROM ordini WHERE idordine = ?");
         
@@ -676,7 +693,7 @@ class DatabaseHelper{
         return $orderStatus ? $orderStatus : null;
     }
     
-    
+    // Aggiorna lo stato di un determinato ordine
     public function updateOrderStatus($orderId, $newStatus) {
         $stmt = $this->db->prepare("UPDATE ordini SET stato = ? WHERE idordine = ?");
         
@@ -692,6 +709,7 @@ class DatabaseHelper{
         return $success;
     }
     
+    // Ricava l'ID del cliente associato ad un determinato ordine
     public function getUserIdByOrderId($orderId) {
         $stmt = $this->db->prepare("SELECT idutente FROM ordini WHERE idordine = ?");
         
@@ -710,7 +728,7 @@ class DatabaseHelper{
         return $userId ? $userId : null; 
     }
     
-
+    // Aggiunge una nuova notifica relativa ad un nuovo ordine
     public function createOrderStatusNotification($message, $userId, $orderId, $status) {
  
         $structuredMessage = "Lo stato dell'ordine è cambiato in: " . $status . "\n" . $message;
@@ -743,6 +761,7 @@ class DatabaseHelper{
         return false;
     }
 
+    // Rimuove un prodotto dal database
     public function deleteProductById($productId) {
         $stmt = $this->db->prepare("DELETE FROM prodotti WHERE idprodotto = ?");
         
@@ -756,6 +775,6 @@ class DatabaseHelper{
     
         return $success;
     }    
-    
 }
+
 ?>

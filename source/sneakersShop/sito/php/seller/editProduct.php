@@ -1,7 +1,7 @@
 <?php
 
-// PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Modifica prodotto";
+$templateParams["name"] = "php/seller/template/edit-product.php";
 
 if (isset($_GET["idprodotto"])) {
     // Verifica che l'ID del prodotto sia presente e valido
@@ -105,6 +105,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// nome del template da visualizzare
-$templateParams["name"] = "php/seller/template/edit-product.php";
 ?>

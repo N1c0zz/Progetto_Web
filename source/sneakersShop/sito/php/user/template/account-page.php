@@ -99,8 +99,8 @@
                 </table>
             </section>
         <?php endif; ?>
-        <section class="d-flex justify-content-center my-5">
+        <div class="d-flex justify-content-center my-5">
             <a href="index.php?action=logout" class="btn btn-danger col-10 col-md-4 mt-4">ESCI DALL'ACCOUNT</a>
-        </section>
+        </div>
     </div>
 </div>

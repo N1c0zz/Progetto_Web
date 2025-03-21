@@ -1,17 +1,14 @@
 <?php
 
-// PARAMETRI DEL TEMPLATE
 $templateParams["pageTitle"] = "Homepage";
-
+$templateParams["name"] = "php/seller/template/seller-homepage.php";
 $templateParams["styleSheet"] = array("css/seller/seller-homepage.css");
 
-// Controlla se l'utente è loggato
 if (!isset($_SESSION['idutente'])) {
     header("Location: ../../index.php?action=login");
     exit();
 }
 
-// Controlla se l'utente è un venditore
 if ($_SESSION['tipo'] !== 'venditore') {
     header("Location: ../../index.php?action=home");
     exit();
@@ -47,8 +44,5 @@ if (isset($_SESSION["idutente"]) && is_numeric($_SESSION["idutente"])) {
     $templateParams["totalSales"] = 0;
     $templateParams["totalEarnings"] = 0;
 }
-
-// nome del template da visualizzare
-$templateParams["name"] = "php/seller/template/seller-homepage.php";
 
 ?>

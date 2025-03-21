@@ -1,5 +1,8 @@
 <?php
-// Controllo della sessione e autorizzazione
+
+$templateParams["pageTitle"] = "Gestisci stato dell'ordine";
+$templateParams["name"] = "php/seller/template/edit-order-state.php";
+
 if (!isset($_SESSION["idutente"]) || !isset($_SESSION["tipo"])) {
     header("Location: index.php?action=login");
     exit();
@@ -10,7 +13,6 @@ if ($_SESSION["tipo"] !== "venditore") {
     exit();
 }
 
-// Controllo di idordine
 if (!isset($_GET["idordine"]) && ($_SERVER["REQUEST_METHOD"] !== "POST")) {
     header("Location: index.php?action=home");
     exit();
@@ -19,9 +21,9 @@ if (!isset($_GET["idordine"]) && ($_SERVER["REQUEST_METHOD"] !== "POST")) {
     $statoAttuale = $dbh -> getOrderStatusById($idordine);
 }
 
-// Gestione della richiesta POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Validazione degli input
+    
+    // Validazione degli INPUT
     $nuovoStato = htmlspecialchars($_POST["newStatus"] ?? "");
     $messaggio = htmlspecialchars($_POST["nota"] ?? "");
 
@@ -30,14 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // Aggiorna lo stato dell'ordine
     $response = $dbh->updateOrderStatus($idordine, $nuovoStato);
 
-    // Ottieni l'ID del cliente associato all'ordine
     $idcliente = $dbh->getUserIdByOrderId($idordine);
 
     if ($idcliente != null) {
-        // Crea una notifica per il cliente
         $response = $dbh->createOrderStatusNotification($messaggio, $idcliente, $idordine, $nuovoStato);
 
         if ($response) {
@@ -56,9 +55,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// PARAMETRI DEL TEMPLATE
-$templateParams["pageTitle"] = "Gestisci stato dell'ordine";
-
-// Nome del template da visualizzare
-$templateParams["name"] = "php/seller/template/edit-order-state.php";
 ?>
