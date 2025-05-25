@@ -52,10 +52,10 @@
             <?php if (!isset($_SESSION["tipo"]) || $_SESSION["tipo"] != "venditore"): ?>
                 <div class="container-fluid">
                     <form action="index.php" method="get" class="d-flex" role="search" aria-label="Cerca prodotti">
-                        <legend class="visually-hidden">Ricerca prodotti</legend>
                         <fieldset class="flex-grow-1 me-2">
+                            <legend class="visually-hidden">Ricerca prodotti</legend>
                             <label for="searchInput" class="visually-hidden">Cerca prodotto</label>
-                            <input class="form-control" type="search" placeholder="Cerca prodotto" name="search" aria-label="cerca prodotto" />
+                            <input class="form-control" id="searchInput" type="search" placeholder="Cerca prodotto" name="search" aria-label="cerca prodotto" />
                         </fieldset>
                         <button class="btn btn-outline-dark" name="action" value="products" type="submit">Cerca</button>
                     </form>

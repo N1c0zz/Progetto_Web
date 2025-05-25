@@ -8,8 +8,8 @@ document.querySelectorAll('button.toggle-password').forEach(btn => {
         const new_type = pwd.getAttribute('type') === 'password' ? 'text' : 'password';
         pwd.setAttribute('type', new_type);
 
-        btn.querySelector('i').classList.toggle('bi-eye');
-        btn.querySelector('i').classList.toggle('bi-eye-slash');
+        btn.querySelector('span').classList.toggle('bi-eye');
+        btn.querySelector('span').classList.toggle('bi-eye-slash');
     });
 });
 
