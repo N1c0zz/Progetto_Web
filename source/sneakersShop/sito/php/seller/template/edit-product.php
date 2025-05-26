@@ -1,9 +1,8 @@
-<h1 class="fw-semibold mb-4">Modifica Prodotto</h1>
+<section>
+    <h1 class="fw-semibold mb-4">Modifica Prodotto</h1>
 
     <form action="index.php?action=save-product-info" method="post" enctype="multipart/form-data">
-
         <input type="hidden" name="idprodotto" value="<?php echo $idprodotto; ?>" />
-
         <div class="mb-3">
             <label for="productName" class="form-label">Nome Prodotto</label>
             <input type="text" class="form-control" id="productName" placeholder="Inserisci il nome del prodotto" name="nomeProdotto" value="<?php echo $prodotto["modello"]; ?>" />
@@ -45,5 +44,5 @@
             <a href="index.php?action=manage-products" class="btn btn-outline-secondary col-1 text-center">Annulla</a>
             <button type="submit" class="btn btn-dark col-2">Salva Modifiche</button>
         </div>
-  
     </form>
+</section>
