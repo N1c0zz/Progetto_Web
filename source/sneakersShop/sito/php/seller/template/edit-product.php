@@ -41,8 +41,8 @@
             <input type="file" class="form-control" name="productImage" id="productImage" />
         </div>
         <div class="d-flex justify-content-between">
-            <a href="index.php?action=manage-products" class="btn btn-outline-secondary col-1 text-center">Annulla</a>
-            <button type="submit" class="btn btn-dark col-2">Salva Modifiche</button>
+            <a href="index.php?action=manage-products" class="btn btn-outline-secondary">Annulla</a>
+            <button type="submit" class="btn btn-dark">Salva Modifiche</button>
         </div>
     </form>
 </section>
