@@ -9,6 +9,6 @@ $templateParams["notifications"] = $dbh->getUserNotifications($_SESSION["idutent
 
 $templateParams["pageTitle"] = "Notifiche";
 $templateParams["name"] = "php/user/template/notification-list.php";
-$templateParams["js"] = array("js/fetch-notifications.js", "js/change-notification-status.js");
+$templateParams["js"] = array("js/fetch-notifications.js", "js/change-notification-status.js", "js/delete-notification.js");
 
 ?>

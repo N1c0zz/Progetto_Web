@@ -148,6 +148,24 @@ class DatabaseHelper{
         $stmt->execute();
     }
 
+    // Elimina una notifica utente dal database
+    public function deleteNotification($userID, $notifID) {
+        try {
+        $this->db->begin_transaction();
+        
+        $stmt1 = $this->db->prepare("DELETE FROM ricezioni WHERE idutente = ? AND idnotifica = ?");
+        $stmt1->execute([$userID, $notifID]);
+        $stmt2 = $this->db->prepare("DELETE FROM notifiche WHERE idnotifica = ?");
+        $stmt2->execute([$notifID]);
+        
+        $this->db->commit();
+        
+        } catch (PDOException $e) {
+            $this->db->rollback();
+            echo "Errore: " . $e->getMessage();
+        }
+    }
+
     // Ricava tutte le informazioni di un determinato utente registrate nel database
     public function getUserInfo($userID) {
         $query = "SELECT nome, cognome, DATE_FORMAT(dataNascita, '%Y-%m-%d') AS dataNascita, sesso, numeroTelefono, email FROM utenti WHERE idutente = ?";

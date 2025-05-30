@@ -37,15 +37,18 @@ function generateNotificationHtml(notifications) {
 
     for (let i = 0; i < notifications.length; i++) {
         let notif = `
-        <li class="list-group-item">
-            <div class="text-break">
-                <div class="d-flex w-100">
-                    <h2 class="mb-3 flex-grow-1 h5">${notifications[i]["titolo"]}</h2>
-                    <a class="btn btn-sm bi bi-envelope-open py-0 fs-3 icon" aria-label="Segna Come letto o da leggere"></a>
-                    <small class="text-body-secondary mt-2">${notifications[i]["data"]}</small>
+        <li class="list-group-item notification bg-body-secondary">
+            <article>
+                <div class="text-break">
+                    <div class="d-flex w-100">
+                        <h2 class="mb-3 flex-grow-1 h5">${notifications[i]["titolo"]}</h2>
+                        <a class="btn btn-sm bi bi bi-trash3 py-0 pe-1 fs-3 icon delete_notif" id="${notifications[i]["idnotifica"]}" aria-label="Elimina notifica"></a>
+                        <a class="btn btn-sm bi bi-envelope-open py-0 ps-1 fs-3 icon da_leggere" id="${notifications[i]["idnotifica"]}" aria-label="Segna Come già letto/da leggere"></a>
+                        <small class="text-body-secondary mt-2">${notifications[i]["data"]}</small>
+                    </div>
+                    <p class="mb-1">${notifications[i]["messaggio"]}</p>
                 </div>
-                <p class="mb-1">${notifications[i]["messaggio"]}</p>
-            </div>
+            </article>
         </li>
         `;
         result += notif;

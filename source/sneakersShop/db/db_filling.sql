@@ -118,9 +118,9 @@ VALUES
 INSERT INTO `notifiche` (`idnotifica`, `data`, `stato`, `titolo`, `tipo`, `messaggio`) 
 VALUES 
 (1, '2025-01-20 14:35:00', 'da_leggere', 'Nuovo ordine', 'venditore', 'Hai ricevuto un nuovo ordine.'),
-(2, '2025-01-20 13:30:00', 'da_leggere', 'Ordine confermato', 'cliente', 'Il tuo ordine è stato confermato.'),
-(3, '2025-01-21 15:02:00', 'da_leggere', 'Ordine spedito', 'cliente', 'Il tuo ordine è stato spedito.'),
-(4, '2025-01-22 11:50:00', 'letta', 'Consegna effettuata', 'cliente', 'Il tuo ordine è stato consegnato.');
+(2, '2025-01-20 13:30:00', 'letta', 'Ordine confermato', 'cliente', 'Il tuo ordine è stato confermato.'),
+(3, '2025-01-21 15:02:00', 'letta', 'Ordine spedito', 'cliente', 'Il tuo ordine è stato spedito.'),
+(4, '2025-01-22 11:50:00', 'da_leggere', 'Consegna effettuata', 'cliente', 'Il tuo ordine è stato consegnato.');
 
 -- -----------------------------------------------------
 -- Inserimento nella tabella `relazioni` (notifiche associate agli ordini)

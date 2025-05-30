@@ -153,6 +153,9 @@ require("php/user/template/base.php");
         case 'remove-item-from-cart':
             require("php/remove-item-from-cart.php");
             break;
+        
+        case 'delete-notification':
+            require("php/delete-notification.php");
 
         default:
             break;
