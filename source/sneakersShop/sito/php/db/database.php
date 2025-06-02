@@ -757,9 +757,12 @@ class DatabaseHelper{
         $structuredMessage = "Lo stato dell'ordine è cambiato in: " . $status . "\n" . $message;
     
         $notificationTitle = "Aggiornamento stato ordine #" . $orderId;
+
+        $read_status = "da_leggere";
+        $type = "cliente";
     
-        $stmt = $this->db->prepare("INSERT INTO notifiche (data, titolo, messaggio) VALUES (NOW(), ?, ?)");
-        $stmt->bind_param("ss", $notificationTitle, $structuredMessage);
+        $stmt = $this->db->prepare("INSERT INTO notifiche (data, stato, titolo, tipo, messaggio) VALUES (NOW(), ?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $read_status, $notificationTitle, $type, $structuredMessage);
         $stmt->execute();
     
         $notificationId = $stmt->insert_id;
