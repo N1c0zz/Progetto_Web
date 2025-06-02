@@ -54,6 +54,11 @@ class DatabaseHelper{
             $password = hash('sha512', $password . $salt);
             if ($stmt->num_rows == 1) { // se l'utente esiste
                 if ($db_password == $password) {
+                    if(session_status() == PHP_SESSION_ACTIVE) {
+                        session_regenerate_id(true); // Distrugge la vecchia sessione (anonima) e ne crea una nuova 
+                                                     // (il parametro "true" forza PHP a distruggere la vecchia sessione e i suoi dati associati, 
+                                                     //  prevenzione hijacking sessione)
+                    }
                     // Password corretta
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
                     $login_data['login_string'] = hash('sha512', $password . $user_browser);

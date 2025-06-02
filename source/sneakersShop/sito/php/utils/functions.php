@@ -12,7 +12,6 @@ function sec_session_start() {
     session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, $httponly); 
     session_name($session_name);
     session_start();
-    session_regenerate_id(); // rigenera la sessione e cancella quella creata in precedenza (impedisce hijacking della sessione).
 }
 
 // controlla se l'utente è loggato
