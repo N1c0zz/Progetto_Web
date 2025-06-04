@@ -4,7 +4,8 @@ async function deleteNotification(node) {
     try {
         
         const formData = new FormData();
-        formData.append('notificationId', node.id);
+        const notificationId = node.id.split('-')[1];
+        formData.append('notificationId', notificationId);
 
         const response = await fetch('index.php?request=delete-notification', {
             method: "POST",
