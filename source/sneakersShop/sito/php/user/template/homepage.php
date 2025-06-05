@@ -11,7 +11,7 @@
         <h1 class="h2">ESPLORA I NOSTRI PRODOTTI</h1>
         <a href="index.php?action=products" title="Esplora i nostri prodotti">
             <div class="border rounded p-3 mx-auto" style="width: 90%; height: 150px;">
-                <img src="<?php echo IMG_DIR."esplora.png"; ?>" style="width: 100%; height: 100%; object-fit: cover;" alt="scarpe" />
+                <img src="<?php echo IMG_DIR."esplora.webp"; ?>" style="width: 100%; height: 100%; object-fit: cover;" alt="scarpe" />
             </div>
         </a>
     </div>
